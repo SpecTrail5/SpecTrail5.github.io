@@ -54,13 +54,17 @@
         }
 
         .sidebar {
+            background:linear-gradient(rgb(211,0,0),rgb(236, 87, 0));
+            width: 210px;
+            height: 400;
             margin-right: 25px;
             padding: 10px;
-            border: 4px silver ridge;
+            border: 4px rgb(133, 133, 133) ridge;
         }
 
         .sidebar-img {
             width: 200px;
+            border: 4px rgb(211, 0, 0) ridge;
         }
 
         .content {
@@ -73,7 +77,10 @@
             padding: 8px;
         }
 
-        h2,
+        .h2{
+            margin: 0px;
+            color: rgb(255, 255, 255);
+        }
         h3 {
             margin: 0px;
         }
@@ -107,7 +114,8 @@
         <main>
 
             <!--side bar/-->
-            <div id="sidebar">
+            <div class="sidebar">
+                <h2 class="h2">Home</h2>
                 <img class="sidebar-img"
                     src="https://images.weserv.nl/?url=https://images-eds-ssl.xboxlive.com/image?url=8Oaj9Ryq1G1_p3lLnXlsaZgGzAie6Mnu24_PawYuDYIoH77pJ.X5Z.MqQPibUVTcS9jr0n8i7LY1tL3U7AiaffeBi4yFzJx3JE8Qr5xrUJ.OoOpFPRHPu.JFmELUywl1">
 
