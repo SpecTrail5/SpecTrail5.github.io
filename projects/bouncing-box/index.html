@@ -14,10 +14,11 @@
 			display: block;
 			position: absolute;
 			top: 100px;
-			left:0px;  /* <--- Change me! */
+			left:10px;  /* <--- Change me! */
 		}
 		.board{
 			height: 100vh;
+			outline: auto;
 		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
@@ -39,6 +40,7 @@
 			var box = jQuery('.box');	// reference to the HTML .box element
 			var board = jQuery('.board');	// reference to the HTML .board element
 			var boardWidth = board.width();	// the maximum X-Coordinate of the screen
+			var boardHeight = jQuery(window).height(); 
 
 			// Every 50 milliseconds, call the update Function (see below)
 			setInterval(update, 50);
@@ -47,23 +49,34 @@
 			box.on('click', handleBoxClick);
 
 			// moves the Box to a new position on the screen along the X-Axis
-			function moveBoxTo(newPositionX) {
+			function moveBoxTo(newPositionX, newPositionY) {
 				box.css("left", newPositionX);
+				box.css('top', newPositionY);
 			}
 
 			// changes the text displayed on the Box
 			function changeBoxText(newText) {
 				box.text(newText);
 			}
-
+			
+			
+			
 			//////////////////////////////////////////////////////////////////
 			/////////////////// YOUR CODE BELOW HERE /////////////////////////
 			//////////////////////////////////////////////////////////////////
 			
 			// TODO 2 - Variable declarations 
 			
-			var positionX=0;
-			var points = 0
+			var positionX = 10;
+			var points = 0;
+			var speed = 5;
+			var boardWidth = boardWidth;
+			var speedY = 5;
+			var positionY = 100;
+			var boardHeight = boardHeight; 
+			var colorStr = "rgb(250, 25, 50)";
+			box.css('background-color', colorStr);
+			var randomNumberBetween0and10 = Math.random() * 10;
 			
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -72,9 +85,35 @@
 			*/
 			function update() {
 				/*Increase positionX by 10 HERE*/
-				positionX = positionX + 10
-				moveBoxTo(positionX);
+				positionX = positionX + speed
+				positionY = positionY + speedY
+				moveBoxTo(positionX, positionY);
 				
+				
+				if (positionX > boardWidth){
+					speed = -speed;
+					speed *= -1;
+					speed = speed * -1;
+				}
+
+				if (positionX < 10){
+					speed = speed;
+					speed *= 1;
+					speed = speed * -1;
+				}
+
+				if (positionY > boardHeight){
+					speedY = -speedY;
+					speedY *= -1;
+					speedY = speedY * -1;
+				}
+
+				if (positionY < 10){
+					speedY = speedY;
+					speedY *= 1;
+					speedY = speedY * -1;
+				}
+
 			};
 
 			/* 
@@ -83,11 +122,30 @@
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
-				positionX = 0
-				points =points + 1
+				positionX = 10
+				positionY = 100 
+				points = points + 1
 				changeBoxText(points);
+				
+				
+				
+				
+				if (speed > 1 ){
+					speed = speed + 3
+				}else if(speed < -1 ){
+					speed = speed - 3
+				}
+				if (speedY > 1 ){
+					speedY = speedY + 3
+				}else if(speedY < -1 ){
+					speedY = speedY - 3
+				}
+
 
 			};
+			
+
+
 		})();
 	</script>
 </body>
