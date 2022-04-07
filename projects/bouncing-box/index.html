@@ -67,17 +67,22 @@
 			
 			// TODO 2 - Variable declarations 
 			
-			var positionX = 10;
+			var positionX = randomLocationX;
 			var points = 0;
 			var speed = 5;
 			var boardWidth = boardWidth;
 			var speedY = 5;
-			var positionY = 100;
+			var positionY = randomLocationY;
 			var boardHeight = boardHeight; 
-			var colorStr = "rgb(250, 25, 50)";
-			box.css('background-color', colorStr);
-			var randomNumberBetween0and10 = Math.random() * 10;
+			var colorStr = "rgb("+randomRed+", "+randomGreen+", "+randomBlue+")";
 			
+			var randomRed = Math.random() * 255;
+			var randomGreen = Math.random() * 255;
+			var randomBlue = Math.random() * 255;
+			var randomLocationX = Math.random() * boardWidth;
+			var randomLocationY = Math.random() * boardHeight;
+			
+
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
 			it should move the Box to a new location. If the box drifts off the screen
@@ -88,8 +93,10 @@
 				positionX = positionX + speed
 				positionY = positionY + speedY
 				moveBoxTo(positionX, positionY);
-				
-				
+
+				randomLocation();
+				changeBoxColor();
+
 				if (positionX > boardWidth){
 					speed = -speed;
 					speed *= -1;
@@ -122,12 +129,17 @@
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
-				positionX = 10
-				positionY = 100 
+				randomLocationX = Math.random() * boardWidth;
+				randomLocationY = Math.random() * boardHeight;
+				positionX = randomLocationX
+				positionY = randomLocationY
 				points = points + 1
 				changeBoxText(points);
+				randomRed = Math.random() * 255;
+				randomGreen = Math.random() * 255;
+				randomBlue = Math.random() * 255;
 				
-				
+				colorStr = "rgb("+randomRed+", "+randomGreen+", "+randomBlue+")";
 				
 				
 				if (speed > 1 ){
@@ -143,7 +155,21 @@
 
 
 			};
+
+			function randomLocation(){
+				var randomLocationX = Math.random() * boardWidth;
+				var randomLocationY = Math.random() * boardHeight;
+				
+
+
+			}
 			
+			function changeBoxColor(){
+				var randomRed = Math.random() * 255;
+				var randomGreen = Math.random() * 255;
+				var randomBlue = Math.random() * 255;
+				box.css('background-color', colorStr);
+			}
 
 
 		})();
