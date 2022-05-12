@@ -60,9 +60,12 @@ var init = function (window) {
             // TODO 9 : Iterate over the array
             for(var pos = 0; pos < circles.length; pos++){
                 var eachCircle = circles[pos];
-            
+                for(var noSpeed = 0; noSpeed < 5; noSpeed++){
                 physikz.updatePosition(eachCircle)
             }
+            }
+
+            
 
             for(var far = 0; far < circles.length; far++){
                 game.checkCirclePosition(circles[far]);
