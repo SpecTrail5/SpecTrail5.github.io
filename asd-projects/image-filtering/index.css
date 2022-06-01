@@ -1,0 +1,10 @@
+.square {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}
+
+body > div {
+    position: relative;
+    height: 200px;
+}
