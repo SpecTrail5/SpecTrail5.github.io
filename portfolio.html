@@ -3,6 +3,8 @@
 
 <head>
     <title> SpecTrail5's Random Website </title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    
     <style>
         body {
             background: linear-gradient(rgb(78, 78, 78), rgb(0, 0, 0));
@@ -93,9 +95,10 @@
         }
 
         .prolinks {
-            background: rgb(138, 138, 138);
+            background: rgb(100, 100, 100);
             margin-top: 5px;
-            border: inset rgb(190, 190, 190);
+            border:  rgb(140, 140, 140);
+            border-style: inset;
         }
         #nav-img{
             width: 100px;
@@ -147,11 +150,13 @@
 
                     <!-- Interests section -->
                     <div id="interests">
+                        
                         <h3>Links</h3>
                         <ul>
                             <a class="li" href="https://www.tinkercad.com/">
                                 <div class="prolinks">
                                     Tinkercad
+                                    
                                 </div>
                             </a>
 
@@ -177,61 +182,79 @@
 
                         <h3>Projects</h3>
                         <ul>
-                            <div class="prolinks">
+                            <a class="li" href="projects/platformer/">
+                                <div class="prolinks">
+                                    Platformer : A cannon - dodging,
+                                        collectible - grabbing adventure game for Halleb0t
+                                </div>
+                            </a>
 
-                                <a class="li" href="projects/platformer/">Platformer : A cannon - dodging,
-                                    collectible - grabbing adventure game for Halleb0t</a>
+                            <a class="li" href="projects/bouncing-box/">
+                                <div class="prolinks">
+                                    Bouncing Box : A project that gives you
+                                        a taste of game development on the web 
+                                </div>
+                            </a>
 
-                            </div>
-
-                            <div class="prolinks">
-
-                                <a class="li" href="projects/bouncing-box/">Bouncing Box : A project that gives you
-                                    a taste of game development on the web </a>
-
-                            </div>
-
-                            <div class="prolinks">
-
-                                <a class="li" href="projects/circularity/">Circularity : A motion poem using random
-                                    number generation and velocity applied to circle shapes...</a>
-
-                            </div>
+                            <a class="li" href="projects/circularity/">
+                                <div class="prolinks">
+                                    Circularity : A motion poem using random
+                                        number generation and velocity applied to circle shapes...
+                                </div>
+                            </a>
                         </ul>
 
                             <h3>Advance Projects</h3>
                         <ul>
-                            <div class="prolinks">
+                            <a class="li" href="asd-projects/debugging-exercise/">
+                                <div class="prolinks">
+                                    Debugging Exercise 
+                                </div>
+                            </a>
 
-                                <a class="li" href="asd-projects/debugging-exercise/">Debugging Exercise </a>
+                            <a class="li" href="asd-projects/walker/">
+                                <div class="prolinks">
+                                    Walker 
+                                </div>
+                            </a>
 
-                            </div>
+                            <a class="li" href="asd-projects/image-filtering/">
+                                <div class="prolinks">
+                                    Image Filtering  
+                                </div>
+                            </a>
 
-                            <div class="prolinks">
+                            <a class="li" href="asd-projects/pong/">
+                                <div class="prolinks">
+                                    Pong 
+                                </div>
+                            </a>
 
-                                <a class="li" href="asd-projects/image-filtering/">Image Filtering  </a>
+                            <a class="li" href="asd-projects/sorting-exercise/">
+                                <div class="prolinks">
+                                    Sorting Exercise 
+                                </div>
+                            </a>
 
-                            </div>
-
-                            <div class="prolinks">
-
-                                <a class="li" href="asd-projects/pong/">Pong </a>
-
-                            </div>
-
-                            <div class="prolinks">
-
-                                <a class="li" href="asd-projects/sorting-exercise/">Sorting Exercise </a>
-
-                            </div>
-
-                            <div class="prolinks">
-
-                                <a class="li" href="asd-projects/walker/">Walker </a>
-
-                            </div>
-
+                            <a class="li" href="asd-projects/pong/">
+                                <div class="prolinks">
+                                    Pong 
+                                </div>
+                            </a>
                         </ul>
+                        <script>
+                            $(".prolinks").hover(function(){
+                                $(this).css("border-style", "ridge");
+                             }, function(){
+                                $(this).css("border-style", "inset");
+                            })
+
+                            $(".li").hover(function(){
+                                $(this).css("color", "purple");
+                             }, function(){
+                                $(this).css("color", "white");
+                            })
+                        </script>
                     </div>
                 </div>
             </main>
