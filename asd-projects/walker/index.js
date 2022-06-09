@@ -19,7 +19,8 @@ function runProgram() {
     "a": 65,
     "s": 83,
     "d": 68,
-    "space": 32
+    "space": 32,
+    "shift": 16
   }
 
   var positionX = 0; // the x-coordinate location for the walker
@@ -37,7 +38,7 @@ function runProgram() {
     "spdY": speedY
 
   }
-  var P2 ={
+  var P2 = {
     "posX": posX,
     "posY": posY,
     "spdX": speedX,
@@ -52,7 +53,7 @@ function runProgram() {
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
   $(document).on('keyup', handleKeyup);
-  
+
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -75,7 +76,7 @@ function runProgram() {
   */
   function handleKeyDown(event) {
 
-    
+
 
     if (event.which === KEY.LEFT) {
       P1.spdX = -5;
@@ -104,7 +105,8 @@ function runProgram() {
       P2.spdY = 10;
 
     }
-    if (event.which === KEY.space){
+
+    if (event.which === KEY.space) {
       var teleportX = Math.random() * 550;
       var teleportY = Math.random() * 550;
       P1.posX = teleportX
@@ -158,25 +160,25 @@ function runProgram() {
     P2["posY"] += P2["spdY"]
 
   }
-  function border(){
-    if(P1["posX"] < 0){
+  function border() {
+    if (P1["posX"] < 0) {
       P1["posX"] = broadWidth
-      
-    } else if(P1["posX"] > broadWidth){
+
+    } else if (P1["posX"] > broadWidth) {
       P1["posX"] = 0
-    } else if(P1["posY"] < 0){
+    } else if (P1["posY"] < 0) {
       P1["posY"] = broadHeight
-    } else if(P1["posY"] > broadHeight){
+    } else if (P1["posY"] > broadHeight) {
       P1["posY"] = 0
     }
-    if(P2["posX"] < 0){
+    if (P2["posX"] < 0) {
       P2["posX"] = broadWidth
-      
-    } else if(P2["posX"] > broadWidth){
+
+    } else if (P2["posX"] > broadWidth) {
       P2["posX"] = 0
-    } else if(P2["posY"] < 0){
+    } else if (P2["posY"] < 0) {
       P2["posY"] = broadHeight
-    } else if(P2["posY"] > broadHeight){
+    } else if (P2["posY"] > broadHeight) {
       P2["posY"] = 0
     }
   }
@@ -187,20 +189,24 @@ function runProgram() {
     $("#walker").css("top", P1["posY"])
     $("#runner").css("left", P2["posX"])
     $("#runner").css("top", P2["posY"])
-    
+
   }
 
-  function tag(){
-    
-      
-    
-  }
+  function tag() {
+    if ((P1.posX + P1.posY) === (P2.posX + P2.posY)) {
+      endGame();
 
+    }
+
+
+  }
+  $("#GO").css("color", "black");
 
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
 
+    $("#GO").css("color", "red");
     // turn off event handlers
     $(document).off();
   }
