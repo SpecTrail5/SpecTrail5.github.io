@@ -18,17 +18,18 @@ function runProgram() {
     "w": 87,
     "a": 65,
     "s": 83,
-    "d": 68
+    "d": 68,
+    "space": 32
   }
 
   var positionX = 0; // the x-coordinate location for the walker
   var positionY = 0; // the Y-coordinate location for the walker
-  var posX = 550; // the x-coordinate location for the walker
-  var posY = 550; // the Y-coordinate location for the walker
+  var posX = 600; // the x-coordinate location for the walker
+  var posY = 600; // the Y-coordinate location for the walker
   var speedX = 0; // the speed for the walker along the x-axis
   var speedY = 0; // the speed for the walker along the Y-axis
-  var broadWidth = 550
-  var broadHeight = 550
+  var broadWidth = 600
+  var broadHeight = 600
   var P1 = {
     "posX": positionX,
     "posY": positionY,
@@ -51,6 +52,7 @@ function runProgram() {
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
   $(document).on('keyup', handleKeyup);
+  
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -64,6 +66,7 @@ function runProgram() {
     repositionGameItem();
     redrawGameItem();
     border();
+    tag()
 
   }
 
@@ -89,17 +92,23 @@ function runProgram() {
     }
 
     if (event.which === KEY.a) {
-      P2.spdX = -5;
+      P2.spdX = -10;
 
     } else if (event.which === KEY.w) {
-      P2.spdY = -5;
+      P2.spdY = -10;
 
     } else if (event.which === KEY.d) {
-      P2.spdX = 5;
+      P2.spdX = 10;
 
     } else if (event.which === KEY.s) {
-      P2.spdY = 5;
+      P2.spdY = 10;
 
+    }
+    if (event.which === KEY.space){
+      var teleportX = Math.random() * 550;
+      var teleportY = Math.random() * 550;
+      P1.posX = teleportX
+      P1.posY = teleportY
     }
 
   }
@@ -178,6 +187,13 @@ function runProgram() {
     $("#walker").css("top", P1["posY"])
     $("#runner").css("left", P2["posX"])
     $("#runner").css("top", P2["posY"])
+    
+  }
+
+  function tag(){
+    
+      
+    
   }
 
 
