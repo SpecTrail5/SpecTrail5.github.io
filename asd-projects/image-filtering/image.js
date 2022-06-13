@@ -1,5 +1,5 @@
 // set the square size (must match the CSS)
-const SQUARE_SIZE = 20;
+const SQUARE_SIZE = 50;
 
 // set constants for the indexes of R, G, and B values
 const RED = 0;
