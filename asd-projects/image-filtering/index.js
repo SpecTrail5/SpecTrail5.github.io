@@ -4,9 +4,7 @@ $(document).ready(function () {
     const $display = $('#display');
 
     // Multiple TODOs: Call your apply function(s) here
-    // applyFilter(reddify);
-    // applyFilter(decreaseBlue)
-    // applyFilter(increaseGreenByBlue)
+
     applyFilterNoBackground(reddify)
     applyFilterNoBackground(decreaseBlue)
     applyFilterNoBackground(increaseGreenByBlue)
@@ -22,6 +20,7 @@ $(document).ready(function () {
 // TODO 1, 2 & 4: Create the applyFilter function here
 function applyFilter(filterFunction) {
     for (var i = 0; i < image.length; i++) {
+
         for (var j = 0; j < image[i].length; j++) {
 
             var rgbString = image[i][j]
@@ -35,67 +34,56 @@ function applyFilter(filterFunction) {
 
     }
 
-
-
-
 }
 
 
 // TODO 7: Create the applyFilterNoBackground function
 function applyFilterNoBackground(filterFunc) {
-    var cornPix = image[0][1]
+    // cornerPixel
+    var cornPix = image[0][0]
+
     for (var r = 0; r < image.length; r++) {
+
         for (var l = 0; l < image[r].length; l++) {
 
-            
-            if(image[r][l] !== cornPix){
+            if (image[r][l] !== cornPix) {
 
-            var rgbStr = image[r][l]
-            var rgbNums = rgbStringToArray(rgbStr)
+                var rgbStr = image[r][l]
+                var rgbNums = rgbStringToArray(rgbStr)
 
-            filterFunc(rgbNums)
+                filterFunc(rgbNums)
 
-            rgbStr = rgbArrayToString(rgbNums);
-            image[r][l] = rgbStr
+                rgbStr = rgbArrayToString(rgbNums);
+                image[r][l] = rgbStr
 
             }
-            
-            
+
         }
 
     }
 }
 // TODO 5: Create the keepInBounds function
 function keepInBounds(bound) {
-    // if (bound < 0) {
-    //     return 0;
-    // } else if (bound > 255) {
-    //     return 255;
-    // } else {
-    //     return bound;
-    // }
-
     return Math.max(0, Math.min(255, bound))
-
-
 
 }
 
 
 // TODO 3: Create reddify function
 function reddify(Rcolor) {
-    Rcolor[RED] = 200
+    Rcolor[RED] = Math.random() * 255
+
 }
 
 // TODO 6: Create more filter functions
 function decreaseBlue(Bcolor) {
-
     Bcolor[BLUE] = keepInBounds(Bcolor[BLUE] - 50)
 
 }
 
 function increaseGreenByBlue(Gcolor) {
     Gcolor[GREEN] = keepInBounds(Gcolor[GREEN] + Gcolor[BLUE])
+
 }
 
 // CHALLENGE code goes below here

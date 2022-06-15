@@ -1,9 +1,8 @@
-
 body {
   background-color: rgb(0, 36, 69);
 }
 
-#info{
+#info {
   background: rgb(215, 215, 215);
   width: 400px;
   height: 400px;
@@ -11,18 +10,19 @@ body {
   left: 700px;
 }
 
-#W{
+#W {
   background: rgb(136, 195, 253);
   width: 100px;
 
 }
-#R{
+
+#R {
   background: rgb(255, 118, 113);
   width: 100px;
 
 }
 
-#GO{
+#GO {
   color: crimson;
   position: absolute;
   left: 250px;
@@ -46,15 +46,16 @@ body {
   height: 50px;
   position: absolute;
   border-radius: 50%;
-   left: 100px;     
-   top: 100px;     
+  left: 100px;
+  top: 100px;
 }
+
 #runner {
-  background: linear-gradient(45deg, rgb(255, 140, 0) 10%, rgb(230, 0, 0) );
+  background: linear-gradient(45deg, rgb(255, 140, 0) 10%, rgb(230, 0, 0));
   width: 50px;
   height: 50px;
   position: absolute;
   border-radius: 50%;
-   left: 550px;   /* Uncomment if you want to set a "starting" position */
-   top: 550px;    /* Uncomment if you want to set a "starting" position */
+  left: 550px;
+  top: 550px;
 }

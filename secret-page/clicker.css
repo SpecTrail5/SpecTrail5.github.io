@@ -1,0 +1,20 @@
+#allbody {
+    background: rgb(255, 129, 33);
+}
+
+#main {
+    background: rgb(48, 48, 48);
+    height: 950px;
+
+}
+
+#button {
+    background: rgb(128, 1, 1);
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    position: absolute;
+    left: 800px;
+    top: 400px;
+
+}
