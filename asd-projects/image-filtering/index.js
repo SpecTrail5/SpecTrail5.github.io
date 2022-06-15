@@ -4,10 +4,12 @@ $(document).ready(function () {
     const $display = $('#display');
 
     // Multiple TODOs: Call your apply function(s) here
-    applyFilter( reddify);
-
-
-
+    // applyFilter(reddify);
+    // applyFilter(decreaseBlue)
+    // applyFilter(increaseGreenByBlue)
+    applyFilterNoBackground(reddify)
+    applyFilterNoBackground(decreaseBlue)
+    applyFilterNoBackground(increaseGreenByBlue)
 
 
     render($display, image);
@@ -40,8 +42,29 @@ function applyFilter(filterFunction) {
 
 
 // TODO 7: Create the applyFilterNoBackground function
+function applyFilterNoBackground(filterFunc) {
+    var cornPix = image[0][1]
+    for (var r = 0; r < image.length; r++) {
+        for (var l = 0; l < image[r].length; l++) {
 
+            
+            if(image[r][l] !== cornPix){
 
+            var rgbStr = image[r][l]
+            var rgbNums = rgbStringToArray(rgbStr)
+
+            filterFunc(rgbNums)
+
+            rgbStr = rgbArrayToString(rgbNums);
+            image[r][l] = rgbStr
+
+            }
+            
+            
+        }
+
+    }
+}
 // TODO 5: Create the keepInBounds function
 function keepInBounds(bound) {
     // if (bound < 0) {
@@ -65,12 +88,14 @@ function reddify(Rcolor) {
 }
 
 // TODO 6: Create more filter functions
-function decreaseBlue(Bcolor){
+function decreaseBlue(Bcolor) {
 
-Bcolor[BLUE] = keepInBounds(Bcolor[BLUE] - 50)
+    Bcolor[BLUE] = keepInBounds(Bcolor[BLUE] - 50)
 
+}
 
-
+function increaseGreenByBlue(Gcolor) {
+    Gcolor[GREEN] = keepInBounds(Gcolor[GREEN] + Gcolor[BLUE])
 }
 
 // CHALLENGE code goes below here
