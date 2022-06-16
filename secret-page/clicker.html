@@ -5,22 +5,102 @@
     <title> Clicker </title>
     <link rel="stylesheet" type="text/css" href="/secret-page/clicker.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="/secret-page/clicker.js"></script>
 
-    <style >
-        
+
+    <style>
+
     </style>
 
 </head>
 
 <body id="allbody">
+    <div id="allcon">
 
-    <div id="main">
-        <button id="button">
+        <div id="side">
+            <div id="points">0</div>
 
-        </button>
+            <button type="button" id="button">
+                <script>
+
+                    var score = 0
+                    var clk = 1
+
+                    $("#button").on('click', addClick);
+
+
+                    function addClick() {
+                        score = score + clk
+                        return trackpoints(score)
+                    }
+
+                    function trackpoints(newscore) {
+                        $("#points").text(newscore)
+                    }
+
+
+                </script>
+
+            </button>
+
+        </div>
+
+        <div id="main">
+
+            <h1>Button Clicker</h1>
+            <button type="button" id="pu1" class="allpu">
+
+                More clicks
+                +1 click
+                <p id="pu1Price">Price:50</p>
+                <p id="pu1lvl">lvl:0</p>
+
+                <script>
+
+                    var pu1lvl = 0
+                    var pu1price = 50
+                    var pu2 = 0
+                    var pu3 = 0
+                    var pu4 = 0
+                    var pu5 = 0
+
+
+                    $("#pu1").on('click', pu1click)
+
+                    function pu1click() {
+                        if (score >= pu1price) {
+                            score = score - pu1price
+                            clk = clk + 1
+
+                            pu1price = pu1price + 50
+                            pu1lvl = pu1lvl + 1
+
+                            pu1Newlvl(pu1lvl, pu1price, score)
+                        }
+                    }
+                    function pu1Newlvl(pu1A, pu1B, newpoints1) {
+                        $("#pu1Price").text("Price:" + pu1B)
+                        $("#pu1lvl").text("lvl:" + pu1A)
+                        $("#points").text(newpoints1)
+                    }
+
+
+
+
+                </script>
+
+            </button>
+            <li class="allpu"></li>
+
+            <li class="allpu"></li>
+
+            <li class="allpu"></li>
+
+            <li class="allpu"></li>
+
+
+        </div>
+
     </div>
-
 </body>
 
 </html>
