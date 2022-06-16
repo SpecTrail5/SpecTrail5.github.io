@@ -14,7 +14,17 @@ The CSS ids you will work with are:
 ///////////////////////////////////////////////////////////////////////
 
 // TODO 2: Implement bubbleSort
-
+async function bubbleSort(array) {
+    for (var x = 0; x < array.length - 1; x++) {
+        //TODO FIX THIS
+        for (var c = array.length - 1; c <  ; c++) {
+            if(array[c] < array[c - 1]){
+                var z = array[c]
+                array[c] = array
+            }
+        }
+    }
+}
 
 // TODO 3: Implement quickSort
 
@@ -23,7 +33,26 @@ The CSS ids you will work with are:
 
 
 // TODO 1: Implement swap
+function swap(array, i, j) {
+    var sorted = false
 
+    while (sort === false) {
+        sorted = true
+        for (var i = 0; i < array.length - 1; i++) {
+            if (array[i] > array[j]) {
+                var x = array[i]
+
+                array[i] = array[j]
+                array[j] = x
+                drawSwap(array, i, j)
+                sorted = false
+            }
+        }
+    }
+
+
+
+}
 
 ///////////////////////////////////////////////////////////////////////
 /////////////////////// YOUR WORK GOES ABOVE HERE /////////////////////
@@ -32,12 +61,12 @@ The CSS ids you will work with are:
 //////////////////////////// HELPER FUNCTIONS /////////////////////////
 
 // this function makes the program pause by SLEEP_AMOUNT milliseconds whenever it is called
-function sleep(){
+function sleep() {
     return new Promise(resolve => setTimeout(resolve, SLEEP_AMOUNT));
 }
 
 // This function draws the swap on the screen
-function drawSwap(array, i, j){
+function drawSwap(array, i, j) {
     let element1 = array[i];
     let element2 = array[j];
 
@@ -48,6 +77,6 @@ function drawSwap(array, i, j){
 }
 
 // This function updates the specified counter
-function updateCounter(counter){
+function updateCounter(counter) {
     $(counter).text("Move Count: " + (parseFloat($(counter).text().replace(/^\D+/g, '')) + 1));
 }
