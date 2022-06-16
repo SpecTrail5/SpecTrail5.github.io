@@ -11,26 +11,31 @@ function runProgram() {
   var FRAME_RATE = 60;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   var KEY = {
+    //walker controls
     "LEFT": 37,
     "UP": 38,
     "RIGHT": 39,
     "DOWN": 40,
+    //Runner controls
     "w": 87,
     "a": 65,
     "s": 83,
     "d": 68,
+
     "space": 32,
-    "shift": 16
+
+
   }
 
   var positionX = 0; // the x-coordinate location for the walker
   var positionY = 0; // the Y-coordinate location for the walker
-  var posX = 600; // the x-coordinate location for the walker
-  var posY = 600; // the Y-coordinate location for the walker
+  var posX = 600; // the x-coordinate location for the runner
+  var posY = 600; // the Y-coordinate location for the runner
   var speedX = 0; // the speed for the walker along the x-axis
   var speedY = 0; // the speed for the walker along the Y-axis
   var broadWidth = 600
   var broadHeight = 600
+  // Walker position and speed
   var P1 = {
     "posX": positionX,
     "posY": positionY,
@@ -38,6 +43,7 @@ function runProgram() {
     "spdY": speedY
 
   }
+  // Runnner position and speed
   var P2 = {
     "posX": posX,
     "posY": posY,
@@ -74,6 +80,7 @@ function runProgram() {
   /* 
   Called in response to events.
   */
+  // Handles Walker movement
   function handleKeyDown(event) {
 
 
@@ -114,7 +121,7 @@ function runProgram() {
     }
 
   }
-
+  // Stops the walker 
   function handleKeyup(event) {
 
     if (event.which === KEY.LEFT) {

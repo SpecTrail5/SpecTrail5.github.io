@@ -10,9 +10,10 @@
 #main {
     background: rgb(48, 48, 48);
     display: flex;
-    
+
 }
-.allpu{
+
+.allpu {
     display: inline-block;
     border: inset;
     width: 90px;

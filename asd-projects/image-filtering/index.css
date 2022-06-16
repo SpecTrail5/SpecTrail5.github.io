@@ -4,7 +4,7 @@
     position: absolute;
 }
 
-body > div {
+body>div {
     position: relative;
     height: 200px;
 }
