@@ -158,6 +158,7 @@ function runProgram() {
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
+// reposition the walker
   function repositionGameItem() {
 
     P1["posX"] += P1["spdX"]
@@ -167,6 +168,7 @@ function runProgram() {
     P2["posY"] += P2["spdY"]
 
   }
+  // the broad border to stop the walker or teleport
   function border() {
     if (P1["posX"] < 0) {
       P1["posX"] = broadWidth
@@ -190,7 +192,7 @@ function runProgram() {
     }
   }
 
-
+// redraws the walker 
   function redrawGameItem() {
     $("#walker").css("left", P1["posX"])
     $("#walker").css("top", P1["posY"])
@@ -198,7 +200,7 @@ function runProgram() {
     $("#runner").css("top", P2["posY"])
 
   }
-
+// ends the game if walker is tagged
   function tag() {
     if ((P1.posX + P1.posY) === (P2.posX + P2.posY)) {
       endGame();
