@@ -17,8 +17,8 @@ function runProgram() {
   var boardWidthmin = $("#board").width() - $("#board").width()
   var boardHeightmax = $("#board").height()
   var boardHeightmin = $("#board").height() - $("#board").height()
-  var point1 = 0
-  var point2 = 0
+  var pointL = 0
+  var pointR = 0
 
 
 
@@ -27,7 +27,9 @@ function runProgram() {
     spdX: 5,
     spdY: 5,
     posX: 375,
-    posY: 180
+    posY: 180,
+    height: $("#ball").height(),
+    width: $("#ball").width()
   }
 
   var KEY = {
@@ -46,12 +48,18 @@ function runProgram() {
   var pad1 = {
     spdY: 0,
     posY: 150,
-    posx: $("#pad1").width()
+    posX: 15,
+    height: $("#pad1").height(),
+    width: $("#pad1").width()
   }
+
   //red paddle
   var pad2 = {
     spdY: 0,
-    posY: 150
+    posY: 150,
+    posX: 760,
+    height: $("#pad2").height(),
+    width: $("#pad2").width()
   }
 
 
@@ -59,6 +67,7 @@ function runProgram() {
   // one-time setup
   let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
+  $(document).on('keyup', handleKeyUp);
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -72,6 +81,8 @@ function runProgram() {
     moveGameItems()
     redraw();
     ballBorder()
+    score()
+
   }
 
   /* 
@@ -96,6 +107,33 @@ function runProgram() {
 
   }
 
+  function doCollide() {
+
+    if (collide(pad1, pad2, ball)) {
+      console.log(5)
+    }
+
+  }
+
+  function handleKeyUp(event) {
+
+    if (event.which === KEY.w) {
+      pad1.spdY = 0
+
+    }
+    if (event.which === KEY.s) {
+      pad1.spdY = 0
+    }
+
+    if (event.which === KEY.up) {
+      pad2.spdY = 0
+    }
+    if (event.which === KEY.down) {
+      pad2.spdY = 0
+    }
+
+  }
+
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -113,17 +151,18 @@ function runProgram() {
 
   function ballBorder() {
     // ball Y board 
-    if (ball.posY === boardHeightmax - 50) {
+    if (ball.posY >= boardHeightmax - 50) {
       ball.spdY = ball.spdY * -1
     }
-    if (ball.posY === boardHeightmin) {
+    if (ball.posY <= boardHeightmin) {
       ball.spdY = ball.spdY * -1
     }
     // ball X board
-    if (ball.posX === boardWidthmax - 50) {
+    if (ball.posX >= boardWidthmax - 50) {
       ball.spdX = ball.spdX * -1
+
     }
-    if (ball.posX === boardWidthmin) {
+    if (ball.posX <= boardWidthmin) {
       ball.spdX = ball.spdX * -1
     }
     if (pad1.posY > boardHeightmax) {
@@ -132,11 +171,32 @@ function runProgram() {
 
   }
 
+  function collide(obj1, obj2, obj3) {
 
+    obj1.left = pad1.posX
+    obj1.right = pad1.posX + pad1.width
+
+    obj2.left = pad2.posX
+
+  }
+
+  function score() {
+
+    if (ball.posX >= boardWidthmax - 50) {
+      pointL = pointL + 1
+      $("#pointL").text(pointL)
+    }
+    if (ball.posX <= boardWidthmin) {
+      pointR = pointR + 1
+      $("#pointR").text(pointR)
+    }
+
+  }
 
 
 
   function redraw() {
+
 
     $("#ball").css('left', ball.posX)
     $("#ball").css('top', ball.posY)
