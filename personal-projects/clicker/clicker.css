@@ -9,11 +9,13 @@
 
 #main {
     background: rgb(48, 48, 48);
+    border: inset;
     display: flex;
 
 }
 
 .allpu {
+    background: rgb(100, 100, 100);
     display: inline-block;
     border: inset;
     width: 90px;
@@ -21,9 +23,7 @@
 
 }
 
-#pu1 {
-    background: rgb(100, 100, 100);
-}
+
 
 #side {
     margin-right: 250px;
@@ -31,6 +31,7 @@
 
 #points {
     background: rgb(65, 65, 66);
+    border: inset;
     height: 50px;
     width: 300px;
     position: relative;

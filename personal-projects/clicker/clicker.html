@@ -7,12 +7,34 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script>
 
-        var pu1lvl = 0
-        var pu1price = 50
-        var pu2 = 0
-        var pu3 = 0
-        var pu4 = 0
-        var pu5 = 0
+        var cps = 0
+        var i = 1
+
+
+        var pu1 = {
+            price: 10,
+            lvl: 0
+        }
+
+        var pu2 = {
+            price: 100,
+            lvl: 0
+        }
+
+        var pu3 = {
+            price: 0,
+            lvl: 0
+        }
+
+        var pu4 = {
+            price: 0,
+            lvl: 0
+        }
+
+        var pu5 = {
+            price: 0,
+            lvl: 0
+        }
 
     </script>
 
@@ -28,12 +50,16 @@
 
         <div id="side">
             <div id="points">0</div>
-
+            <div id="cps">
+                <h2>
+                    cps: 0
+                </h2>
+            </div>
             <button type="button" id="button">
                 <script>
 
                     var score = 0
-                    var clk = 50
+                    var clk = 1
 
                     $("#button").on('click', addClick);
 
@@ -57,50 +83,77 @@
         <div id="main">
 
             <h1>Button Clicker</h1>
+
             <button type="button" id="pu1" class="allpu">
 
                 More clicks
                 +1 click
-                <p id="pu1Price">Price:50</p>
+                <p id="pu1Price">Price:10</p>
                 <p id="pu1lvl">lvl:0</p>
 
                 <script>
 
-
-
-
                     $("#pu1").on('click', pu1click)
 
                     function pu1click() {
-                        if (score >= pu1price) {
-                            score = score - pu1price
+                        if (score >= pu1.price) {
+                            score = score - pu1.price
                             clk = clk + 1
 
-                            pu1price = pu1price + 50
-                            pu1lvl = pu1lvl + 1
+                            pu1.price = Math.ceil(pu1.price + pu1.price / 2)
+                            pu1.lvl = pu1.lvl + 1
 
-                            pu1Newlvl(pu1lvl, pu1price, score)
+                            pu1Newlvl(pu1.lvl, pu1.price, score)
                         }
                     }
-                    function pu1Newlvl(pu1A, pu1B, newpoints1) {
-                        $("#pu1Price").text("Price:" + pu1B)
-                        $("#pu1lvl").text("lvl:" + pu1A)
-                        $("#points").text(newpoints1)
+                    function pu1Newlvl(puA, puB, newpoints) {
+                        $("#pu1Price").text("Price:" + puB)
+                        $("#pu1lvl").text("lvl:" + puA)
+                        $("#points").text(newpoints)
                     }
-
-
-
 
                 </script>
 
             </button>
-            <button type="button" class="allpu">
+
+            <button type="button" id="pu2" class="allpu">
 
                 Auto Clicker
                 +1 cps
-                <p></p>
-                <p></p>
+                <p id="pu2Price">price:100</p>
+                <p id="pu2lvl">lvl:0</p>
                 <script>
+                     
+
+                    $("#pu2").on('click', pu2Click)
+
+                    function pu2Click() {
+                        if (score >= pu2.price) {
+                            score = score - pu2.price
+                            i = 0
+                            cps = cps + 1
+
+
+                            pu2.price = pu2.price + 50
+                            pu2.lvl = pu2.lvl + 1
+
+                            pu2Newlvl(pu2.lvl, pu2.price, score)
+                        }
+
+                    }
+                    function pu2Newlvl(puA, puB, newpoints) {
+                        $("#pu2Price").text("Price:" + puB)
+                        $("#pu2lvl").text("lvl:" + puA)
+                        $("#points").text(newpoints)
+                    }
+
+                //     while(i < 1 ){
+                // score = score + cps
+                // $("#points").text(score)
+                //             }
+
+
+
 
                 </script>
 
