@@ -113,20 +113,20 @@ function runProgram() {
 
   function ballBorder() {
     // ball Y board 
-    if (ball.posY === boardHeightmax- 50) {
+    if (ball.posY === boardHeightmax - 50) {
       ball.spdY = ball.spdY * -1
     }
     if (ball.posY === boardHeightmin) {
       ball.spdY = ball.spdY * -1
     }
-// ball X board
-    if (ball.posX === boardWidthmax- 50) {
+    // ball X board
+    if (ball.posX === boardWidthmax - 50) {
       ball.spdX = ball.spdX * -1
     }
     if (ball.posX === boardWidthmin) {
       ball.spdX = ball.spdX * -1
     }
-    if(pad1.posY > boardHeightmax){
+    if (pad1.posY > boardHeightmax) {
       pad1.spdY = 0
     }
 
