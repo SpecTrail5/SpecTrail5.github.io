@@ -27,29 +27,28 @@ function runProgram() {
 
   }
 
-  var positionX = 0; // the x-coordinate location for the walker
-  var positionY = 0; // the Y-coordinate location for the walker
-  var posX = 600; // the x-coordinate location for the runner
-  var posY = 600; // the Y-coordinate location for the runner
-  var speedX = 0; // the speed for the walker along the x-axis
-  var speedY = 0; // the speed for the walker along the Y-axis
+   
+   
   var broadWidth = 600
   var broadHeight = 600
   // Walker position and speed
   var P1 = {
-    "posX": positionX,
-    "posY": positionY,
-    "spdX": speedX,
-    "spdY": speedY
+    "posX": 0, // the x-coordinate location for the walker
+    "posY": 0, // the Y-coordinate location for the walker
+    "spdX": 0,// the speed for the walker along the x-axis
+    "spdY": 0,// the speed for the walker along the Y-axis
+    "width": $("#walker").width(),
+    "height": $("#walker").height()
 
   }
   // Runnner position and speed
   var P2 = {
-    "posX": posX,
-    "posY": posY,
-    "spdX": speedX,
-    "spdY": speedY
-
+    "posX": 600,// the x-coordinate location for the runner
+    "posY": 600,// the Y-coordinate location for the runner
+    "spdX": 0,
+    "spdY": 0,
+    "width": $("#runner").width(),
+    "height": $("#runner").height()
 
   }
   // Game Item Objects
@@ -73,7 +72,7 @@ function runProgram() {
     repositionGameItem();
     redrawGameItem();
     border();
-    tag()
+    tag(P1, P2)
 
   }
 
@@ -100,16 +99,16 @@ function runProgram() {
     }
 
     if (event.which === KEY.a) {
-      P2.spdX = -10;
+      P2.spdX = -15;
 
     } else if (event.which === KEY.w) {
-      P2.spdY = -10;
+      P2.spdY = -15;
 
     } else if (event.which === KEY.d) {
-      P2.spdX = 10;
+      P2.spdX = 15;
 
     } else if (event.which === KEY.s) {
-      P2.spdY = 10;
+      P2.spdY = 15;
 
     }
 
@@ -201,8 +200,19 @@ function runProgram() {
 
   }
 // ends the game if walker is tagged
-  function tag() {
-    if ((P1.posX + P1.posY) === (P2.posX + P2.posY)) {
+  function tag(obj1, obj2) {
+
+    obj1.left = P1.posX
+    obj1.right = P1.posX + P1.width
+    obj1.top = P1.posY
+    obj1.buttom = P1.posY + P1.height
+
+    obj2.left = P2.posX
+    obj2.right = P2.posX + P2.width
+    obj2.top = P2.posY
+    obj2.buttom = P2.posY + P2.height
+
+    if (obj1.right > obj2.left && obj1.left < obj2.right && obj1.top < obj2.buttom && obj1.buttom > obj2.top) {
       endGame();
 
     }
