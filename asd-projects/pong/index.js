@@ -82,7 +82,7 @@ function runProgram() {
     redraw();
     ballBorder()
     score()
-
+    doCollide()
   }
 
   /* 
@@ -175,8 +175,28 @@ function runProgram() {
 
     obj1.left = pad1.posX
     obj1.right = pad1.posX + pad1.width
+    obj1.top = pad1.posY
+    obj1.buttom = pad1.posY + pad1.height
 
     obj2.left = pad2.posX
+    obj2.right = pad2.posX + pad2.width
+    obj2.top = pad2.posY
+    obj2.buttom = pad2.posY + pad2.height
+
+    obj3.left = ball.posX
+    obj3.right = ball.posX + ball.width
+    obj3.top = ball.posY
+    obj3.buttom = ball.posY + ball.height
+
+    if (obj3.left < obj1.right && obj3.top < obj1.buttom && obj3.buttom > obj1.top) {
+      ball.spdX = ball.spdX * -1
+      ball.spdY = ball.spdY + pad1.spdY
+    }
+
+    if (obj3.right > obj2.left && obj3.top < obj2.buttom && obj3.buttom > obj2.top) {
+      ball.spdX = ball.spdX * -1
+    }
+
 
   }
 
