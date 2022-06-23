@@ -10,6 +10,16 @@ body {
   position: relative;
 }
 
+#win{
+  background: darkgray;
+  width: 400px;
+  height: 200px;
+  text-align: center;
+  font-size: 300%;
+  position: absolute;
+  left: 200px;
+}
+
 #pointL {
   background-color: rgb(255, 255, 255);
   border-radius: 50%;

@@ -19,7 +19,7 @@ function runProgram() {
   var boardHeightmin = $("#board").height() - $("#board").height()
   var pointL = 0
   var pointR = 0
-
+  var winPoint = 5
 
 
   // Game Item Objects
@@ -80,9 +80,11 @@ function runProgram() {
   function newFrame() {
     moveGameItems()
     redraw();
-    ballBorder()
+    ballborder()
     score()
     doCollide()
+    finishpoint()
+
   }
 
   /* 
@@ -91,21 +93,43 @@ function runProgram() {
   function handleKeyDown(event) {
 
     if (event.which === KEY.w) {
-      pad1.spdY = -5
+      pad1.spdY = -10
 
     }
     if (event.which === KEY.s) {
-      pad1.spdY = 5
+      pad1.spdY = 10
+
     }
 
     if (event.which === KEY.up) {
-      pad2.spdY = -5
+      pad2.spdY = -10
     }
     if (event.which === KEY.down) {
-      pad2.spdY = 5
+      pad2.spdY = 10
     }
 
   }
+
+  startBall()
+  function startBall() {
+    var startX = Math.ceil(Math.random() * 5)
+    var startY = Math.ceil(Math.random() * 5)
+    
+
+    if(startX < 3){
+      ball.spdX = ball.spdX
+    } else if (startX > 3){
+      ball.spdX = ball.spdX * -1
+    }
+
+    if(startY > 3){
+      ball.spdY = ball.spdY
+    } else if (startY < 3){
+      ball.spdY = ball.spdY * -1
+    }
+  }
+
+
 
   function doCollide() {
 
@@ -114,6 +138,8 @@ function runProgram() {
     }
 
   }
+
+
 
   function handleKeyUp(event) {
 
@@ -149,25 +175,27 @@ function runProgram() {
 
   }
 
-  function ballBorder() {
+
+
+  function ballborder(event) {
     // ball Y board 
-    if (ball.posY >= boardHeightmax - 50) {
+    if (ball.posY + ball.height >= boardHeightmax) {
       ball.spdY = ball.spdY * -1
     }
     if (ball.posY <= boardHeightmin) {
       ball.spdY = ball.spdY * -1
     }
     // ball X board
-    if (ball.posX >= boardWidthmax - 50) {
+    if (ball.posX + ball.width >= boardWidthmax) {
       ball.spdX = ball.spdX * -1
 
     }
     if (ball.posX <= boardWidthmin) {
       ball.spdX = ball.spdX * -1
     }
-    if (pad1.posY > boardHeightmax) {
-      pad1.spdY = 0
-    }
+
+
+
 
   }
 
@@ -195,7 +223,10 @@ function runProgram() {
 
     if (obj3.right > obj2.left && obj3.top < obj2.buttom && obj3.buttom > obj2.top) {
       ball.spdX = ball.spdX * -1
+      ball.spdY = ball.spdY + pad2.spdY
     }
+
+
 
 
   }
@@ -204,10 +235,14 @@ function runProgram() {
 
     if (ball.posX >= boardWidthmax - 50) {
       pointL = pointL + 1
+      ball.posX = 375
+      ball.spdY = 5
       $("#pointL").text(pointL)
     }
     if (ball.posX <= boardWidthmin) {
       pointR = pointR + 1
+      ball.spdY = 5
+      ball.posX = 375
       $("#pointR").text(pointR)
     }
 
@@ -223,6 +258,22 @@ function runProgram() {
 
     $("#pad1").css('top', pad1.posY)
     $("#pad2").css('top', pad2.posY)
+  }
+  $("#win").hide()
+  function finishpoint(){
+    if(pointL === winPoint){
+      $("#winner").text("BLUE")
+      
+      endGame()
+      $("#win").show()
+    }
+
+    if(pointR === winPoint){
+      $("#winner").text("RED")
+      
+      endGame()
+      $("#win").show()
+    }
   }
 
 
