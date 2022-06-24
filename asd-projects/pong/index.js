@@ -13,19 +13,18 @@ function runProgram() {
   // game variables
 
   var boardWidthmax = $("#board").width()
-
   var boardWidthmin = $("#board").width() - $("#board").width()
   var boardHeightmax = $("#board").height()
   var boardHeightmin = $("#board").height() - $("#board").height()
   var pointL = 0
   var pointR = 0
-  var winPoint = 5
+  var winPoint = 10
 
 
   // Game Item Objects
   var ball = {
-    spdX: 5,
-    spdY: 5,
+    spdX: 0,
+    spdY: 0,
     posX: 375,
     posY: 180,
     height: $("#ball").height(),
@@ -45,6 +44,8 @@ function runProgram() {
     // right booster controls
     left: 37,
     right: 39,
+    // start
+    space: 32
 
   }
   //blue paddle
@@ -89,6 +90,7 @@ function runProgram() {
   let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
   $(document).on('keyup', handleKeyUp);
+  $(document).on('keydown', start);
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -104,7 +106,7 @@ function runProgram() {
     ballborder()
     score()
     doCollide()
-    // finishpoint()
+    finishpoint()
     boostCollide()
   }
 
@@ -129,20 +131,28 @@ function runProgram() {
       pad2.spdY = 10
     }
 
-    if(event.which === KEY.a){
+    if (event.which === KEY.a) {
       boostL.spdY = -5
     }
-    if(event.which === KEY.d){
+    if (event.which === KEY.d) {
       boostL.spdY = 5
     }
 
-    if(event.which === KEY.left){
+    if (event.which === KEY.left) {
       boostR.spdY = -5
     }
-    if(event.which === KEY.right){
+    if (event.which === KEY.right) {
       boostR.spdY = 5
     }
 
+
+  }
+
+  function start(event){
+
+    if(event.which === KEY.space){
+      startBall()
+    }
 
   }
 
@@ -153,15 +163,15 @@ function runProgram() {
 
 
     if (startX < 3) {
-      ball.spdX = ball.spdX
+      ball.spdX = -5
     } else if (startX > 3) {
-      ball.spdX = ball.spdX * -1
+      ball.spdX = 5
     }
 
     if (startY > 3) {
-      ball.spdY = ball.spdY
+      ball.spdY = -5
     } else if (startY < 3) {
-      ball.spdY = ball.spdY * -1
+      ball.spdY = 5
     }
   }
 
@@ -175,9 +185,9 @@ function runProgram() {
 
   }
 
-  function boostCollide(){
+  function boostCollide() {
 
-    if(booster(boostL, boostR, ball)){
+    if (booster(boostL, boostR, ball)) {
       console.log("Gala")
     }
 
@@ -240,22 +250,22 @@ function runProgram() {
       ball.spdX = ball.spdX * -1
     }
 
-    if(boostL.posY <= boardHeightmin){
+    if (boostL.posY <= boardHeightmin) {
       boostL.spdY = 0
     }
-    if(boostL.posY + boostL.height >= boardHeightmax){
+    if (boostL.posY + boostL.height >= boardHeightmax) {
       boostL.spdY = 0
     }
 
-    if(boostR.posY <= boardHeightmin){
+    if (boostR.posY <= boardHeightmin) {
       boostR.spdY = 0
     }
-    if(boostR.posY + boostR.height >= boardHeightmax){
+    if (boostR.posY + boostR.height >= boardHeightmax) {
       boostR.spdY = 0
     }
 
   }
-// handles paddles collisions
+  // handles paddles collisions
   function collide(obj1, obj2, obj3) {
 
     obj1.left = pad1.posX
@@ -288,7 +298,7 @@ function runProgram() {
   function booster(obj1, obj2, obj3) {
 
     obj1.left = boostL.posX
-    obj1. right = boostL .posX + boostL.width
+    obj1.right = boostL.posX + boostL.width
     obj1.top = boostL.posY
     obj1.buttom = boostL.posY
 
@@ -302,12 +312,12 @@ function runProgram() {
     obj3.top = ball.posY
     obj3.buttom = ball.posY + ball.height
 
-    if (obj3.left < obj1.right && obj3.top < obj1.buttom && obj3.buttom > obj1.top){
+    if (obj3.left < obj1.right && obj3.top < obj1.buttom && obj3.buttom > obj1.top) {
       ball.spdY = 0
       ball.spdX = 20
     }
 
-    if (obj3.right > obj2.left && obj3.top < obj2.buttom && obj3.buttom > obj2.top){
+    if (obj3.right > obj2.left && obj3.top < obj2.buttom && obj3.buttom > obj2.top) {
       ball.spdY = 0
       ball.spdX = -20
 
