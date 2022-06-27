@@ -13,7 +13,7 @@
 
 <body>
   <div id='board'>
-    
+
     <div class="goal" id="g1"></div>
     <div class="goal" id="g2"></div>
 
@@ -36,16 +36,56 @@
   </div>
 
   <div id="clrbld">
-    <h1>color blind</h1>
-    <li id="orin">Original color</li>
-    <li id="color1">protanopia</li>
-    <li id="color2"></li>
-    <li id="color3"></li>
-    <li id="color4"></li>
-    <li id="color5"></li>
-    <li id="color6"></li>
-    <li id="color7"></li>
-    <li id="color8"></li>
+    <h1>Color Blind</h1>
+
+    <button type="button" class="allclrbut" id="orin">Original color
+      <script>
+        $("#orin").on('click', orinColor)
+
+        function orinColor() {
+          $("body").css('background-color', 'rgb(60, 1, 2)')
+          $("#ball").css('background-color', 'rgb(230, 180, 0)')
+          $("#pad1").css('background-color', 'rgb(0, 93, 168)')
+          $("#pad2").css('background-color', 'rgb(224, 45, 0)')
+          $(".goal").css('background-color', 'rgb(6, 198, 76)')
+          $("#boost1").css('border-color', 'rgb(0, 93, 168)')
+          $("#boost2").css('border-color', 'rgb(224, 45, 0)')
+
+        }
+
+      </script>
+    </button>
+
+    <button type="button" class="allclrbut" id="color1">protanopia
+      <script>
+        $("#color1").on('click', propiaColor)
+
+        function propiaColor() {
+          $("body").css('background-color', 'rgb(34, 33, 1)')
+          $("#ball").css('background-color', 'rgb(208, 207, 43)')
+          $("#pad1").css('background-color', 'rgb(40, 41, 149)')
+          $("#pad2").css('background-color', 'rgb(146, 144, 10)')
+          $(".goal").css('background-color', 'rgb(89, 90, 105)')
+          $("#boost1").css('border-color', 'rgb(40, 41, 149)')
+          $("#boost2").css('border-color', 'rgb(146, 144, 10)')
+        }
+
+      </script>
+    </button>
+
+    <button type="button" class="allclrbut" id="color2">Deuteranopia</button>
+
+    <button type="button" class="allclrbut" id="color3">Tritanopia</button>
+
+    <button type="button" class="allclrbut" id="color4">Achromatopsia</button>
+
+    <button type="button" class="allclrbut" id="color5">Protanomaly</button>
+
+    <button type="button" class="allclrbut" id="color6">Deuteranomaly</button>
+
+    <button type="button" class="allclrbut" id="color7">Tritanomaly</button>
+
+    <button type="button" class="allclrbut" id="color8">Achromatomaly</button>
   </div>
 </body>
 

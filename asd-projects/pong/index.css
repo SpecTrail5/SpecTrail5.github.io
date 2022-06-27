@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(60, 1, 2);
+  background-color: rgb(60,1,2);
 }
 
 #board {
@@ -120,5 +120,20 @@ body {
 
 #g2 {
   left: 790px;
+
+}
+
+#clrbld{
+  background: rgb(113, 113, 113);
+  width: 170px;
+  height: auto;
+  border: inset;
+  text-align: center;
+  margin-top: 10px;
+  padding-bottom: 5px;
+}
+
+.allclrbut{
+  background-color: white;
 
 }

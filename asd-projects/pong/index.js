@@ -115,6 +115,7 @@ function runProgram() {
     finishpoint()
     boostCollide()
     padBorder()
+    
   }
 
   /* 
@@ -395,6 +396,8 @@ function runProgram() {
       $("#win").show()
     }
   }
+
+
 
 
   function endGame() {
