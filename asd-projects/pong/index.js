@@ -12,13 +12,19 @@ function runProgram() {
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   // game variables
 
-  var boardWidthmax = $("#board").width()
-  var boardWidthmin = $("#board").width() - $("#board").width()
-  var boardHeightmax = $("#board").height()
-  var boardHeightmin = $("#board").height() - $("#board").height()
   var pointL = 0
   var pointR = 0
   var winPoint = 10
+  var board = {
+    widthMax: $("#board").width(),
+    widthMin: $("#board").width() - $("#board").width(),
+    heightMax: $("#board").height(),
+    heightMin: $("#board").height() - $("#board").height()
+  }
+  // var boardWidthmax = $("#board").width()
+  // var boardWidthmin = $("#board").width() - $("#board").width()
+  // var boardHeightmax = $("#board").height()
+  // var boardHeightmin = $("#board").height() - $("#board").height()
 
 
   // Game Item Objects
@@ -56,7 +62,7 @@ function runProgram() {
     height: $("#pad1").height(),
     width: $("#pad1").width()
   }
-
+  //left booster
   var boostL = {
     spdY: 0,
     posY: 200,
@@ -74,7 +80,7 @@ function runProgram() {
     height: $("#pad2").height(),
     width: $("#pad2").width()
   }
-
+  //right booster
   var boostR = {
     spdY: 0,
     posY: 200,
@@ -90,7 +96,7 @@ function runProgram() {
   let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
   $(document).on('keyup', handleKeyUp);
-  $(document).on('keydown', start);
+
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -103,11 +109,12 @@ function runProgram() {
   function newFrame() {
     moveGameItems()
     redraw();
-    ballborder()
+    border()
     score()
     doCollide()
     finishpoint()
     boostCollide()
+    padBorder()
   }
 
   /* 
@@ -148,13 +155,9 @@ function runProgram() {
 
   }
 
-  function start(event){
 
-    if(event.which === KEY.space){
-      startBall()
-    }
+  startBall()
 
-  }
 
   startBall()
   function startBall() {
@@ -176,10 +179,10 @@ function runProgram() {
   }
 
 
-
+  // calls collide functions
   function doCollide() {
 
-    if (collide(pad1, pad2, ball)) {
+    if (padCollide(pad1, pad2, ball)) {
       console.log("coconut")
     }
 
@@ -233,40 +236,55 @@ function runProgram() {
 
 
 
-  function ballborder() {
-    // ball Y board 
-    if (ball.posY + ball.height >= boardHeightmax) {
+  function border() {
+    // ball Y border collision
+    if (ball.posY + ball.height >= board.heightMax) {
       ball.spdY = ball.spdY * -1
     }
-    if (ball.posY <= boardHeightmin) {
+    if (ball.posY <= board.heightMin) {
       ball.spdY = ball.spdY * -1
     }
-    // ball X board
-    if (ball.posX + ball.width >= boardWidthmax) {
+    // ball X border collision
+    if (ball.posX + ball.width >= board.widthMax) {
       ball.spdX = ball.spdX * -1
 
     }
-    if (ball.posX <= boardWidthmin) {
+    if (ball.posX <= board.widthMin) {
       ball.spdX = ball.spdX * -1
     }
-
-    if (boostL.posY <= boardHeightmin) {
+    // left booster border collision
+    if (boostL.posY <= board.heightMin) {
       boostL.spdY = 0
     }
-    if (boostL.posY + boostL.height >= boardHeightmax) {
+    if (boostL.posY + boostL.height >= board.heightMax) {
       boostL.spdY = 0
     }
-
-    if (boostR.posY <= boardHeightmin) {
+    // right booster border collision
+    if (boostR.posY <= board.heightMin) {
       boostR.spdY = 0
     }
-    if (boostR.posY + boostR.height >= boardHeightmax) {
+    if (boostR.posY + boostR.height >= board.heightMax) {
       boostR.spdY = 0
+    }
+    // left paddle border collision
+    if (pad1.posY < board.heightMin) {
+      pad1.posY = board.heightMin
+    }
+    if (pad1.posY + pad1.height > board.heightMax) {
+      pad1.posY = board.heightMax - pad1.height
+    }
+    // right paddle border collision
+    if (pad2.posY < board.heightMin) {
+      pad2.posY = board.heightMin
+    }
+    if (pad2.posY + pad2.height > board.heightMax) {
+      pad2.posY = board.heightMax - pad2.height
     }
 
   }
-  // handles paddles collisions
-  function collide(obj1, obj2, obj3) {
+
+  // handles paddles collisions with ball
+  function padCollide(obj1, obj2, obj3) {
 
     obj1.left = pad1.posX
     obj1.right = pad1.posX + pad1.width
@@ -294,7 +312,7 @@ function runProgram() {
     }
 
   }
-  // handles boosters collisions
+  // handles boosters collisions with ball
   function booster(obj1, obj2, obj3) {
 
     obj1.left = boostL.posX
@@ -324,10 +342,10 @@ function runProgram() {
     }
 
   }
-
+  // handles scoring
   function score() {
 
-    if (ball.posX >= boardWidthmax - 50) {
+    if (ball.posX >= board.widthMax - ball.width) {
       pointL = pointL + 1
       ball.posX = 375
       ball.posY = 180
@@ -335,7 +353,7 @@ function runProgram() {
       ball.spdX = 5
       $("#pointL").text(pointL)
     }
-    if (ball.posX <= boardWidthmin) {
+    if (ball.posX <= board.widthMin) {
       pointR = pointR + 1
       ball.spdY = 5
       ball.posY = 180
@@ -359,6 +377,8 @@ function runProgram() {
     $("#boost1").css('top', boostL.posY)
     $("#boost2").css('top', boostR.posY)
   }
+
+  // handles win
   $("#win").hide()
   function finishpoint() {
     if (pointL === winPoint) {
