@@ -8,7 +8,7 @@ body {
   border: inset;
   text-align: center;
   width: fit-content;
-  height: 100px;
+  height: fit-content;
   position: absolute;
   left: 700px;
 }
