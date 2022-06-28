@@ -1,0 +1,28 @@
+body{
+    background: black;
+
+}
+
+#board{
+    background: gray;
+    width: 800px;
+    height: 600px;
+    position: relative;
+}
+
+#jumper{
+    background: crimson;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 10px;
+    top: 530px;
+}
+
+#ground{
+    background: darkslategrey;
+    width: 800px;
+    height: 20px;
+    position: absolute;
+    top: 580px;
+}

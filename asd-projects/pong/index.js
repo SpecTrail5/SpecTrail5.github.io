@@ -15,23 +15,20 @@ function runProgram() {
   var pointL = 0
   var pointR = 0
   var winPoint = 10
+  // board walls
   var board = {
     widthMax: $("#board").width(),
-    widthMin: $("#board").width() - $("#board").width(),
+    widthMin: 0 ,
     heightMax: $("#board").height(),
-    heightMin: $("#board").height() - $("#board").height()
+    heightMin: 0
   }
-  // var boardWidthmax = $("#board").width()
-  // var boardWidthmin = $("#board").width() - $("#board").width()
-  // var boardHeightmax = $("#board").height()
-  // var boardHeightmin = $("#board").height() - $("#board").height()
 
 
   // Game Item Objects
   var ball = {
     spdX: 0,
     spdY: 0,
-    posX: 375,
+    posX: 450,
     posY: 180,
     height: $("#ball").height(),
     width: $("#ball").width()
@@ -50,8 +47,6 @@ function runProgram() {
     // right booster controls
     left: 37,
     right: 39,
-    // start
-    space: 32
 
   }
   //blue paddle
@@ -76,7 +71,7 @@ function runProgram() {
   var pad2 = {
     spdY: 0,
     posY: 150,
-    posX: 760,
+    posX: 960,
     height: $("#pad2").height(),
     width: $("#pad2").width()
   }
@@ -84,7 +79,7 @@ function runProgram() {
   var boostR = {
     spdY: 0,
     posY: 200,
-    posX: 605,
+    posX: 750,
     height: $("#boost2").height(),
     width: $("#boost2").width()
 
@@ -216,6 +211,20 @@ function runProgram() {
       pad2.spdY = 0
     }
 
+    if (event.which === KEY.a) {
+      boostL.spdY = 0
+    }
+    if (event.which === KEY.d) {
+      boostL.spdY = 0
+    }
+
+    if (event.which === KEY.left) {
+      boostR.spdY = 0
+    }
+    if (event.which === KEY.right) {
+      boostR.spdY = 0
+    }
+
   }
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -255,17 +264,17 @@ function runProgram() {
     }
     // left booster border collision
     if (boostL.posY <= board.heightMin) {
-      boostL.spdY = 0
+      boostL.posY = board.heightMin
     }
     if (boostL.posY + boostL.height >= board.heightMax) {
-      boostL.spdY = 0
+      boostL.posY = board.heightMax - boostL.height
     }
     // right booster border collision
     if (boostR.posY <= board.heightMin) {
-      boostR.spdY = 0
+      boostR.posY = board.heightMin
     }
     if (boostR.posY + boostR.height >= board.heightMax) {
-      boostR.spdY = 0
+      boostR.posY = board.heightMax - boostR.height
     }
     // left paddle border collision
     if (pad1.posY < board.heightMin) {
@@ -319,7 +328,7 @@ function runProgram() {
     obj1.left = boostL.posX
     obj1.right = boostL.posX + boostL.width
     obj1.top = boostL.posY
-    obj1.buttom = boostL.posY
+    obj1.buttom = boostL.posY + boostL.height
 
     obj2.left = boostR.posX
     obj2.right = boostR.posX + boostR.width
@@ -331,12 +340,12 @@ function runProgram() {
     obj3.top = ball.posY
     obj3.buttom = ball.posY + ball.height
 
-    if (obj3.left < obj1.right && obj3.top < obj1.buttom && obj3.buttom > obj1.top) {
+    if (obj3.left < obj1.right && obj3.top < obj1.buttom && obj3.buttom > obj1.top && obj3.right > obj1.left) {
       ball.spdY = 0
       ball.spdX = 20
     }
 
-    if (obj3.right > obj2.left && obj3.top < obj2.buttom && obj3.buttom > obj2.top) {
+    if (obj3.right > obj2.left && obj3.top < obj2.buttom && obj3.buttom > obj2.top && obj3.left < obj2.right) {
       ball.spdY = 0
       ball.spdX = -20
 

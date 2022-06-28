@@ -4,8 +4,11 @@ body {
 
 #info {
   background: rgb(215, 215, 215);
-  width: 400px;
-  height: 400px;
+  border-color: black;
+  border: inset;
+  text-align: center;
+  width: fit-content;
+  height: 100px;
   position: absolute;
   left: 700px;
 }
@@ -13,13 +16,14 @@ body {
 #W {
   background: rgb(136, 195, 253);
   width: 100px;
+  margin-left: 20px;
 
 }
 
 #R {
   background: rgb(255, 118, 113);
   width: 100px;
-
+  margin-left: 20px;
 }
 
 #GO {
