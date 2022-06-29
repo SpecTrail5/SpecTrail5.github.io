@@ -1,16 +1,32 @@
-body{
+body {
     background: black;
 
 }
 
-#board{
+#board {
     background: gray;
     width: 1000px;
     height: 800px;
     position: relative;
 }
 
-#jumper{
+#playerHp{
+    background: cadetblue;
+    width: 100px;
+    height: 50px;
+    font-size: 300%;
+}
+
+/* #bossHp{
+    background: rgb(57, 0, 0);
+    width: 200px;
+    height: 100px;
+    color: azure;
+    font-size: 500%;
+    text-align: center;
+} */
+
+#jumper {
     background: crimson;
     width: 20px;
     height: 20px;
@@ -19,12 +35,14 @@ body{
     top: 390px;
 }
 
-#boss{
+#boss {
     background: darkblue;
     width: 80px;
     height: 80px;
     position: absolute;
     left: 900px;
     top: 360;
+    color: azure;
+    font-size: 300%;
+    text-align: center;
 }
-

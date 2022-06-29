@@ -5,8 +5,12 @@ function runProgram() {
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   // game variables
 
-
-
+  
+  
+  var boostUp = 0
+  var boostDown = 0
+  var boostLeft = 0
+  var boostRight = 0
 
   var board = {
     widthMax: $("#board").width(),
@@ -15,18 +19,19 @@ function runProgram() {
     heightMin: $("#board").height() - $("#board").height()
   }
 
-  
-  
+
+
   var KEY = {
     up: 38,
     down: 40,
     left: 37,
     right: 39,
     space: 32
-    
+
   }
-  
+
   var jumper = {
+    hp: 50,
     spdX: 0,
     spdY: 0,
     posX: 10,
@@ -34,10 +39,11 @@ function runProgram() {
     width: $("#jumper").width(),
     height: $("#jumper").height()
   }
-  
+
   var boss = {
-    spdX: -20,
-    spdY: -20,
+    hp: 500,
+    spdX: -10,
+    spdY: -10,
     posX: 900,
     posY: 360,
     width: $("#boss").width(),
@@ -65,7 +71,7 @@ function runProgram() {
     redraw();
     border()
     groundcollide(jumper, ground)
-
+    die()
   }
 
   /* 
@@ -74,18 +80,37 @@ function runProgram() {
   function handleKeyDown(event) {
 
     if (event.which === KEY.up) {
+      boostUp = 1
       jumper.spdY = -10
       
     }
     if (event.which === KEY.left) {
+      boostLeft = 1
       jumper.spdX = -10
+      
     }
     if (event.which === KEY.right) {
+      boostRight = 1
       jumper.spdX = 10
     }
-    if(event.which === KEY.down){
+    if (event.which === KEY.down) {
+      boostDown = 1
       jumper.spdY = 10
     }
+
+    if(event.which === KEY.space && boostUp === 1){
+      jumper.spdY = -25
+    }
+    if(event.which === KEY.space && boostLeft === 1){
+      jumper.spdX = -25
+    }
+    if(event.which === KEY.space && boostRight === 1){
+      jumper.spdX = 25
+    }
+    if(event.which === KEY.space && boostDown === 1){
+      jumper.spdY = 25
+    }
+    
 
 
   }
@@ -95,20 +120,24 @@ function runProgram() {
 
     if (event.which === KEY.up) {
       jumper.spdY = 0
+      boostUp = 0
     }
 
     if (event.which === KEY.left) {
       jumper.spdX = 0
+      boostLeft = 0
     }
     if (event.which === KEY.right) {
       jumper.spdX = 0
+      boostRight = 0
     }
-    if(event.which === KEY.down){
+    if (event.which === KEY.down) {
       jumper.spdY = 0
+      boostDown = 0
     }
 
   }
- 
+
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -125,29 +154,29 @@ function runProgram() {
 
   function border() {
 
-    if(boss.posY < board.heightMin){
+    if (boss.posY < board.heightMin) {
       boss.spdY = boss.spdY * -1
     }
-    if(boss.posY > board.heightMax){
+    if (boss.posY > board.heightMax) {
       boss.spdY = boss.spdY * -1
     }
-    if(boss.posX < board.widthMin){
+    if (boss.posX < board.widthMin) {
       boss.spdX = boss.spdX * -1
     }
-    if(boss.posX > board.widthMax){
+    if (boss.posX > board.widthMax) {
       boss.spdX = boss.spdX * -1
     }
 
-    if(jumper.posX < board.widthMin){
+    if (jumper.posX < board.widthMin) {
       jumper.posX = board.widthMin
     }
-    if(jumper.posX > board.widthMax){
+    if (jumper.posX > board.widthMax) {
       jumper.posX = board.widthMax
     }
-    if(jumper.posY < board.heightMin){
+    if (jumper.posY < board.heightMin) {
       jumper.posY = board.heightMin
     }
-    if(jumper.posY > board.heightMax){
+    if (jumper.posY > board.heightMax) {
       jumper.posY = board.heightMax
     }
 
@@ -166,8 +195,9 @@ function runProgram() {
     obj2.top = boss.posY
     obj2.buttom = boss.posY + boss.height
 
-    if(obj1.buttom > obj2.top && obj1.top < obj2.buttom && obj1.left < obj2.right && obj1.right > obj2.left){
-      endGame()
+    if (obj1.buttom > obj2.top && obj1.top < obj2.buttom && obj1.left < obj2.right && obj1.right > obj2.left) {
+      jumper.hp = jumper.hp - 1
+      $("#playerHp").text(jumper.hp)
     }
 
   }
@@ -180,6 +210,12 @@ function runProgram() {
     $("#boss").css('top', boss.posY)
   }
 
+  function die(){
+
+    if(jumper.hp === 0){
+      endGame()
+    }
+  }
 
   function endGame() {
     // stop the interval timer
