@@ -12,22 +12,22 @@ body {
 
 #playerHp{
     background: cadetblue;
-    width: 100px;
+    width: fit-content;
     height: 50px;
     font-size: 300%;
 }
 
-/* #bossHp{
+#powerUp{
     background: rgb(57, 0, 0);
-    width: 200px;
-    height: 100px;
-    color: azure;
-    font-size: 500%;
-    text-align: center;
-} */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 580px;
+}
 
 #jumper {
-    background: crimson;
+    background: rgb(20, 173, 220);
     width: 20px;
     height: 20px;
     position: absolute;
@@ -45,4 +45,16 @@ body {
     color: azure;
     font-size: 300%;
     text-align: center;
+}
+
+#die{
+    background: linear-gradient(black, dimgray, gray);
+    width: fit-content;
+    height: fit-content;
+    color: crimson;
+    font-size: 500%;
+    position: absolute;
+    left: 300px;
+
+
 }

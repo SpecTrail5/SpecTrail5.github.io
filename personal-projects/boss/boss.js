@@ -12,6 +12,8 @@ function runProgram() {
   var boostLeft = 0
   var boostRight = 0
 
+  
+
   var board = {
     widthMax: $("#board").width(),
     widthMin: $("#board").width() - $("#board").width(),
@@ -26,7 +28,11 @@ function runProgram() {
     down: 40,
     left: 37,
     right: 39,
-    space: 32
+    space: 32,
+    w: 87,
+    a: 65,
+    s: 83,
+    d: 68
 
   }
 
@@ -70,7 +76,7 @@ function runProgram() {
     moveGameItems()
     redraw();
     border()
-    groundcollide(jumper, ground)
+    bosscollide(jumper, boss)
     die()
   }
 
@@ -79,7 +85,7 @@ function runProgram() {
   */
   function handleKeyDown(event) {
 
-    if (event.which === KEY.up) {
+    if (event.which === (KEY.up || KEY.w)) {
       boostUp = 1
       jumper.spdY = -10
       
@@ -100,6 +106,7 @@ function runProgram() {
 
     if(event.which === KEY.space && boostUp === 1){
       jumper.spdY = -25
+
     }
     if(event.which === KEY.space && boostLeft === 1){
       jumper.spdX = -25
@@ -183,7 +190,7 @@ function runProgram() {
 
   }
 
-  function groundcollide(obj1, obj2) {
+  function bosscollide(obj1, obj2) {
 
     obj1.left = jumper.posX
     obj1.right = jumper.posX + jumper.width
@@ -197,7 +204,7 @@ function runProgram() {
 
     if (obj1.buttom > obj2.top && obj1.top < obj2.buttom && obj1.left < obj2.right && obj1.right > obj2.left) {
       jumper.hp = jumper.hp - 1
-      $("#playerHp").text(jumper.hp)
+      $("#playerHp").text("HP:" + jumper.hp)
     }
 
   }
@@ -211,8 +218,9 @@ function runProgram() {
   }
 
   function die(){
-
+$("#die").hide()
     if(jumper.hp === 0){
+      $("#die").show()
       endGame()
     }
   }
