@@ -6,7 +6,7 @@ body {
 #board {
     background: gray;
     width: 1000px;
-    height: 800px;
+    height: 650px;
     position: relative;
 }
 
@@ -15,6 +15,30 @@ body {
     width: fit-content;
     height: 50px;
     font-size: 300%;
+}
+
+#bcd {
+    background: rgb(182, 99, 16);
+    width: fit-content;
+    height: 50px;
+    font-size: 300%;
+
+}
+
+#dcd {
+    background: rgb(16, 77, 182);
+    width: fit-content;
+    height: 50px;
+    font-size: 300%;
+
+}
+
+#ucd {
+    background: rgb(16, 182, 163);
+    width: fit-content;
+    height: 50px;
+    font-size: 300%;
+
 }
 
 #powerUp{
@@ -35,6 +59,37 @@ body {
     top: 390px;
 }
 
+#blast {
+    background: rgba(182, 99, 16, 0.633);
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    position: absolute;
+    left: 10px;
+    top: 390px;
+}
+
+#block {
+    background: rgba(16, 77, 182, 0.633);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: absolute;
+    left: 10px;
+    top: 390px;
+}
+
+#ult {
+    background: rgba(16, 182, 163, 0.8);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    left: 10px;
+    top: 390px;
+}
+
+
 #boss {
     background: darkblue;
     width: 80px;
@@ -47,7 +102,7 @@ body {
     text-align: center;
 }
 
-#die{
+#dieWin{
     background: linear-gradient(black, dimgray, gray);
     width: fit-content;
     height: fit-content;
