@@ -6,14 +6,15 @@ function runProgram() {
   // game variables
 
   var jumperCap = 50
-  var bossCap = 1
+  var bossCap = 2
   var bossReCap = 400
   var boostUp = 0
   var boostDown = 0
   var boostLeft = 0
   var boostRight = 0
 
-  
+
+
 
   var board = {
     widthMax: $("#board").width(),
@@ -23,12 +24,8 @@ function runProgram() {
   }
 
 
-// controls
+  // controls
   var KEY = {
-    up: 38,
-    down: 40,
-    left: 37,
-    right: 39,
     space: 32,
     w: 87,
     a: 65,
@@ -36,13 +33,14 @@ function runProgram() {
     d: 68,
     j: 74,
     k: 75,
+    i: 73,
     l: 76
 
   }
-// Player
+  // Player
   var jumper = {
-    hp: 50,
-    regen: 0.2,
+    hp: $("#playerHp").width(),
+    regen: 2.5,
     spdX: 0,
     spdY: 0,
     posX: 100,
@@ -50,9 +48,9 @@ function runProgram() {
     width: $("#jumper").width(),
     height: $("#jumper").height()
   }
-// Attack
+  // Attack
   var blast = {
-    damge: 20,
+    damge: 40,
     cooldown: 0,
     spdX: jumper.spdX,
     spdY: jumper.spdY,
@@ -75,7 +73,7 @@ function runProgram() {
   }
 
   var ult = {
-    damge: 150,
+    damge: 250,
     cooldown: 1000,
     spdX: jumper.spdX,
     spdY: jumper.spdY,
@@ -85,13 +83,24 @@ function runProgram() {
     height: $("#ult").height()
   }
 
-// boss
+  var HFH = {
+    damge: 2,
+    cooldown: 1500,
+    spdX: jumper.spdX,
+    spdY: jumper.spdY,
+    posX: 10,
+    posY: 390,
+    width: $("#HFH").width(),
+    height: $("#HFH").height()
+  }
+
+  // boss
   var boss = {
-    hp: 500,
-    regen: 5,
-    attack: 1,
-    spdX: -10,
-    spdY: -10,
+    hp: 1600,
+    regen: 200,
+    attack: 5,
+    spdX: -5,
+    spdY: -5,
     posX: 900,
     posY: 360,
     width: $("#boss").width(),
@@ -107,6 +116,7 @@ function runProgram() {
 
   $("#blast").hide()
   $("#block").hide()
+  $("#HFH").hide()
   $("#ult").hide()
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -153,40 +163,46 @@ function runProgram() {
       jumper.spdY = 10
     }
 
-    if(event.which === KEY.space && boostUp === 1){
+    if (event.which === KEY.space && boostUp === 1) {
       jumper.spdY = -25
     }
 
-    if(event.which === KEY.space && boostLeft === 1){
+    if (event.which === KEY.space && boostLeft === 1) {
       jumper.spdX = -25
     }
 
-    if(event.which === KEY.space && boostRight === 1){
+    if (event.which === KEY.space && boostRight === 1) {
       jumper.spdX = 25
     }
 
-    if(event.which === KEY.space && boostDown === 1){
+    if (event.which === KEY.space && boostDown === 1) {
       jumper.spdY = 25
     }
 
-    if(event.which === KEY.j && blast.cooldown === 0){
+    if (event.which === KEY.j && blast.cooldown === 0) {
       blast.cooldown = 200
       $("#blast").show()
       attackcollide(blast, boss)
     }
 
-    if(event.which === KEY.k && block.cooldown === 0){
-      block.cooldown = 100
+    if (event.which === KEY.k && block.cooldown === 0) {
+      block.cooldown = 50
       $("#block").show()
       blockCollide(block, boss)
     }
 
-    if(event.which === KEY.l && ult.cooldown === 0){
+    if (event.which === KEY.i && HFH.cooldown === 0) {
+      HFH.cooldown = 1000
+      $("#HFH").show()
+      HFHcollide(HFH, boss)
+    }
+
+    if (event.which === KEY.l && ult.cooldown === 0) {
       ult.cooldown = 1000
       $("#ult").show()
       attackcollide(ult, boss)
     }
-    
+
   }
 
 
@@ -212,15 +228,19 @@ function runProgram() {
       boostDown = 0
     }
 
-    if(event.which === KEY.j){
+    if (event.which === KEY.j) {
       $("#blast").hide()
     }
 
-    if(event.which === KEY.k){
+    if (event.which === KEY.k) {
       $("#block").hide()
     }
 
-    if(event.which === KEY.l){
+    if (event.which === KEY.i) {
+      $("#HFH").hide()
+    }
+
+    if (event.which === KEY.l) {
       $("#ult").hide()
     }
 
@@ -239,6 +259,9 @@ function runProgram() {
 
     block.posX = jumper.posX - 90
     block.posY = jumper.posY - 90
+
+    HFH.posX = jumper.posX - 65
+    HFH.posY = jumper.posY - 65
 
     ult.posX = jumper.posX - 40
     ult.posY = jumper.posY - 40
@@ -300,45 +323,52 @@ function runProgram() {
     if (obj1.buttom > obj2.top && obj1.top < obj2.buttom && obj1.left < obj2.right && obj1.right > obj2.left) {
       jumper.hp = jumper.hp - boss.attack
       $("#playerHp").text("HP:" + jumper.hp)
+      $("#playerHp").css('width', jumper.hp)
     }
 
   }
 
-  function bosslvl(){
+  function bosslvl() {
 
-    
 
-    if(boss.hp < 400){
-      boss.attack = 2
-    }else if(boss.hp < 100){
+
+    if (boss.hp < 400) {
       boss.attack = 10
+    } else if (boss.hp < 100) {
+      boss.attack = 15
     }
 
-    if(boss.hp <= 250 && bossCap === 1){
+    if(boss.hp <= 1000 && bossCap === 2){
+      bossCap = bossCap - 1
+      boss.spdX = boss.spdX * 2
+      boss.spdY = boss.spdY * 2
+    }
+
+    if (boss.hp <= 250 && bossCap === 1) {
       bossCap = bossCap - 1
       boss.spdX = boss.spdX * 1.5
       boss.spdY = boss.spdY * 1.5
     }
-    if(boss.hp <= 50){
+    if (boss.hp <= 75) {
       bossRegen()
     }
   }
 
-  function bossRegen(){ 
+  function bossRegen() {
     bossReCap = bossReCap - 1
-    if(boss.hp < 50 && bossReCap <= 0){
+    if (boss.hp < 50 && bossReCap <= 0) {
       bossReCap = 400
-    boss.hp = boss.hp + boss.regen
-    $("#bossHp").text((Math.ceil(boss.hp) - 1))
+      boss.hp = boss.hp + boss.regen
+      $("#bossHp").text((Math.ceil(boss.hp) - 1))
     }
   }
 
-  function playerRegen(){ 
-    jumperCap = jumperCap - 1
-    if(jumper.hp < 50 && jumperCap <= 0){
+  function playerRegen() {
+    jumperCap = jumperCap - 2
+    if (jumper.hp < 150 && jumperCap <= 0) {
       jumperCap = jumper.hp
-    jumper.hp = jumper.hp + jumper.regen
-    $("#playerHp").text("HP:" + (Math.ceil(jumper.hp) - 1))
+      jumper.hp = jumper.hp + jumper.regen
+      $("#playerHp").text("HP:" + (Math.ceil(jumper.hp) - 1))
     }
   }
 
@@ -360,6 +390,27 @@ function runProgram() {
     }
   }
 
+  function HFHcollide(obj1, obj2,) {
+
+    obj1.left = obj1.posX
+    obj1.right = obj1.posX + obj1.width
+    obj1.top = obj1.posY
+    obj1.buttom = obj1.posY + obj1.height
+
+    obj2.left = boss.posX
+    obj2.right = boss.posX + boss.width
+    obj2.top = boss.posY
+    obj2.buttom = boss.posY + boss.height
+
+    if (obj1.buttom > obj2.top && obj1.top < obj2.buttom && obj1.left < obj2.right && obj1.right > obj2.left) {
+      jumper.hp = jumper.hp / (obj1.damge * jumper.hp)
+      boss.hp = boss.hp / obj1.damge
+      $("#boss").text(boss.hp)
+      $("#playerHp").text("HP:" + (Math.ceil(jumper.hp) - 1))
+      $("#playerHp").css('width', jumper.hp)
+    }
+  }
+
   function blockCollide(obj1, obj2,) {
 
     obj1.left = obj1.posX
@@ -377,39 +428,53 @@ function runProgram() {
       boss.spdX = boss.spdX * -1
       boss.hp = boss.hp - obj1.damge
       $("#boss").text(boss.hp)
-      
+
     }
 
   }
 
-  function cooldowns(){
+  function cooldowns() {
     blast.cooldown = blast.cooldown - 1
     $("#bcd").text("blast:" + (blast.cooldown + 1))
 
-    if(blast.cooldown <= 1){
+    if (blast.cooldown <= 1) {
       blast.cooldown = 0
     }
-    if(jumper.hp <= 10){
+    if (jumper.hp <= 30) {
       blast.cooldown = 0
       $("#bcd").text("blast:" + (blast.cooldown))
     }
-//---------------------------------------------------//
-block.cooldown = block.cooldown - 1
+
+    //---------------------------------------------------//
+    block.cooldown = block.cooldown - 1
     $("#dcd").text("block:" + (block.cooldown + 1))
 
-    if(block.cooldown <= 1){
+    if (block.cooldown <= 1) {
       block.cooldown = 0
     }
-//---------------------------------------------------//
+    if (jumper.hp <= 40) {
+      block.cooldown = 0
+      $("#dcd").text("block:" + (block.cooldown))
+    }
+
+    //---------------------------------------------------//
+    HFH.cooldown = HFH.cooldown - 1
+    $("#Hcd").text("THE HIT:" + (HFH.cooldown + 1))
+
+    if (HFH.cooldown <= 1) {
+      HFH.cooldown = 0
+    }
+
+    //---------------------------------------------------//
     ult.cooldown = ult.cooldown - 1
     $("#ucd").text("ult:" + (ult.cooldown + 1))
 
-    if(ult.cooldown <= 1){
+    if (ult.cooldown <= 1) {
       ult.cooldown = 0
     }
 
-    if(jumper.hp <= 5){
-      ult.cooldown = 0
+    if (jumper.hp <= 20) {
+      ult.cooldown = 100
       $("#ucd").text("ult:" + (ult.cooldown))
     }
 
@@ -417,32 +482,39 @@ block.cooldown = block.cooldown - 1
 
 
   function redraw() {
+    $("#boss").text(boss.hp)
+    $("#playerHp").text("HP:" + Math.ceil(jumper.hp))
+    $("#playerHp").css('width', jumper.hp)
+
     $("#jumper").css('left', jumper.posX)
     $("#jumper").css('top', jumper.posY)
 
     $("#blast").css('left', blast.posX)
-    $("#blast").css('top', blast.posY )
+    $("#blast").css('top', blast.posY)
 
     $("#block").css('left', block.posX)
-    $("#block").css('top', block.posY )
+    $("#block").css('top', block.posY)
+
+    $("#HFH").css('left', HFH.posX)
+    $("#HFH").css('top', HFH.posY)
 
     $("#ult").css('left', ult.posX)
-    $("#ult").css('top', ult.posY )
+    $("#ult").css('top', ult.posY)
 
     $("#boss").css('left', boss.posX)
     $("#boss").css('top', boss.posY)
   }
 
-  function dieWin(){
-$("#dieWin").hide()
+  function dieWin() {
+    $("#dieWin").hide()
 
-    if(jumper.hp <= 0){
+    if (jumper.hp <= 0) {
       $("#dieWin").text("You Died")
       $("#dieWin").show()
       endGame()
     }
 
-    if(boss.hp <= 0){
+    if (boss.hp <= 0) {
       $("#dieWin").text("You Win")
       $("#dieWin").css("color", 'aqua')
       $("#dieWin").show()
@@ -450,7 +522,7 @@ $("#dieWin").hide()
     }
   }
 
-  
+
 
   function endGame() {
     // stop the interval timer

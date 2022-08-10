@@ -10,9 +10,9 @@ body {
     position: relative;
 }
 
-#playerHp{
-    background: cadetblue;
-    width: fit-content;
+#playerHp {
+    background: crimson;
+    width: 200px;
     height: 50px;
     font-size: 300%;
 }
@@ -33,6 +33,14 @@ body {
 
 }
 
+#Hcd {
+    background: rgb(88, 1, 1);
+    width: fit-content;
+    height: 50px;
+    font-size: 300%;
+
+}
+
 #ucd {
     background: rgb(16, 182, 163);
     width: fit-content;
@@ -41,8 +49,8 @@ body {
 
 }
 
-#powerUp{
-    background: rgb(57, 0, 0);
+#powerUp {
+    background: rgb(255, 213, 0);
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -79,6 +87,16 @@ body {
     top: 390px;
 }
 
+#HFH {
+    background: rgba(88, 1, 1, 0.633);
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: absolute;
+    left: 10px;
+    top: 390px;
+}
+
 #ult {
     background: rgba(16, 182, 163, 0.8);
     width: 100px;
@@ -98,11 +116,11 @@ body {
     left: 900px;
     top: 360;
     color: azure;
-    font-size: 300%;
+    font-size: 250%;
     text-align: center;
 }
 
-#dieWin{
+#dieWin {
     background: linear-gradient(black, dimgray, gray);
     width: fit-content;
     height: fit-content;
@@ -110,6 +128,5 @@ body {
     font-size: 500%;
     position: absolute;
     left: 300px;
-
 
 }
