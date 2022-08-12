@@ -1,24 +1,49 @@
 body {
     background: darkcyan;
+    margin: auto;
 }
 
-#board {
-    background: azure;
-    width: 600px;
-    height: 600px;
-    position: relative;
+main {
+    display: flex;
+    margin-left: 100px;
 }
 
-#tester {
-    background: rgb(255, 0, 0);
-    width: 20px;
-    height: 20px;
+#main {
+    width: 400px;
+    height: 400px;
+
+}
+
+#sidePan {
+    background: cadetblue;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    margin-right: auto;
+}
+
+#coin {
+    background: linear-gradient(140deg, rgb(218, 165, 32), rgb(131, 88, 8));
+    border-style: outset;
+    border-color: rgb(152, 112, 10);
+    border-radius: 50%;
+    width: 300px;
+    height: 300px;
     position: absolute;
+    left: 50px;
+    top: 50px;
 }
 
-.tail {
-    background: rgb(0, 0, 255);
-    width: 20px;
-    height: 20px;
-    position: absolute;
+#coins {
+    background-color: darkgrey;
+    width: fit-content;
+    height: fit-content;
+    font-size: 300%;
+}
+
+.pu {
+    background: darkslategrey;
+    width: fit-content;
+    height: fit-content;
+
 }

@@ -338,7 +338,7 @@ function runProgram() {
       boss.attack = 15
     }
 
-    if(boss.hp <= 1000 && bossCap === 2){
+    if (boss.hp <= 1000 && bossCap === 2) {
       bossCap = bossCap - 1
       boss.spdX = boss.spdX * 2
       boss.spdY = boss.spdY * 2
@@ -531,5 +531,4 @@ function runProgram() {
     // turn off event handlers
     $(document).off();
   }
-
 }

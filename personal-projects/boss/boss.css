@@ -130,3 +130,8 @@ body {
     left: 300px;
 
 }
+
+#pause {
+    color: azure;
+    font-size: 200%;
+}

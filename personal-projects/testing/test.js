@@ -1,176 +1,108 @@
-$(document).ready(runTest);
+$(document).ready(runProgram);
 
-function runTest() {
+function runProgram() {
   const FRAME_RATE = 60;
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   // game variables
 
-  var board = {
-    widthMax: $("#board").width(),
-    widthMin: $("#board").width() - $("#board").width(),
-    heightMax: $("#board").height(),
-    heightMin: $("#board").height() - $("#board").height()
+
+
+  var coins = {
+    count: 0,
+    gain: 99999
   }
 
-
-  // controls
-  var KEY = {
-    space: 32,
-    w: 87,
-    a: 65,
-    s: 83,
-    d: 68
-
+  var pu1 = {
+    price: 25,
+    lvl: 0
   }
-  // Player
-  var tester = {
-    spdX: 0,
-    spdY: 0,
-    posX: 100,
-    posY: 290,
-    width: $("#jumper").width(),
-    height: $("#jumper").height()
-  }
-
-  var tail = {
-    spdX: 0,
-    spdY: 0,
-    posX: 100,
-    posY: 290,
-    width: $(".tail").width(),
-    height: $(".tail").height(),
+  var rate = 100
+  var pu2 = {
+    price: 100,
+    lvl: 0,
+    trig: 0,
+    gain: 1,
   }
 
 
   // one-time setup
-  let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
-  $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
-  $(document).on('keyup', handleKeyUp);
+  let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);
+
+  $("#coin").on('click', function click() {
+    coins.count = coins.count + coins.gain
+  })
+
+  $("#pu1").on('click', pu1Click);
+  $("#pu2").on('click', pu2Click);
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
-
-  /* 
-  On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
-  by calling this function and executing the code inside.
-  */
   function newFrame() {
-    moveGameItems()
     redraw();
-    border()
+    generator()
   }
 
-  /* 
-  Called in response to events.
-  */
-  function handleKeyDown(event) {
-
-    if (event.which === KEY.w) {
-
-      tester.spdY = -10
+  function pu1Click() {
+    if (coins.count >= pu1.price) {
+      coins.count = coins.count - pu1.price
+      coins.gain = coins.gain + 1
+      pu1.lvl = pu1.lvl + 1
+      pu1.price = Math.ceil(pu1.price * 1.5)
+      $("#1Lvl").text("lvl:" + pu1.lvl)
+      $("#1Price").text("price:" + pu1.price)
     }
+  }
 
-    if (event.which === KEY.a) {
-
-      tester.spdX = -10
+  function pu2Click() {
+    if (coins.count >= pu2.price) {
+      coins.count = coins.count - pu2.price
+      pu2.trig = pu2.trig + 1
+      pu2.lvl = pu2.lvl + 1
+      pu2.price = Math.ceil( pu2.price + (pu2.price / 2))
+      $("#2Lvl").text("lvl:" + pu2.lvl)
+      $("#2Price").text("price:" + pu2.price)
     }
-
-    if (event.which === KEY.d) {
-
-      tester.spdX = 10
-    }
-
-    if (event.which === KEY.s) {
-
-      tester.spdY = 10
-    }
-
-
-
   }
 
 
-  function handleKeyUp(event) {
-
-    if (event.which === KEY.w) {
-      tester.spdY = 0
-
-    }
-
-    if (event.which === KEY.a) {
-      tester.spdX = 0
-
-    }
-
-    if (event.which === KEY.d) {
-      tester.spdX = 0
-
-    }
-
-    if (event.which === KEY.s) {
-      tester.spdY = 0
-
-    }
-
-  }
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-  function moveGameItems() {
-    tester.posY += tester.spdY
-    tester.posX += tester.spdX
-
-    tail.posX = tester.spdX 
-    tail.posY = tester.spdY 
-
+function generator(){
+  rate = rate - 1
+  if(rate <= 0 && pu2.lvl > 0){
+  coins.count = coins.count + pu2.gain
+  rate = 100
+  if(pu2.lvl > pu2.gain){
+    pu2.gain = pu2.gain + 1
+  }
+  if(pu2.lvl >= 5){
+    rate = 75
+  }
+  else if(pu2.lvl >= 15){
+    rate = 50
+  }
+  else if (pu2.lvl === 25){
+    rate = 25
+  }
+  else if (pu2.lvl === 50){
+    rate = 5
   }
 
-
-  function border() {
-
-
-    if (tester.posX < board.widthMin) {
-      tester.posX = board.widthMin
-    }
-
-    if (tester.posX + tester.width > board.widthMax) {
-      tester.posX = board.widthMax - tester.width
-    }
-
-    if (tester.posY < board.heightMin) {
-      tester.posY = board.heightMin
-    }
-
-    if (tester.posY + tester.height > board.heightMax) {
-      tester.posY = board.heightMax - tester.height
-    }
-
   }
+}
+
 
 
 
 
   function redraw() {
-    $("#tester").css('left', tester.posX)
-    $("#tester").css('top', tester.posY)
-
-    $(".tail").css('left', tail.posX)
-    $(".tail").css('top', tail.posY)
+    $("#coins").text("coins:" + coins.count)
 
   }
 
-
-
-
-  function endGame() {
-    // stop the interval timer
-    clearInterval(interval);
-
-    // turn off event handlers
-    $(document).off();
-  }
 
 }
