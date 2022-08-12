@@ -1,0 +1,61 @@
+body {
+    background: darkslategray;
+}
+
+#board {
+    background: blanchedalmond;
+    width: 650px;
+    height: 650px;
+    position: relative;
+}
+
+.head {
+    background: rgb(173, 82, 17);
+    width: 50px;
+    height: 50px;
+    position: absolute;
+}
+
+#headTLC {
+    left: 100px;
+    top: 100px;
+}
+
+#headTRC {
+    left: 400px;
+    top: 100px;
+}
+
+#headBLC {
+    left: 100px;
+    top: 400px;
+}
+
+#headBRC {
+    left: 400px;
+    top: 400px;
+}
+
+#headR{
+    height: 350px;
+    left: 400px;
+    top: 100px;
+}
+
+#headL{
+    height: 350px;
+    left: 100px;
+    top: 100px;
+}
+
+#headT{
+    width: 350px;
+    left: 100px;
+    top: 100px;
+}
+
+#headB{
+    width: 350px;
+    left: 100px;
+    top: 400px;
+}
