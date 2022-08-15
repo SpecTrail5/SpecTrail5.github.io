@@ -1,4 +1,6 @@
 
+$("#die").on("click", rollDie)
+
 // function to make dots
 function makeDot(dotX, dotY) {
 
@@ -15,7 +17,6 @@ function makeDot(dotX, dotY) {
 
 }
 
-$("#die").on("click", rollDie);
 
 $("#die").hover(function () {
     $(this).css("outline-color", "red");
@@ -25,7 +26,6 @@ $("#die").hover(function () {
 
 function rollDie() {
     $('#die').empty();
-
 
     var randomNum = Math.ceil(Math.random() * 6)
 

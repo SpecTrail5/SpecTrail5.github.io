@@ -1,0 +1,18 @@
+body {
+    background-color: slategray;
+}
+
+#board {
+    background: black;
+    width: 650px;
+    height: 650px;
+}
+
+#player {
+    background: red;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
