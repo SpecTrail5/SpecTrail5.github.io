@@ -33,6 +33,17 @@ function runProgram() {
         height: $("#player").height()
     }
 
+    var bullet = {
+        Count: 0,
+        maxCount: 5,
+        posX: 10,
+        posY: 10,
+        spdX: 0,
+        spdY: 0,
+        width: 10,
+        height: 10
+    }
+
     //--------------Core Setup------------------------//
     let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);
     $(document).on('keydown', handleKeyDown);
@@ -45,37 +56,39 @@ function runProgram() {
 
     }
 
-    function handleKeyDown(event){
-        if(event.which === KEY.w){
+    function handleKeyDown(event) {
+        if (event.which === KEY.w) {
             player.spdY = -5
         }
-        if(event.which === KEY.s){
+        if (event.which === KEY.s) {
             player.spdY = 5
         }
-        if(event.which === KEY.a){
+        if (event.which === KEY.a) {
             player.spdX = -5
         }
-        if(event.which === KEY.d){
+        if (event.which === KEY.d) {
             player.spdX = 5
         }
 
-        if(event.which === KEY.space){
+        if (event.which === KEY.space /*&& bullet.Count < bullet.maxCount*/) {
             makeBullet()
+                
+
         }
 
     }
 
-    function handleKeyUp(event){
-        if(event.which === KEY.w){
+    function handleKeyUp(event) {
+        if (event.which === KEY.w) {
             player.spdY = 0
         }
-        if(event.which === KEY.s){
+        if (event.which === KEY.s) {
             player.spdY = 0
         }
-        if(event.which === KEY.a){
+        if (event.which === KEY.a) {
             player.spdX = 0
         }
-        if(event.which === KEY.d){
+        if (event.which === KEY.d) {
             player.spdX = 0
         }
 
@@ -83,19 +96,26 @@ function runProgram() {
     }
     //--------------Helper Functions------------------------//
 
-    function moveItems(){
+    function moveItems() {
         player.posX += player.spdX
         player.posY += player.spdY
 
     }
 
-    function redraw(){
+    function redraw() {
         $("#player").css('left', player.posX)
         $("#player").css('top', player.posY)
-
     }
 
     function makeBullet(){
-
+        
+        $("#bullet").css('background-color', 'blue')
+        $("#bullet").css('width', 20)
+        $("#bullet").css('height', 20)
+        $("#bullet").css('left', 20)
+        $("#bullet").css('top', 20)
+        $("#bullet").appendTo("#player")
     }
+
+
 }

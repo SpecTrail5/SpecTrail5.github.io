@@ -459,7 +459,7 @@ function runProgram() {
 
     //---------------------------------------------------//
     HFH.cooldown = HFH.cooldown - 1
-    $("#Hcd").text("THE HIT:" + (HFH.cooldown + 1))
+    $("#Hcd").text("HIT:" + (HFH.cooldown + 1))
 
     if (HFH.cooldown <= 1) {
       HFH.cooldown = 0

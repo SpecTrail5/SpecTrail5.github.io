@@ -15,10 +15,12 @@ body {
     width: 200px;
     height: 50px;
     font-size: 300%;
+    transform: skewX(-10deg);
 }
 
 #bcd {
     background: rgb(182, 99, 16);
+    transform: skewX(-10deg);
     width: fit-content;
     height: 50px;
     font-size: 300%;
@@ -30,7 +32,7 @@ body {
     width: fit-content;
     height: 50px;
     font-size: 300%;
-
+    transform: skewX(-10deg);
 }
 
 #Hcd {
@@ -38,7 +40,7 @@ body {
     width: fit-content;
     height: 50px;
     font-size: 300%;
-
+    transform: skewX(-10deg);
 }
 
 #ucd {
@@ -46,7 +48,7 @@ body {
     width: fit-content;
     height: 50px;
     font-size: 300%;
-
+    transform: skewX(-10deg);
 }
 
 #powerUp {
@@ -68,7 +70,10 @@ body {
 }
 
 #blast {
-    background: rgba(182, 99, 16, 0.633);
+    background: rgba(16, 182, 152, 0.165);
+    background-image: url(boss-images/blast.png);
+    background-position: center;
+    background-size: 500px;
     width: 300px;
     height: 300px;
     border-radius: 50%;
@@ -78,7 +83,10 @@ body {
 }
 
 #block {
-    background: rgba(16, 77, 182, 0.633);
+    background: rgba(2, 175, 210, 0.2);
+    background-image: url(boss-images/shield.png);
+    background-position: center;
+    background-size: cover;
     width: 200px;
     height: 200px;
     border-radius: 50%;
