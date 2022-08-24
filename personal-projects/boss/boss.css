@@ -61,7 +61,7 @@ body {
 }
 
 #jumper {
-    background: rgb(20, 173, 220);
+    background: rgb(20, 220, 203);
     width: 20px;
     height: 20px;
     position: absolute;
@@ -70,10 +70,10 @@ body {
 }
 
 #blast {
-    background: rgba(16, 182, 152, 0.165);
+    background: rgba(182, 113, 16, 0.22);
     background-image: url(boss-images/blast.png);
     background-position: center;
-    background-size: 500px;
+    background-size: cover;
     width: 300px;
     height: 300px;
     border-radius: 50%;
@@ -106,7 +106,10 @@ body {
 }
 
 #ult {
-    background: rgba(16, 182, 163, 0.8);
+    background: rgba(16, 182, 163, 0.083);
+    background-image: url(boss-images/ult.png);
+    background-position: center;
+    background-size: 150px;
     width: 100px;
     height: 100px;
     border-radius: 50%;
