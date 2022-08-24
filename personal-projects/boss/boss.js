@@ -7,6 +7,7 @@ function runProgram() {
 
   var jumperCap = 50
   var bossCap = 2
+  var bossRegenCap = 400
   var bossReCap = 400
   var boostUp = 0
   var boostDown = 0
@@ -39,6 +40,7 @@ function runProgram() {
   }
   // Player
   var jumper = {
+    maxHp: 200,
     hp: $("#playerHp").width(),
     regen: 2.5,
     spdX: 0,
@@ -83,22 +85,24 @@ function runProgram() {
     height: $("#ult").height()
   }
 
-  var HFH = {
-    damge: 2,
-    cooldown: 1500,
+  var heal = {
+    regen: 50,
+    cooldown: 550,
     spdX: jumper.spdX,
     spdY: jumper.spdY,
     posX: 10,
     posY: 390,
-    width: $("#HFH").width(),
-    height: $("#HFH").height()
+    width: $("#heal").width(),
+    height: $("#heal").height()
   }
 
   // boss
   var boss = {
+    maxHp: 1600,
     hp: 1600,
-    regen: 200,
+    regen: 25,
     attack: 5,
+    tpCD: 1000,
     spdX: -5,
     spdY: -5,
     posX: 900,
@@ -116,7 +120,7 @@ function runProgram() {
 
   $("#blast").hide()
   $("#block").hide()
-  $("#HFH").hide()
+  $("#heal").hide()
   $("#ult").hide()
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -132,6 +136,7 @@ function runProgram() {
     redraw();
     border()
     bosscollide(jumper, boss)
+    bossRegen()
     bosslvl()
     dieWin()
     cooldowns()
@@ -191,10 +196,10 @@ function runProgram() {
       blockCollide(block, boss)
     }
 
-    if (event.which === KEY.i && HFH.cooldown === 0) {
-      HFH.cooldown = 1000
-      $("#HFH").show()
-      HFHcollide(HFH, boss)
+    if (event.which === KEY.i && heal.cooldown === 0) {
+      heal.cooldown = 550
+      $("#heal").show()
+      healing()
     }
 
     if (event.which === KEY.l && ult.cooldown === 0) {
@@ -237,7 +242,7 @@ function runProgram() {
     }
 
     if (event.which === KEY.i) {
-      $("#HFH").hide()
+      $("#heal").hide()
     }
 
     if (event.which === KEY.l) {
@@ -260,8 +265,8 @@ function runProgram() {
     block.posX = jumper.posX - 90
     block.posY = jumper.posY - 90
 
-    HFH.posX = jumper.posX - 65
-    HFH.posY = jumper.posY - 65
+    heal.posX = jumper.posX - 65
+    heal.posY = jumper.posY - 65
 
     ult.posX = jumper.posX - 40
     ult.posY = jumper.posY - 40
@@ -275,19 +280,43 @@ function runProgram() {
   function border() {
 
     if (boss.posY < board.heightMin) {
+      var TY = Math.ceil( Math.random() * 5)
+      if(TY !== 3){
       boss.spdY = boss.spdY * -1
+      }
+      else{
+        boss.posY = board.heightMax - boss.height
+      }
     }
 
     if (boss.posY + boss.height > board.heightMax) {
+     var BY = Math.ceil( Math.random() * 5)
+      if(BY !== 3){
       boss.spdY = boss.spdY * -1
+      }
+      else {
+        boss.posY = board.heightMin
+      }
     }
 
     if (boss.posX < board.widthMin) {
+     var LX = Math.ceil( Math.random() * 5)
+      if(LX !== 3){
       boss.spdX = boss.spdX * -1
+      }
+      else {
+        boss.posX = board.widthMax - boss.width
+      }
     }
 
     if (boss.posX + boss.width >= board.widthMax) {
+     var RX = Math.ceil( Math.random() * 5)
+      if(RX !== 3){
       boss.spdX = boss.spdX * -1
+      }
+      else {
+        boss.posX = board.widthMin
+      }
     }
 
     if (jumper.posX < board.widthMin) {
@@ -329,8 +358,12 @@ function runProgram() {
   }
 
   function bosslvl() {
-
-
+    boss.tpCD = boss.tpCD - 1
+    if(boss.hp < 600 && boss.tpCD <= 0){
+      boss.tpCD = 1000
+      boss.posY = Math.random() * board.heightMax
+      boss.posX =  Math.random() * board.widthMax
+    }
 
     if (boss.hp < 400) {
       boss.attack = 10
@@ -349,23 +382,31 @@ function runProgram() {
       boss.spdX = boss.spdX * 1.5
       boss.spdY = boss.spdY * 1.5
     }
-    if (boss.hp <= 75) {
-      bossRegen()
+    if (boss.hp <= 175) {
+      bossReCap = bossReCap - 1
+      if (boss.hp < 50 && bossReCap <= 0) {
+        bossReCap = 400
+        boss.hp = boss.hp + 500
+        $("#bossHp").text((Math.ceil(boss.hp) - 1))
+      }
     }
+
   }
 
   function bossRegen() {
-    bossReCap = bossReCap - 1
-    if (boss.hp < 50 && bossReCap <= 0) {
-      bossReCap = 400
+    bossRegenCap = bossRegenCap - 1
+    if (boss.hp < boss.maxHp && bossRegenCap === 0) {
+      bossRegenCap = 400
       boss.hp = boss.hp + boss.regen
       $("#bossHp").text((Math.ceil(boss.hp) - 1))
     }
+
+
   }
 
   function playerRegen() {
     jumperCap = jumperCap - 2
-    if (jumper.hp < 150 && jumperCap <= 0) {
+    if (jumper.hp < jumper.maxHp && jumperCap <= 0) {
       jumperCap = jumper.hp
       jumper.hp = jumper.hp + jumper.regen
       $("#playerHp").text("HP:" + (Math.ceil(jumper.hp) - 1))
@@ -390,25 +431,15 @@ function runProgram() {
     }
   }
 
-  function HFHcollide(obj1, obj2,) {
+  function healing() {
 
-    obj1.left = obj1.posX
-    obj1.right = obj1.posX + obj1.width
-    obj1.top = obj1.posY
-    obj1.buttom = obj1.posY + obj1.height
-
-    obj2.left = boss.posX
-    obj2.right = boss.posX + boss.width
-    obj2.top = boss.posY
-    obj2.buttom = boss.posY + boss.height
-
-    if (obj1.buttom > obj2.top && obj1.top < obj2.buttom && obj1.left < obj2.right && obj1.right > obj2.left) {
-      jumper.hp = jumper.hp / (obj1.damge * jumper.hp)
-      boss.hp = boss.hp / obj1.damge
-      $("#boss").text(boss.hp)
+    jumper.hp = jumper.hp + heal.regen
+    if (jumper.hp > jumper.maxHp) {
+      jumper.hp = jumper.maxHp
+    }
       $("#playerHp").text("HP:" + (Math.ceil(jumper.hp) - 1))
       $("#playerHp").css('width', jumper.hp)
-    }
+
   }
 
   function blockCollide(obj1, obj2,) {
@@ -458,11 +489,11 @@ function runProgram() {
     }
 
     //---------------------------------------------------//
-    HFH.cooldown = HFH.cooldown - 1
-    $("#Hcd").text("HIT:" + (HFH.cooldown + 1))
+    heal.cooldown = heal.cooldown - 1
+    $("#Hcd").text("heal:" + (heal.cooldown + 1))
 
-    if (HFH.cooldown <= 1) {
-      HFH.cooldown = 0
+    if (heal.cooldown <= 1) {
+      heal.cooldown = 0
     }
 
     //---------------------------------------------------//
@@ -495,8 +526,8 @@ function runProgram() {
     $("#block").css('left', block.posX)
     $("#block").css('top', block.posY)
 
-    $("#HFH").css('left', HFH.posX)
-    $("#HFH").css('top', HFH.posY)
+    $("#heal").css('left', heal.posX)
+    $("#heal").css('top', heal.posY)
 
     $("#ult").css('left', ult.posX)
     $("#ult").css('top', ult.posY)

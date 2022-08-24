@@ -36,7 +36,7 @@ body {
 }
 
 #Hcd {
-    background: rgb(88, 1, 1);
+    background: rgb(12, 173, 0);
     width: fit-content;
     height: 50px;
     font-size: 300%;
@@ -95,8 +95,11 @@ body {
     top: 390px;
 }
 
-#HFH {
-    background: rgba(88, 1, 1, 0.633);
+#heal {
+    background: rgba(17, 200, 0, 0.109);
+    background-image: url(boss-images/heal.png);
+    background-position: center;
+    background-size: 350px;
     width: 150px;
     height: 150px;
     border-radius: 50%;
