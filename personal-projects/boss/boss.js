@@ -537,18 +537,18 @@ function runProgram() {
   }
 
   function dieWin() {
-    $("#dieWin").hide()
+    $("#shade").hide()
 
     if (jumper.hp <= 0) {
       $("#dieWin").text("You Died")
-      $("#dieWin").show()
+      $("#shade").show()
       endGame()
     }
 
     if (boss.hp <= 0) {
       $("#dieWin").text("You Win")
       $("#dieWin").css("color", 'aqua')
-      $("#dieWin").show()
+      $("#shade").show()
       endGame()
     }
   }
