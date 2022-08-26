@@ -5,7 +5,7 @@ body {
 
 #board {
     background: black;
-    box-shadow: 0px 0px 20px red inset;
+    /* box-shadow: 0px 0px 20px red inset; */
     width: 1000px;
     height: 650px;
     position: relative;
@@ -13,7 +13,8 @@ body {
 
 #playerHp {
     background: crimson;
-    box-shadow: 0px 0px 20px red inset;
+    box-shadow:0px 0px 20px crimson;
+    text-shadow: 0px 0px 20px ghostwhite;
     width: 200px;
     height: 50px;
     color: ghostwhite;
@@ -26,7 +27,8 @@ body {
 
 #bcd {
     background: rgb(182, 99, 16);
-    box-shadow: 0px 0px 20px red inset;
+    box-shadow: 0px 0px 20px rgb(182, 99, 16) ;
+    text-shadow: 0px 0px 10px rgb(228, 150, 14);
     transform: skewX(-10deg);
     width: fit-content;
     height: 50px;
@@ -38,7 +40,8 @@ body {
 
 #dcd {
     background: rgb(16, 77, 182);
-    box-shadow: 0px 0px 20px red inset;
+    box-shadow: 0px 0px 20px rgb(16, 77, 182) ;
+    text-shadow: 0px 0px 10px rgb(16, 163, 182);
     width: fit-content;
     height: 50px;
     font-size: 300%;
@@ -50,7 +53,8 @@ body {
 
 #Hcd {
     background: rgb(12, 173, 0);
-    box-shadow: 0px 0px 20px red inset;
+    box-shadow: 0px 0px 20px rgb(12, 173, 0) ;
+    text-shadow: 0px 0px 10px rgb(70, 223, 50);
     width: fit-content;
     height: 50px;
     font-size: 300%;
@@ -62,7 +66,8 @@ body {
 
 #ucd {
     background: rgb(16, 182, 163);
-    box-shadow: 0px 0px 20px red inset;
+    box-shadow: 0px 0px 20px rgb(16, 182, 163);
+    text-shadow: 0px 0px 10px rgb(101, 173, 164);
     width: fit-content;
     height: 50px;
     font-size: 300%;
@@ -83,6 +88,7 @@ body {
 
 #jumper {
     background: rgb(20, 220, 203);
+    box-shadow: 0px 0px 10px rgb(255, 255, 255) inset, 0px 0px 20px rgb(255, 255, 255);
     width: 20px;
     height: 20px;
     position: absolute;
