@@ -5,7 +5,8 @@ body {
 
 #board {
     background: black;
-    box-shadow: 0px 0px 10px ghostwhite inset; 
+    box-shadow: 0px 0px 10px ghostwhite inset;
+    border-radius: 1%;
     width: 1000px;
     height: 650px;
     position: relative;
@@ -13,7 +14,7 @@ body {
 
 #playerHp {
     background: crimson;
-    box-shadow:0px 0px 20px crimson;
+    box-shadow: 0px 0px 20px crimson;
     text-shadow: 0px 0px 20px ghostwhite;
     width: 200px;
     height: 50px;
@@ -21,39 +22,39 @@ body {
     font-size: 300%;
     transform: skewX(-10deg);
     position: absolute;
-    left: 10px;
+    left: 15px;
     top: 10px;
 }
 
 #bcd {
     background: rgb(182, 99, 16);
-    box-shadow: 0px 0px 20px rgb(182, 99, 16) ;
+    box-shadow: 0px 0px 20px rgb(182, 99, 16);
     text-shadow: 0px 0px 10px rgb(228, 150, 14);
     transform: skewX(-10deg);
     width: fit-content;
     height: 50px;
     font-size: 300%;
     position: absolute;
-    left: 10px;
+    left: 15px;
     top: 530px;
 }
 
 #dcd {
     background: rgb(16, 77, 182);
-    box-shadow: 0px 0px 20px rgb(16, 77, 182) ;
+    box-shadow: 0px 0px 20px rgb(16, 77, 182);
     text-shadow: 0px 0px 10px rgb(16, 163, 182);
     width: fit-content;
     height: 50px;
     font-size: 300%;
     transform: skewX(-10deg);
     position: absolute;
-    left: 10px;
+    left: 15px;
     top: 590px;
 }
 
 #Hcd {
     background: rgb(12, 173, 0);
-    box-shadow: 0px 0px 20px rgb(12, 173, 0) ;
+    box-shadow: 0px 0px 20px rgb(12, 173, 0);
     text-shadow: 0px 0px 10px rgb(70, 223, 50);
     width: fit-content;
     height: 50px;
@@ -167,8 +168,8 @@ body {
 }
 
 #dieWin {
-     background:black; 
-     box-shadow: 0px 0px 50px ghostwhite inset;
+    background: black;
+    box-shadow: 0px 0px 50px ghostwhite inset;
     width: fit-content;
     height: fit-content;
     color: crimson;
@@ -179,10 +180,21 @@ body {
 
 }
 
-#shade{
+#shade {
     background: rgba(0, 0, 0, 0.5);
     box-shadow: 0px 0px 1000px black inset;
     width: 1000px;
     height: 650px;
     position: absolute;
+}
+
+#Info {
+    background: ivory;
+    box-shadow: 0px 0px 10px black inset;
+    border-radius: 5%;
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    top: 10px;
+    left: 1050px;
 }
