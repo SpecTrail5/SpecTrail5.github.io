@@ -1,28 +1,7 @@
 
+
 $("#die").on("click", rollDie)
 
-// function to make dots
-function makeDot(dotX, dotY) {
-
-
-    $('#pip')
-        .css("height", 20)
-        .css("width", 20)
-        .css("border-radius", 50)
-        .css("background-color", "black")
-        .css("position", "absolute")
-        .css('top', dotY)
-        .css('left', dotX)
-        .appendTo("#die");
-
-}
-
-
-$("#die").hover(function () {
-    $(this).css("outline-color", "red");
-}, function () {
-    $(this).css("outline-color", "purple");
-})
 
 function rollDie() {
     $('#die').empty();
@@ -64,5 +43,26 @@ function rollDie() {
         makeDot(70, 40);
         makeDot(10, 70);
     }
+}
+
+function makeDot(dotX, dotY) {
+
+
+    $('#pip')
+        .css("height", 20)
+        .css("width", 20)
+        .css("border-radius", 50)
+        .css("background-color", "black")
+        .css("position", "absolute")
+        .css('top', dotY)
+        .css('left', dotX)
+        .appendTo("#die");
 
 }
+
+
+$("#die").hover(function () {
+    $("#die").css("outline-color", "red");
+}, function () {
+    $("#die").css("outline-color", "purple");
+})
