@@ -191,6 +191,7 @@ body {
 #Info {
     background: ivory;
     box-shadow: 0px 0px 10px black inset;
+    padding: 10px;
     border-radius: 5%;
     width: fit-content;
     height: fit-content;
