@@ -5,7 +5,7 @@ function runProgram() {
     const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
     // game variables
 
-
+    var time = 20000
 
     var board = {
         widthMax: $("#board").width(),
@@ -33,20 +33,25 @@ function runProgram() {
 
     // Player
     var player1 = {
+        trig: 1,
+        dur: $("#p1Dur").width(),
+        speed: 10,
+        coolDown: $("#p1Cool").width(),
         spdX: 0,
         spdY: 0,
         posX: 100,
-        posY: 100,
+        posY: 150,
         width: $("#player1").width(),
         height: $("#player1").height()
     }
 
     var player2 = {
-        coolDown: 100,
+        charge: 3,
+        coolDown: $("#p2Cool").width(),
         spdX: 0,
         spdY: 0,
         posX: 1050,
-        posY: 500,
+        posY: 400,
         width: $("#player2").width(),
         height: $("#player2").height()
     }
@@ -66,25 +71,30 @@ function runProgram() {
         redraw()
         border()
         collide(player1, player2)
-        p2CoolDown()
+        p1Power()
+        p2Power()
     }
 
     function handleKeyDown(event) {
         //---------Player1 controls-------//
         if (event.which === KEY.w) {
-            player1.spdY = -20
+            player1.spdY = -player1.speed
         }
 
         if (event.which === KEY.s) {
-            player1.spdY = 20
+            player1.spdY = player1.speed
         }
 
         if (event.which === KEY.a) {
-            player1.spdX = -20
+            player1.spdX = -player1.speed
         }
 
         if (event.which === KEY.d) {
-            player1.spdX = 20
+            player1.spdX = player1.speed
+        }
+
+        if(event.which === KEY.q){
+            player1.trig = 0
         }
 
 
@@ -104,10 +114,10 @@ function runProgram() {
         if (event.which === KEY.right) {
             player2.spdX = 10
         }
-        if(event.which === KEY.shift && player2.coolDown <= 0){
+        if (event.which === KEY.shift && player2.charge > 0) {
             player2.posX = Math.random() * board.widthMax
             player2.posY = Math.random() * board.heightMax
-            player2.coolDown = 100
+            player2.charge = player2.charge - 1
         }
 
     }
@@ -198,8 +208,13 @@ function runProgram() {
         $("#player1").css('left', player1.posX)
         $("#player1").css('top', player1.posY)
 
+        $("#p1Dur").css('width', player1.dur)
+        $("#p1Cool").css('width', player1.coolDown)
+
         $("#player2").css('left', player2.posX)
         $("#player2").css('top', player2.posY)
+
+        $("#p2Cool").css('width', player2.coolDown)
     }
 
     function collide(obj1, obj2) {
@@ -218,8 +233,51 @@ function runProgram() {
         }
     }
 
-    function p2CoolDown(){
-        player2.coolDown = player2.coolDown - 1
+    function p1Power(){
+        if(player1.trig === 0){
+            player1.speed = 25
+            player1.dur = player1.dur - 1
+        }
+
+        if(k === 0){
+            player1.coolDown = player1.coolDown - 1
+        }
+
+    }
+
+    function p2Power() {
+
+        if (player2.charge === 0) {
+            player2.coolDown = player2.coolDown + 1
+
+
+        } if (player2.coolDown >= 400) {
+            player2.charge = 3
+
+        } if (player2.charge === 3) {
+            player2.coolDown = 0
+        }
+
+
+        if (player2.charge === 3) {
+            $("#p2C3").show()
+        } else {
+            $("#p2C3").hide()
+        }
+
+
+        if (player2.charge >= 2) {
+            $("#p2C2").show()
+        } else {
+            $("#p2C2").hide()
+        }
+
+
+        if (player2.charge >= 1) {
+            $("#p2C1").show()
+        } else {
+            $("#p2C1").hide()
+        }
 
     }
 
