@@ -5,6 +5,8 @@ function runProgram() {
     const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
     // game variables
 
+    var not = 3
+
     var time = {
         dur: $("#timer").width(),
         cap: 1000
@@ -39,7 +41,7 @@ function runProgram() {
         tag: 0,
         trig: 1,
         dur: $("#p1Dur").width(),
-        speed: 10,
+        speed: 15,
         coolDown: $("#p1Cool").width(),
         spdX: 0,
         spdY: 0,
@@ -55,7 +57,7 @@ function runProgram() {
         coolDown: $("#p2Cool").width(),
         spdX: 0,
         spdY: 0,
-        posX: 1050,
+        posX: 1000,
         posY: 400,
         width: $("#player2").width(),
         height: $("#player2").height()
@@ -67,7 +69,7 @@ function runProgram() {
     let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);
     $(document).on('keydown', handleKeyDown);
     $(document).on('keyup', handleKeyUp);
-
+    $("#win").hide()
     //----------------------------CORE LOGIC--------------------------//
 
 
@@ -184,20 +186,20 @@ function runProgram() {
             player1.posX = board.widthMin
         }
 
-        if (player2.posY >= board.heightMax - player2.height) {
-            player2.posY = board.heightMax - player2.height
+        if (player2.posY >= board.heightMax - 25) {
+            player2.posY = board.heightMin + 5
         }
 
         if (player2.posY <= board.heightMin) {
-            player2.posY = board.heightMin
+            player2.posY = board.heightMax - player2.height
         }
 
-        if (player2.posX >= board.widthMax - player2.width) {
-            player2.posX = board.widthMax - player2.width
+        if (player2.posX >= board.widthMax - 25) {
+            player2.posX = board.widthMin + 5
         }
 
         if (player2.posX <= board.widthMin) {
-            player2.posX = board.widthMin
+            player2.posX = board.widthMax - player2.width
         }
     }
 
@@ -237,48 +239,64 @@ function runProgram() {
         obj2.buttom = obj2.posY + obj2.height
 
         if (obj1.buttom > obj2.top && obj1.top < obj2.buttom && obj1.left < obj2.right && obj1.right > obj2.left) {
-            
+
+            if(player1.tag === 1){
+                
+                $("#win").text('Orange Wins')
+                         .css('color', 'Orangered')
+                         .css('box-shadow', '0px 0px 20px orangered, 0px 0px 10px orangered inset')
+                         .show()
+                         endGame()
+            }
+
+            if(player2.tag === 1){
+                $("#win").text('aqua Wins')
+                         .css('color', 'aqua')
+                         .css('box-shadow', '0px 0px 20px aqua, 0px 0px 10px aqua inset')
+                         .show()
+                         endGame()
+            }
         }
     }
 
-    function tag() {
 
-        var ran = Math.ceil(Math.random(1) * 2)
-        var not = 3
-        if(not === 3){
-            not = ran
-        }
-        if (not === 1){
+    function tagger() {
+
+
+        if (not === 3) {
+            not = Math.ceil(Math.random() * 2)
+        } else if (not === 1) {
             not = 2
-        }
-        if(not === 2){
+        } else if (not === 2) {
             not = 1
         }
 
-        if(not === 1){
+        if (not === 1) {
             player1.tag = 1
             player2.tag = 0
-        }else if (not === 2){
+
+        } else if (not === 2) {
             player2.tag = 1
             player1.tag = 0
+
         }
-        if(player1.tag === 1){
+        if (player1.tag === 1) {
             $("#player1").css('box-shadow', '0px 0px 20px 20px purple, 0px 0px 20px orangered inset')
-        }else if(player1.tag === 0) {
+        } else if (player1.tag === 0) {
             $("#player1").css('box-shadow', '0px 0px 20px orangered, 0px 0px 10px orangered inset')
         }
 
-        if(player2.tag === 1){
+        if (player2.tag === 1) {
             $("#player2").css('box-shadow', '0px 0px 20px 20px purple, 0px 0px 20px aqua inset')
-        }else if (player2.tag === 0){
+        } else if (player2.tag === 0) {
             $("#player2").css('box-shadow', '0px 0px 20px aqua, 0px 0px 10px aqua inset')
         }
     }
 
-    function timer(){
+    function timer() {
         time.dur = time.dur - 1
-        if(time.dur <= 0){
-            tag()
+        if (time.dur <= 0) {
+            tagger()
             time.dur = time.cap
         }
     }
@@ -286,11 +304,15 @@ function runProgram() {
     function p1Power() {
         if (player1.trig === 0) {
             player1.speed = 25
+            $("#player1").css('width', 25)
+            $("#player1").css('height', 25)
             player1.dur = player1.dur - 1
         }
 
         if (player1.dur === 0) {
-            player1.speed = 10
+            player1.speed = 15
+            $("#player1").css('width', 50)
+            $("#player1").css('height', 50)
             player1.trig = 1
             player1.coolDown = player1.coolDown + 1
         }
@@ -306,10 +328,13 @@ function runProgram() {
 
         if (player2.charge === 0) {
             player2.coolDown = player2.coolDown + 2
-
+            $("#player2").css('width', 25)
+            $("#player2").css('height', 25)
 
         } if (player2.coolDown >= 400) {
             player2.charge = 3
+            $("#player2").css('width', 50)
+            $("#player2").css('height', 50)
 
         } if (player2.charge === 3) {
             player2.coolDown = 0
