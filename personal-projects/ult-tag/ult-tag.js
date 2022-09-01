@@ -5,7 +5,10 @@ function runProgram() {
     const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
     // game variables
 
-    var time = 20000
+    var time = {
+        dur: $("#timer").width(),
+        cap: 1000
+    }
 
     var board = {
         widthMax: $("#board").width(),
@@ -33,6 +36,7 @@ function runProgram() {
 
     // Player
     var player1 = {
+        tag: 0,
         trig: 1,
         dur: $("#p1Dur").width(),
         speed: 10,
@@ -46,6 +50,7 @@ function runProgram() {
     }
 
     var player2 = {
+        tag: 0,
         charge: 3,
         coolDown: $("#p2Cool").width(),
         spdX: 0,
@@ -73,6 +78,7 @@ function runProgram() {
         collide(player1, player2)
         p1Power()
         p2Power()
+        timer()
     }
 
     function handleKeyDown(event) {
@@ -93,7 +99,7 @@ function runProgram() {
             player1.spdX = player1.speed
         }
 
-        if(event.which === KEY.q){
+        if (event.which === KEY.q && player1.dur > 0) {
             player1.trig = 0
         }
 
@@ -215,6 +221,8 @@ function runProgram() {
         $("#player2").css('top', player2.posY)
 
         $("#p2Cool").css('width', player2.coolDown)
+
+        $("#timer").css('width', time.dur)
     }
 
     function collide(obj1, obj2) {
@@ -229,18 +237,67 @@ function runProgram() {
         obj2.buttom = obj2.posY + obj2.height
 
         if (obj1.buttom > obj2.top && obj1.top < obj2.buttom && obj1.left < obj2.right && obj1.right > obj2.left) {
-            $("#player1").css('background', 'black')
+            
         }
     }
 
-    function p1Power(){
-        if(player1.trig === 0){
+    function tag() {
+
+        var ran = Math.ceil(Math.random(1) * 2)
+        var not = 3
+        if(not === 3){
+            not = ran
+        }
+        if (not === 1){
+            not = 2
+        }
+        if(not === 2){
+            not = 1
+        }
+
+        if(not === 1){
+            player1.tag = 1
+            player2.tag = 0
+        }else if (not === 2){
+            player2.tag = 1
+            player1.tag = 0
+        }
+        if(player1.tag === 1){
+            $("#player1").css('box-shadow', '0px 0px 20px 20px purple, 0px 0px 20px orangered inset')
+        }else if(player1.tag === 0) {
+            $("#player1").css('box-shadow', '0px 0px 20px orangered, 0px 0px 10px orangered inset')
+        }
+
+        if(player2.tag === 1){
+            $("#player2").css('box-shadow', '0px 0px 20px 20px purple, 0px 0px 20px aqua inset')
+        }else if (player2.tag === 0){
+            $("#player2").css('box-shadow', '0px 0px 20px aqua, 0px 0px 10px aqua inset')
+        }
+    }
+
+    function timer(){
+        time.dur = time.dur - 1
+        if(time.dur <= 0){
+            tag()
+            time.dur = time.cap
+        }
+    }
+
+    function p1Power() {
+        if (player1.trig === 0) {
             player1.speed = 25
             player1.dur = player1.dur - 1
         }
 
-        if(k === 0){
-            player1.coolDown = player1.coolDown - 1
+        if (player1.dur === 0) {
+            player1.speed = 10
+            player1.trig = 1
+            player1.coolDown = player1.coolDown + 1
+        }
+
+        if (player1.coolDown === 400) {
+            player1.dur = 400
+            player1.coolDown = 0
         }
 
     }
@@ -248,7 +305,7 @@ function runProgram() {
     function p2Power() {
 
         if (player2.charge === 0) {
-            player2.coolDown = player2.coolDown + 1
+            player2.coolDown = player2.coolDown + 2
 
 
         } if (player2.coolDown >= 400) {
