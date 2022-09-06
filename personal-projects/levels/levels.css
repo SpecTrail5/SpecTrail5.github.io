@@ -1,0 +1,19 @@
+body{
+    background: black;
+}
+
+#board{
+    background: rgb(35, 35, 35);
+    width: 1200px;
+    height: 650px;
+    position: relative;
+}
+
+#player{
+    background: darkred;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: 100px;
+    top: 100px;
+}
