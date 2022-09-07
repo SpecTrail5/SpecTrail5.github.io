@@ -38,6 +38,7 @@ function runProgram() {
   const FRAME_RATE = 60;
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
 
+  
 
 
   // one-time setup
@@ -109,8 +110,20 @@ function runProgram() {
   }
 
   function border() {
-    if (player.posX >= board.widthMax) {
-      player.posX = board.widthMax
+    if (player.posX >= board.widthMax - 35) {
+      player.posX = board.widthMax - 35
+    }
+
+    if (player.posX <= board.widthMin + 10) {
+      player.posX = board.widthMin + 10
+    }
+
+    if (player.posY >= board.heightMax - 35) {
+      player.posY = board.heightMax - 35
+    }
+
+    if (player.posY <= board.heightMin + 10) {
+      player.posY = board.heightMin + 10
     }
   }
 

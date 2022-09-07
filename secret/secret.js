@@ -48,7 +48,8 @@ function rollDie() {
 function makeDot(dotX, dotY) {
 
 
-    $('#pip')
+    $('<div>')
+        .addClass("pip")
         .css("height", 20)
         .css("width", 20)
         .css("border-radius", 50)
@@ -62,7 +63,5 @@ function makeDot(dotX, dotY) {
 
 
 $("#die").hover(function () {
-    $("#die").css("outline-color", "red");
-}, function () {
-    $("#die").css("outline-color", "purple");
+    $(this).css("outline-color", "red");
 })
