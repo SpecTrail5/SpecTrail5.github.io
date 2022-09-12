@@ -50,7 +50,7 @@ function runProgram() {
     maxHP: 1000,
     hp: 10000,
     damage: 10,
-    classdur: 1000,
+    classdur: 1500,
     class: 0,
     posX: 1000,
     posY: 300,
@@ -73,6 +73,7 @@ function runProgram() {
     border()
     follow()
     colloide(BOSS, player)
+    bossClass()
   }
   //--------------- Event Handler Functions ---------------//
   function handleKeyDown(event) {
@@ -158,6 +159,7 @@ function runProgram() {
   }
 
   function follow() {
+    if(BOSS.class !== 1){
     if (BOSS.posX > (player.posX + player.width)) {
       BOSS.spdX = -BOSS.maxSpdX
     }
@@ -176,6 +178,7 @@ function runProgram() {
     if (BOSS.posY === (player.posY - 40)) {
       BOSS.spdY = 0
     }
+  }
   }
 
   function colloide(obj1, obj2) {
@@ -197,7 +200,21 @@ function runProgram() {
   }
 
   function bossClass(){
+    BOSS.classdur = BOSS.classdur - 1
+    if(BOSS.classdur <= 0){
+      BOSS.class = Math.ceil(Math.random() * 4)
+      
+    }
 
+    if(BOSS.class === 0){
+      BOSSitem.css('box-shadow', '0px 0px 20px darkblue, 0px 0px 20px darkblue inset')
+      BOSSitem.css('border-color', 'darkblue')
+      BOSSitem.css('width', 100)
+      BOSSitem.css('height', 100)
+      BOSS.maxSpdX = 2.5
+      BOSS.maxSpdY = 2.5
+      BOSS.damage = 10
+    }
   }
   
 }
