@@ -14,18 +14,38 @@ body{
 #player{
     background-color: rgba(248, 248, 255, 0.4);
     border: ghostwhite groove;
-    box-shadow: 0px 0px 5px ghostwhite, 0px 0px 5px ghostwhite inset;
+    box-shadow: 0px 0px 10px ghostwhite, 0px 0px 5px ghostwhite inset;
     width: 25px;
     height: 25px;
     position: absolute;
     left: 100px;
     top: 300px;
 }
+#hpBar{
+    background: dimgray;
+    box-shadow: 0px 0px 10px black inset;
+    width: 550px;
+    height: 75px;
+    position: absolute;
+    left: 200px;
+    top: 10px;
+}
+#HP{
+    background: ghostwhite;
+    border: ghostwhite inset;
+    transform: skewX(20deg);
+    box-shadow: 0px 0px 10px ghostwhite, 0px 0px 10px black inset;
+    width: 500px;
+    height: 50px;
+    position: absolute;
+    left: 25px;
+    top: 10px;
+}
 
 #BOSS{
     background-color: rgba(255, 140, 0, 0.4);
     border: darkorange inset;
-    box-shadow: 0px 0px 5px darkorange, 0px 0px 5px darkorange inset;
+    box-shadow: 0px 0px 10px darkorange, 0px 0px 5px darkorange inset;
     width: 100px;
     height: 100px;
     position: absolute;
