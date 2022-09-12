@@ -6,7 +6,6 @@ function runProgram() {
 
   //--------------- Game Variables ---------------//
 
-  var modifer = 0
 
   var playerItem = $("#player")
   var BOSSitem = $("#BOSS")
@@ -46,17 +45,13 @@ function runProgram() {
   }
 
 
-  var grow = {
-    coolDown: 500,
-    dur: 200,
-    size: 2
-  }
-
   // BOSS
   var BOSS = {
     maxHP: 1000,
-    hp: 1000,
+    hp: 10000,
     damage: 10,
+    classdur: 1000,
+    class: 0,
     posX: 1000,
     posY: 300,
     maxSpdX: 2.5,
@@ -92,10 +87,6 @@ function runProgram() {
     }
     if (event.which === KEY.d) {
       player.spdX = 15
-    }
-
-    if (event.which === KEY.space && playerClass.coolDown <= 0) {
-      changeClass()
     }
 
   }
@@ -205,5 +196,8 @@ function runProgram() {
 
   }
 
+  function bossClass(){
+
+  }
   
 }
