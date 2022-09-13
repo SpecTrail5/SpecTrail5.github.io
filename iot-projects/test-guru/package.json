@@ -1,0 +1,31 @@
+{
+  "name": "test-guru",
+  "version": "1.0.0",
+  "private": true,    
+  "description": "Master scope while learning about Testing",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "pretest": "npm install",
+    "test": "mocha test/index.spec.js || :",
+    "posttest": "rm -rf ./test ./node_modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OperationSpark/test-guru.git"
+  },
+  "author": "jfraboni",
+  "license": "CC",
+  "bugs": {
+    "url": "https://github.com/OperationSpark/test-guru/issues"
+  },
+  "homepage": "https://github.com/OperationSpark/test-guru",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.5",
+    "lodash": "^4.17.4",
+    "mocha": "^3.4.1",
+    "sinon": "^2.2.0"
+  }
+}

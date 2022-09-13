@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>WebSockets Client</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	
+	<style>
+		body {
+			color: rgb(45, 45, 45);
+			padding: 10px;
+			font-family: arial;
+		}
+
+		#top {
+			background: rgb(239, 80, 41);
+			margin: 0 auto;
+			margin-bottom: 20px;
+			display: flex;
+			padding: 10px;
+			border: 4px solid green;
+			border-radius: 20px;
+		}
+		header {
+			font-size: 1.5em;
+			font-weight: bold;
+			display: flex;
+			align-items: center;
+			color: rgb(255, 255, 255);
+			flex: 1;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div id="top">
+		<header>WebSockets Client</header>
+	</div>
+	
+	<div>
+		<h4> Temperature </h4>
+		<p id="temp"></p>
+	</div>
+	
+	<div>
+		<h4> Humidity </h4>
+		<p id="humidity"></p>
+	</div>
+	
+	<div>
+		<h4> PIR </h4>
+		<p id="pir"></p>
+	</div>
+	
+	<script type="text/javascript">
+
+	$(document).ready(function () {
+
+		connect("ws://localhost:8484/pi/sensors/dht/temperature", "#temp");
+		connect("ws://localhost:8484/pi/sensors/dht/humidity", "#humidity");
+		connect("ws://localhost:8484/pi/sensors/pir", "#pir");
+
+		function connect(url, updateElement) {
+			// TODO 4: Create new WebSocket client connections
+			
+		}
+	});
+
+	</script>
+
+</body>
+</html>

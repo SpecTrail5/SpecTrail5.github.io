@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Actuator Form</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="project.css">
+</head>
+
+<!-- This is the page HTML. You should not edit any of this. -->
+<body>
+	<div>
+		<nav>
+		<header>Actuator Form</header>
+		<ul>
+			<li><a href="polling-temp-charts.html">Polling Temperature Charts</a></li>
+			<li><a href="actuator-form.html">Actuator Form</a></li>
+			<li><a href="device-parser.html">Device Parser</a></li>
+		</ul>
+		</nav>
+	</div>
+		<h1>Send Message to WoT Pi (AJAX)</h1>
+		
+	<div id="response"> 
+		<pre></pre> 
+	</div> 
+	<form id="message-form"> 
+		<input type="text" id="value" name="value" placeholder="Your message..." > 
+		<button type="submit">Submit</button> 
+	</form> 
+	<br>
+	<a href="http://devices.webofthings.io/camera/sensors/picture/">Link to Picture</a>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+
+	<script> 
+
+	///////////////////////////////////////////////////////////
+	////////////// ALL CODE SHOULD GO BELOW HERE //////////////
+	///////////////////////////////////////////////////////////
+	(function($){ 
+		function processForm( e ){
+		
+		// TODO 5: Add an AJAX call to post our message to the display
+			
+
+		e.preventDefault(); 
+		} 
+		$('#message-form').submit( processForm );
+	})(jQuery); 
+	</script> 
+
+</body>
+</html>

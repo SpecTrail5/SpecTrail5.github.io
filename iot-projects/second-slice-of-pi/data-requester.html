@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Data Requester</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+	<style>
+		body {
+			color: rgb(45, 45, 45);
+			padding: 10px;
+			font-family: arial;
+		}
+
+		#top {
+			background: rgb(239, 80, 41);
+			margin: 0 auto;
+			margin-bottom: 20px;
+			display: flex;
+			padding: 10px;
+			border: 4px solid green;
+			border-radius: 20px;
+		}
+		header {
+			font-size: 1.5em;
+			font-weight: bold;
+			display: flex;
+			align-items: center;
+			color: rgb(255, 255, 255);
+			flex: 1;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="top">
+		<header>Device Data Requester</header>
+	</div>
+	
+	<h1>Get Device Data</h1>
+
+	<form id="message-form">
+		<input type="text" id="host" name="host" value="http://localhost:8484/pi/sensors/pir" placeholder="Device URL"/>
+		<button type="submit">Get Data</button>
+	</form>
+
+	<h4>Device Data</h4>
+	<div id="data">
+	</div>
+
+	<script>
+	(function ($) {
+		function processForm(e) {
+			// TODO 5: Test Web Page's XMLHttpRequest Client
+			
+
+			e.preventDefault();
+		}
+
+		$('#message-form').submit(processForm);
+	})(jQuery);
+	</script>
+
+
+</body>
+</html>

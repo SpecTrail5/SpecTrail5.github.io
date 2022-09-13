@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Device Parser</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="project.css">
+</head>
+
+<!-- This is the page HTML. You should not edit any of this. Scroll down to find the JavaScript section. -->
+<body>
+    <div>
+        <nav>
+        <header>Device Parser</header>
+        <ul>
+            <li><a href="polling-temp-charts.html">Polling Temperature Charts</a></li>
+            <li><a href="actuator-form.html">Actuator Form</a></li>
+            <li><a href="device-parser.html">Device Parser</a></li>
+        </ul>
+        </nav>
+    </div>
+    <h1>Browse a new device</h1>
+
+    <form id="message-form">
+        <input type="text" id="host" name="host" value="http://devices.webofthings.io/pi" placeholder="The root URL of a WoT device"/>
+        <button type="submit">Browse this device</button>
+    </form>
+
+    <h4>Device Metadata</h4>
+
+    <p>
+        <b>Metadata.</b> 
+        A general model used by this device can be found here: 
+        <div id="meta"></div>
+    </p>
+
+    <p>
+        <b>Documentation.</b> 
+        A human-readable documentation specifically for this device can be found here: 
+        <div id="doc"></div>
+    </p>
+
+    <p>
+        <b>Sensors.</b> 
+        The sensors offered by this device:
+        <div id="sensors"></div>
+    </p>
+
+    <ul id="sensors-list"></ul>
+
+
+    <script>
+        
+    ///////////////////////////////////////////////////////////
+    ////////////// ALL CODE SHOULD GO BELOW HERE //////////////
+    ///////////////////////////////////////////////////////////
+    (function ($) {
+        function processForm(e) {
+
+            var sensorsPath = '';
+
+            $.ajax({
+            // TODO 6: Add in the basic properties and error property of the object passed to the AJAX call
+            
+            
+            success: function (data) {
+                // These two lines add links to the metadata and documentation of the device, respectively.
+                // data.links.meta.title and data.links.doc.title place little bits of plain text ("Metadata" and "Documentation", respectively) before the links themselves
+                $('#meta').html(data.links.meta.title + " <a href=\"" + data.links.meta.rel + "\">" + data.links.meta.rel + "</a>");
+                $('#doc').html(data.links.doc.title + " <a href=\"" + data.links.doc.rel + "\">" + data.links.doc.rel + "</a>");
+
+                // TODO 7: Generate the URL to the sensors of the device
+
+                $.ajax({
+                url: sensorsPath,
+                method: 'GET',
+                dataType: 'json',
+
+                success: function (data) {
+                    // TODO 8: Create a success function that iterates over the list of sensors and displays them
+                    
+                },
+
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+                });
+            }
+            });
+
+            e.preventDefault();
+        }
+
+        $('#message-form').submit(processForm);
+    })(jQuery);
+    </script>
+
+
+</body>
+</html>

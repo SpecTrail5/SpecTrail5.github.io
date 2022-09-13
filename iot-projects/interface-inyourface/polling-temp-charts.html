@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Polling Temperature Charts</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" href="project.css">
+</head>
+
+<!-- This is the page HTML. You should not edit any of this. Scroll down to find the JavaScript section. -->
+<body>
+    <div>
+        <nav>
+        <header>Polling Temperature Charts</header>
+        <ul>
+            <li><a href="polling-temp-charts.html">Polling Temperature Charts</a></li>
+            <li><a href="actuator-form.html">Actuator Form</a></li>
+            <li><a href="device-parser.html">Device Parser</a></li>
+        </ul>
+        </nav>
+    </div>
+
+    <main>
+        <div id="reg-chart-container">
+        <div id="reg-chart"></div>
+        </div>
+        <div id="ws-chart-container">
+        <div id="ws-chart"></div>
+        </div>
+    </main>
+
+    <script type="text/javascript">
+
+    ///////////////////////////////////////////////////////////
+    ////////////////// JAVASCRIPT BEGINS HERE /////////////////
+    ///////////////////////////////////////////////////////////
+    $(document).ready(function () {
+        // Chart initialization code 
+        var maxDataPoints = 10;
+        
+        // Setup to use charts
+        google.charts.load('current', {'packages':['corechart']});
+        google.setOnLoadCallback(drawVisualization);
+        function drawVisualization(){
+        
+        /////////////////////////////////////////////////
+        // CHART PREP SECTION: DO NOT TOUCH /////////////
+        /////////////////////////////////////////////////
+        var regChart = new google.visualization.LineChart($('#reg-chart')[0]);
+        var wsChart = new google.visualization.LineChart($('#ws-chart')[0]);
+        var regData = google.visualization.arrayToDataTable([
+            ['Time', 'Regular Polling Temperature'],
+            [getTime(), 0]
+        ]); 
+        var wsData = google.visualization.arrayToDataTable([
+            ['Time', 'WebSocket Polling Temperature'],
+            [getTime(), 0]
+        ]);
+
+        var options = {
+            title: 'Temperature',
+            curveType: 'function',
+            animation: {
+            duration: 1000,
+            easing: 'in'
+            },
+            legend: {position: 'bottom'}
+        };
+        /////////////////////////////////////////////////
+        // END CHART PREP SECTION: //////////////////////
+        /////////////////////////////////////////////////
+        
+        // Code to add a data point
+        function addDataPoint(dataPoint, dataSet, chart) {
+            if (dataSet.getNumberOfRows() > maxDataPoints) {
+            dataSet.removeRow(0);
+            }
+            dataSet.addRow([getTime(), dataPoint.value]);
+            chart.draw(dataSet, options);
+        }
+
+        // TODO 1: Initialize high and low records
+
+        // TODO 2: Update high and low records
+        function updateRegRecords(value){
+            // Update the regular polling records
+        }
+
+        function updateWSRecords(value){
+            // Update the WebSocket polling records
+        }
+
+        // TODO 3: Regular Polling
+
+        function doPoll() {
+
+        }
+
+        doPoll();
+
+        // TODO 4: WebSocket Polling
+        // Create a new WebSocket connection here
+
+
+
+        function getTime() {
+            var d = new Date();
+            return d.toLocaleTimeString();
+        }
+        }
+    });
+
+
+    </script>
+
+</body>
+</html>

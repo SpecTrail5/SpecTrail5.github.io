@@ -1,0 +1,32 @@
+{
+  "name": "underpants-lite",
+  "version": "1.0.0",
+  "private": true,
+  "description": "This activity is essentially a re-write of [underscore.js](http://underscorejs.org/).",
+  "main": "underpants-lite.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "pretest": "npm install",
+    "test": "mocha ./test/underpants-lite.spec.js || :",
+    "posttest": "rm -rf ./test ./node_modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OperationSpark/underpants-lite.git"
+  },
+  "author": "jfraboni",
+  "license": "CC",
+  "bugs": {
+    "url": "https://github.com/OperationSpark/underpants-lite/issues"
+  },
+  "homepage": "https://github.com/OperationSpark/underpants-lite#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.5",
+    "lodash": "^4.17.4",
+    "mocha": "^3.4.1",
+    "sinon": "^2.2.0"
+  }
+}

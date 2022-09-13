@@ -1,0 +1,100 @@
+{
+	"link": "/",
+	"name": "Root Page",
+	"description": "The Gateway Root Page",
+	"pi": {
+		"link": "/pi",
+		"name": "My Pi",
+		"description": "The world's tastiest Pi",
+		"port": 8484,
+		"sensors": {
+			"link": "/pi/sensors",
+			"name": "Sensors List",
+			"description": "Gateway to all sensors",
+			"pir": {
+				"link": "/pi/sensors/pir",
+				"name": "Passive Infrared Sensor",
+				"description": "A passive infrared sensor",
+				"value": true,
+				"gpio": 4
+			},
+			"dht": {
+				"link": "/pi/sensors/dht",
+				"name": "DHT22 Sensor",
+				"description": "A dual temperature and humidity sensor",
+				"gpio": 17,
+				"model": 22,
+				"temperature": {
+					"link": "/pi/sensors/dht/temperature",
+					"name": "Temperature Sensor",
+					"description": "Measures ambient temperature",
+					"unit": "celsius",
+					"value": 0
+				},
+				"humidity": {
+					"link": "/pi/sensors/dht/humidity",
+					"name": "Humidity Sensor",
+					"description": "Measures ambient humidity",
+					"unit": "%",
+					"value": 0
+				}
+			}
+		},
+		"actuators": {
+			"link": "/pi/actuators",
+			"name": "Actuators List",
+			"description": "Gateway to all actuators",
+			"leds": {
+				"link": "/pi/actuators/leds",
+				"name": "LED List",
+				"description": "List of LEDs",
+				"1": {
+					"link": "/pi/actuators/leds/1",
+					"name": "LED 1",
+					"description": "It lights up",
+					"value": false,
+					"gpio": 16
+				},
+				"2": {
+					"link": "/pi/actuators/leds/2",
+					"name": "LED 2",
+					"description": "It lights up",
+					"value": false,
+					"gpio": 21
+				}
+			}
+		},
+		"actions": {
+			"link": "/pi/actions",
+			"name": "Actions List",
+			"description": "Actions available with this Pi",
+			"resources": {
+				"link": "/pi/actions/resources",
+				"name": "Action Resources",
+				"description": "List of action resources for this Pi",
+				"ledState1": {
+					"link": "/pi/actions/resources/ledState1",
+					"name": "LED State 1",
+					"description": "Changes the state of LED 1",
+					"values": {
+						"value": {
+							"type": "boolean",
+							"required": true
+						}
+					}
+				},
+				"ledState2": {
+					"link": "/pi/actions/resources/ledState2",
+					"name": "LED State 2",
+					"description": "Changes the state of LED 2",
+					"values": {
+						"value": {
+							"type": "boolean",
+							"required": true
+						}
+					}
+				}
+			}
+		}
+	}
+}
