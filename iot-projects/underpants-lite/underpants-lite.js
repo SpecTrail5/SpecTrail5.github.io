@@ -30,6 +30,13 @@ var _ = {};
 * _.typeOf("javascript") -> "string"
 * _.typeOf([1,2,3]) -> "array"
 */
+_.typeOf = function(value){
+    
+}
+
+
+
+
 
 
 /** _.first
