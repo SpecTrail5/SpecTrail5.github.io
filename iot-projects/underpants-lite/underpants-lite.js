@@ -31,7 +31,8 @@ var _ = {};
 * _.typeOf([1,2,3]) -> "array"
 */
 _.typeOf = function(value){
-    
+        return typeof value
+
 }
 
 
