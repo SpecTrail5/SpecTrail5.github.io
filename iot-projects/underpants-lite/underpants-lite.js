@@ -3,7 +3,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 "use strict";
 
-
 var _ = {};
 
 /**
@@ -31,27 +30,27 @@ var _ = {};
  * _.typeOf([1,2,3]) -> "array"
  */
 _.typeOf = function (value) {
-    if (typeof(value) === "string"){
-        return typeof(value)
-    }
-    if (typeof(value) === "number"){
-        return typeof(value)
-    }
-    if (typeof(value) === "object"){
-        return typeof(value)
-    }
-    if (typeof(value) === "boolean"){
-        return typeof(value)
-    }
-    if (typeof(value) === "function"){
-        return typeof(value)
-    }
-    if (typeof(value) === "undefined"){
-        return typeof(value)
-    }
-    if(typeof(value) === [null]){
-        return 'array'
-    }
+  if (typeof value === "string") {
+    return "string";
+  }
+  if (typeof value === "number") {
+    return "number";
+  }
+  if (typeof value === "object") {
+    return "object";
+  }
+  if (typeof value === "boolean") {
+    return "boolean";
+  }
+  if (typeof value === "function") {
+    return "function";
+  }
+  if (typeof value === "undefined") {
+    return "undefined";
+  }
+  if (typeof [5, 3, 0] === "object") {
+    return "array";
+  }
 };
 
 /** _.first
@@ -72,6 +71,22 @@ _.typeOf = function (value) {
  *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
  */
 
+_.first = function (array, number) {
+  if (Array.isArray(array) === false) {
+    return [];
+  }
+  if (number < 0) {
+    return [];
+  }
+  if (number > array.length) {
+    return array;
+  }
+  if (number === undefined) {
+    return array[0];
+  }
+
+};
+
 /** _.last
  * Arguments:
  *   1) An array
@@ -89,7 +104,20 @@ _.typeOf = function (value) {
  *   _.last(["a", "b", "c"], 1) -> "c"
  *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
  */
-
+ _.last = function (array, number) {
+    if (Array.isArray(array) === false) {
+      return [];
+    }
+    if (number < 0) {
+      return [];
+    }
+    if (number > array.length) {
+      return array;
+    }
+    if (number === undefined) {
+      return array[array.length -1];
+    }
+ }
 /** _.indexOf
  * Arguments:
  *   1) An array
