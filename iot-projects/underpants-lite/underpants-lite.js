@@ -36,6 +36,12 @@ _.typeOf = function (value) {
   if (typeof value === "number") {
     return "number";
   }
+  if (Array.isArray(value)) {
+    return "array";
+  }
+  if (value === null) {
+    return "null";
+  }
   if (typeof value === "object") {
     return "object";
   }
@@ -84,7 +90,6 @@ _.first = function (array, number) {
   if (number === undefined) {
     return array[0];
   }
-
 };
 
 /** _.last
@@ -104,20 +109,20 @@ _.first = function (array, number) {
  *   _.last(["a", "b", "c"], 1) -> "c"
  *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
  */
- _.last = function (array, number) {
-    if (Array.isArray(array) === false) {
-      return [];
-    }
-    if (number < 0) {
-      return [];
-    }
-    if (number > array.length) {
-      return array;
-    }
-    if (number === undefined) {
-      return array[array.length -1];
-    }
- }
+_.last = function (array, number) {
+  if (Array.isArray(array) === false) {
+    return [];
+  }
+  if (number < 0) {
+    return [];
+  }
+  if (number > array.length) {
+    return array;
+  }
+  if (number === undefined) {
+    return array[array.length - 1];
+  }
+};
 /** _.indexOf
  * Arguments:
  *   1) An array
