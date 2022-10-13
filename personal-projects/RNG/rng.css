@@ -1,0 +1,81 @@
+body {
+    background: rgb(21, 38, 38);
+    padding: 5px;
+
+}
+
+nav {
+    border-bottom: 4px ghostwhite inset;
+    color: ghostwhite;
+    font-size: 200%;
+
+}
+
+main {
+    border: 4px ghostwhite groove;
+    width: 800px;
+    height: 550px;
+    margin-top: 25px;
+    padding: 10px;
+    display: flex;
+
+}
+
+#main-content {
+    border: 1px ghostwhite ridge;
+    width: 700px;
+    height: 540px;
+    padding: 5px;
+    margin-left: 5px;
+    display: flexbox;
+}
+
+#button{
+    background: chocolate;
+    border: 2px rgb(175, 87, 25) inset;
+    border-radius: 10%;
+    width: 100px;
+    height: fit-content;
+    text-align: center;
+    margin: 5px;
+}
+
+#between-num{
+    border-bottom: 1px ghostwhite ridge;
+    width: fit-content;
+    height: fit-content;
+    color: ghostwhite;
+    font-size: 150%;
+    display: flex;
+}
+#between-num1{
+    width: 100px;
+    height: fit-content;
+}
+#between-num2{
+    width: 100px;
+    height: fit-content;
+}
+
+#num-number{
+    color: ghostwhite;
+    font-size: 150%;
+    
+}
+#num-number-V{
+    width: 100px;
+    height: fit-content;
+}
+#num{
+    border-top: 1px ghostwhite ridge;
+    color: ghostwhite;
+    font-size: 2500%;
+    text-align: center;
+}
+
+#side-bar {
+    border-right: 1px ghostwhite ridge;
+    width: 150px;
+    height: inherit;
+
+}
