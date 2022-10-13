@@ -8,11 +8,11 @@ function runProgram(){
     space: 32
   }
 
-  var num = [5]
+  var num = []
 
   var num_of_num = document.getElementById("num-of-num").value;
 
-  var between_num = {
+  var between = {
     num1: document.getElementById("between-num1").value,
     num2: document.getElementById("between-num2").value
   }
@@ -21,14 +21,29 @@ function runProgram(){
 
   function newFrame(){
     num_of_num = document.getElementById("num-of-num").value
-   
+
+    between.num1 = document.getElementById("between-num1").value
+    between.num2 = document.getElementById("between-num2").value
+
+    $("#num").text(num)
+
   }
 
   function handleKeyUp(event){
     if (event.which === KEY.space){
-         $("#num").text(num_of_num)
+         generateNum()
     }
   }
 
+  function keepInBounds(bound){
+   return Math.max(between.num1,Math.min(between.num2,bound))
+  }
+
+  function generateNum(){
+    for(var i = 0; i < num_of_num;i++){
+      
+    }
+    
+  }
 
 }
