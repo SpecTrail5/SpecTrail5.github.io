@@ -1,0 +1,33 @@
+body {
+  background: black;
+}
+
+#board {
+  background: rgb(10, 18, 18);
+  border: dimgray ridge;
+  box-shadow: 0px 0px 20px ghostwhite inset;
+  width: 1200px;
+  height: 650px;
+  position: relative;
+}
+
+#player {
+  background-color: rgba(248, 248, 255, 0.4);
+  border: ghostwhite inset;
+  box-shadow: 0px 0px 10px ghostwhite, 0px 0px 5px ghostwhite inset;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  left: 100px;
+  top: 300px;
+}
+#follower {
+    background-color: rgba(0, 255, 251, 0.4);
+    border: ghostwhite inset;
+    box-shadow: 0px 0px 10px ghostwhite, 0px 0px 5px ghostwhite inset;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: 100px;
+    top: 300px;
+  }
