@@ -18,16 +18,16 @@ http
     async.series(
       // TODO 9: Supply an array of functions
       [
-        function one(callback) {
+        function (callback) {
           wrapper(callback);
         },
-        function two(callback) {
+        function (callback) {
           wrapper(callback);
         },
-        function three(callback) {
+        function (callback) {
           wrapper(callback);
         },
-        function four(callback) {
+        function (callback) {
           wrapper(callback);
         },
       ],
@@ -36,6 +36,21 @@ http
         res.write("Results:\n");
 
         var victoryOrder = sortTogether(racers, results);
+
+        for(var i = 0; i < victoryOrder.length - 1; i++){
+          
+          "Green Ambler\n"
+          "Catalack\n"
+          "Steel Runner\n"
+          "G.I. Jogger\n"
+        }
+        var d = new Date();
+
+        var endTime = d.getTime
+
+        var duration = startTime - endTime
+
+        res.end( duration + "\n")
       }
     );
   })
