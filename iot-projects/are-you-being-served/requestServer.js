@@ -8,9 +8,8 @@ var port = 5840;
 // example http server creation
 http
   .createServer(function (req, res) {
-    var url = args[0] ? args[0] : "https://spectrail5.github.io/";
+     var url = args[0] ? args[0] : "https://spectrail5.github.io/";
     request(url, function (error, response, body) {
-
       if (
         !body ||
         !response ||
