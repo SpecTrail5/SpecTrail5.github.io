@@ -10,6 +10,7 @@ http
     let racers = ["Green Ambler", "Catalack", "Steel Runner", "G.I. Jogger"];
 
     // TODO 7: Get the start time for the race
+
     let d = new Date();
     let startTime = d.getTime();
 
@@ -17,21 +18,39 @@ http
     async.series(
       // TODO 9: Supply an array of functions
       [
-        function one(callback) {
+        function (callback) {
           wrapper(callback);
         },
-        function two(callback) {
+        function (callback) {
           wrapper(callback);
         },
-        function three(callback) {
+        function (callback) {
           wrapper(callback);
         },
-        function four(callback) {
+        function (callback) {
           wrapper(callback);
         },
       ],
       function (error, results) {
         // TODO 10: add a callback function to the end of the async call to tally the results
+        res.write("Results:\n");
+
+        var victoryOrder = sortTogether(racers, results);
+
+        for(var i = 0; i < victoryOrder.length - 1; i++){
+          
+          "Green Ambler\n"
+          "Catalack\n"
+          "Steel Runner\n"
+          "G.I. Jogger\n"
+        }
+        var d = new Date();
+
+        var endTime = d.getTime
+
+        var duration = startTime - endTime
+
+        res.end( duration + "\n")
       }
     );
   })
@@ -40,7 +59,7 @@ http
 // TODO 8: create a common function to be called by all functions in the array passed to the async function
 function wrapper(callback) {
   setTimeout(function () {
-    d = new Date();
+    var d = new Date();
 
     callback(null, d.getTime());
   }, Math.random() * 1000);
