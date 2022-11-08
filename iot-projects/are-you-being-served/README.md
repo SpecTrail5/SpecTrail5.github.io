@@ -94,7 +94,7 @@ if (!body || !response || (error === null && response.statusCode !== 200)){
 * **3b)** SCENARIO 1: If the status code returned by the request (found via `response.statusCode`) is `200` and there were no errors (easily checked by seeing that `!error === true`), the callback should do the following:
 
    1. it should specify the header of the response variable `res` to have a status code of `200` (meaning ok) and set the content-type to be "text/html" (use `res.writeHead()`)
-   2. it should write the body of the HTML returned as its response (use `res.write()`)
+   2. it should write the `body` of the HTML returned as its response (use `res.write()`)
 
 <br>
 
@@ -228,7 +228,7 @@ The `async.series` function also has a callback function. It goes directly after
 
 <hr>
 
-* **10e)** The Race Time: Create a new `Date` object (place it in a variable called `d` again). Then, use the `.getTime()` method of `Date` objects (refer to how you used `d.getTime()` earlier) to get the end time for the race. You might want to store the new time in a variable called `endTime`. 
+* **10e)** The Race Time: Now outside of the loop, create a new `Date` object (place it in a variable called `d` again). Then, use the `.getTime()` method of `Date` objects (refer to how you used `d.getTime()` earlier) to get the end time for the race. You might want to store the new time in a variable called `endTime`. 
 
 <hr>
 

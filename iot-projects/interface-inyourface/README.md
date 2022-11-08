@@ -186,7 +186,7 @@ The second way we are going to obtain temperature data is through WebSocket poll
 
 <hr>
 
-* **4d)** The last thing we need to add to our `socket.onmessage` function is a call to update the record highs and lows of the WebSocket connection. This is where you will call your `updateWSRecords()` function. Remember to pass it the `value` property of the result and not the result object itself!
+* **4d)** The last thing we need to add to our `socket.onmessage` function is a call to update the record highs and lows of the WebSocket connection. This is where you will call your `updateWSRecords()` function. Remember to pass it the `value` property of the `result` and not the result object itself!
 
 <hr>
 
