@@ -1,6 +1,4 @@
 // requestServer.js file
-<<<<<<< HEAD
-=======
 
 var args = process.argv.slice(2);
 const http = require("http");
@@ -34,4 +32,4 @@ http
     });
   })
   .listen(port);
->>>>>>> 8bd7e25a2e67392a863ccb0a5b516bdf9364d306
+  
