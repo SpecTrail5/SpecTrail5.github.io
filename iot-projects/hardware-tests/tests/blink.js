@@ -13,7 +13,7 @@ interval = setInterval(function () {
   led2.write((value + 1) % 2, function() {
     console.log("Changed LED 2 state to: " + ((value + 1) % 2));
   });
-}, 100);
+}, 50);
 
 process.on('SIGINT', function () {
   clearInterval(interval);
