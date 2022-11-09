@@ -6,14 +6,14 @@ const led2 = new Gpio(21, 'out');
 let interval;
 
 interval = setInterval(function () {
-  const value = (led1.readSync() + 1) % 2;
+  const value = (led1.readSync() + 1) % 10;
   led1.write(value, function() {
     console.log("Changed LED 1 state to: " + value);
   });
   led2.write((value + 1) % 2, function() {
     console.log("Changed LED 2 state to: " + ((value + 1) % 2));
   });
-}, 50);
+}, 500);
 
 process.on('SIGINT', function () {
   clearInterval(interval);
