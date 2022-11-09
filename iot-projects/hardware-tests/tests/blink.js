@@ -14,7 +14,7 @@ sensor.watch(function () {
   led2.write((value + 1) % 2, function() {
     console.log("Changed LED 2 state to: " + ((value + 1) % 2));
   });
-}, 500);
+});
 
 process.on('SIGINT', function () {
   clearInterval(interval);
