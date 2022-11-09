@@ -3,17 +3,18 @@ const onoff = require('onoff');
 const Gpio = onoff.Gpio;
 const led1 = new Gpio(16, 'out');
 const led2 = new Gpio(21, 'out');
+const sensor = new Gpio(4, 'in', 'both');
 let interval;
 
-interval = setInterval(function () {
-  const value = (led1.readSync() + 1) % 5;
+sensor.watch(function () {
+  const value = (led1.readSync() + 1) % 2;
   led1.write(value, function() {
     console.log("Changed LED 1 state to: " + value);
   });
   led2.write((value + 1) % 2, function() {
     console.log("Changed LED 2 state to: " + ((value + 1) % 2));
   });
-}, Math.random() * 500);
+}, 500);
 
 process.on('SIGINT', function () {
   clearInterval(interval);
