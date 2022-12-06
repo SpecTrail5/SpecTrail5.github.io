@@ -8,8 +8,9 @@ function connectHardware() {
   sensor = new Gpio(device.gpio, "in", "both");
 
   sensor.watch(function (err, value) {
-    if (err) exit(err);
-    console.log(value ? "there is someone!" : "not anymore!");
+    if (err === false) {
+      device.value = !!value;
+    }
   });
 }
 
