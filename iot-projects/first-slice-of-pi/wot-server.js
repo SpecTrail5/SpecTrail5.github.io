@@ -11,3 +11,4 @@ process.on("SIGINT", function () {
 });
 
 var pirPlugin = require("./plugins/internal/pirPlugin");
+pirPlugin.start({});
