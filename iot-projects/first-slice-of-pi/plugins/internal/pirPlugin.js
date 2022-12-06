@@ -8,7 +8,7 @@ function connectHardware() {
   sensor = new Gpio(device.gpio, "in", "both");
 
   sensor.watch(function (err, value) {
-    if (err === false) {
+    if (!err) {
       device.value = !!value;
     }
   });
