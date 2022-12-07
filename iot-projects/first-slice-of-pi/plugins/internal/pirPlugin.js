@@ -22,5 +22,5 @@ function stop() {
   sensor.unexport();
 }
 
-exports.start = start();
-exports.stop = stop();
+exports.start = start;
+exports.stop = stop;
