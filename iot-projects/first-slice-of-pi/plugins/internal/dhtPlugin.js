@@ -11,7 +11,7 @@ function connectHardware() {
       sensorDriver.initialize(device.model, device.gpio);
     },
     read: function () {
-      var whateverYouWish = sensorDriver.read;
+      var whateverYouWish = sensorDriver.read();
 
       device.temperature.value = parseFloat(whateverYouWish.temperature);
       device.humidity.value = parseFloat(whateverYouWish.humidity);
