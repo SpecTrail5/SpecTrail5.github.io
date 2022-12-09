@@ -51,8 +51,24 @@
 	<script>
 	(function ($) {
 		function processForm(e) {
-			// TODO 5: Test Web Page's XMLHttpRequest Client
+
+			const xhttp = new XMLHttpRequest();
+			const url = $('#host').val();
+			xhttp.open("GET", url, true);
+			xhttp.setRequestHeader("Accept", "text/html");
+			xhttp.send();
 			
+			xhttp.onreadystatechange = function() {
+				if (this.readyState === 4 && this.status === 200){
+					console.log(this.responseText);
+					$('#data').html(this.responseText);
+				}
+				else if (this.readyState === 4){
+					console.log("ERROR");
+					console.log(this.responseText);
+					$('#data').text("ERROR");
+				}
+			}
 
 			e.preventDefault();
 		}
