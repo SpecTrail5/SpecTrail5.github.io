@@ -1,27 +1,28 @@
-# pi-inyourface
-Add in interface support to your Pi server
+# second-slice-of-pi
+Add in middleware to handle data format conversion
 
 **Table of Contents**
  
 - [Setup](#setup)
 - [Important Information](#important-information)
 - [Lesson Steps](#lesson-steps)
-    - [TODO 1: LEDs Plugin](#todo-1-leds-plugin)
-    - [TODO 2: Update Routes](#todo-2-update-routes)
-    - [TODO 3: Add WebSockets Server](#todo-3-add-websockets-server)
-    - [TODO 4: Test Web Page](#todo-4-test-web-page)
+    - [TODO 1: Update Server](#todo-1-update-server)
+    - [TODO 2: The Converter](#todo-2-the-converter)
+    - [TODO 3: Modify Sensor Routes](#todo-3-modify-sensor-routes)
+    - [TODO 4: Modify Actuator Routes](#todo-4-modify-actuator-routes)
+    - [TODO 5: Test Web Page](#todo-5-test-web-page)
 
 ## Setup
-* This project should be completed on your Pi. **DO NOT WORK ON THIS PROJECT UNTIL SECOND SLICE OF PI IS COMPLETED**
+* This project should be completed on your Pi. **DO NOT WORK ON THIS PROJECT UNTIL FIRST SLICE OF PI IS COMPLETED**
 * Open a new terminal on your Pi (putty or otherwise)
 * Enter the command `cd <your GitHub repository's name>` to enter your repository directory
 * Enter the command `cd iot-projects` to enter your iot-projects directory
-* Enter the command `cp -r second-slice-of-pi/* pi-inyourface/.` to copy your completed second-slice-of-pi's work into pi-inyourface's directory
-* Enter the command `cd pi-inyourface` to enter the new project's directory
-* Run the command `npm install websocket ws lodash onoff node-dht-sensor express cors epoll body-parser xmlhttprequest node-json2html`
-* Run the command `git add -A`
-* Run the command `git commit -m "set up pi in your face"`
-* Run the command `git push`
+* Enter the command `cp -r first-slice-of-pi/* second-slice-of-pi/.` to copy your first-slice-of-pi's work into second-slice-of-pi's directory
+* Enter the command `cd second-slice-of-pi` to enter the new project's directory
+* Run the command `npm install onoff node-dht-sensor express cors epoll body-parser xmlhttprequest node-json2html`
+* Run `git add -A`
+* Run `git commit -m "set up second slice"`
+* Run `git push`
 
 ## Push Reminder
 To push to GitHub, enter the following commands in bash:
@@ -34,182 +35,197 @@ git push
 ## Important Information
 You must keep your working code on your Pi. However, you can edit your code on any machine, and then use GitHub (or other methods) to move your changes to your Pi for testing.
 
-**To test your code,** you will need to follow the following steps (for all TODOs except TODO 4).
+**To test your code,** you will need to follow the following steps (for all TODOs except TODO 5).
 1. Make certain that your terminal (on your Pi) is in your project directory. `cd` into it if you are not.
 2. Run the command `node wot-server.js`
 3. Open a second terminal
 4. Use `curl` commands to send requests to your running server
 
-**IMPORTANT NOTE:** If a `curl` command crashes your server, you will need to restart it in the first terminal before sending another `curl` request.
+>**IMPORTANT NOTE:** If a `curl` command crashes your server, you will need to restart it in the first terminal before sending another `curl` request.
 
 ## Lesson Steps
-This project is the third part of the multi-project undertaking that is setting up a server to allow others to interface with your Pi. For your server itself, you will be adding in two things: a plugin for communicating with the LEDs, and WebSocket support. You will also update a few other parts of your server to support these new additions.
+This project is the second part of the multi-project undertaking that is setting up a server to allow others to interface with your Pi. For your server itself, you will only be adding in a converter middleware to allow for multiple data formats to be sent back as responses for the server and the necessary changes to support that converter. However, part of this project is writing a script to test that functionality.
 
-Once your server has been updated, you will need to create a test web page for WebSocket support. This will consist of connecting multiple WebSocket clients to your server to listen for updates.
+### TODO 1: Update Server
+This is a small step, but an important one. At the top of your **`servers/http.js`** file, import your middleware converter with `require('./../middleware/converter')` and the body-parser library with `require('body-parser')`. 
 
-### TODO 1: LEDs Plugin
-Deep in the file **`plugins/internal/ledsPlugin.js`**, you will find that you have already been given the `start()` function for your plugin. You will also see that the `start()` function calls `connectHardware()`, which has not been provided.
+Assuming you stored the body-parser library in a variable called `bodyParser`, add the line
 
-Your goal here is to create the `connectHardware()` function, as well as to export a `stop()` and a `switchOnOff` object. The connectHardware is the simplest, so let's handle that first.
+```js
+app.use(bodyParser.json());
+```
 
-* **1a)** Create the following function:
-    * **Name:** `connectHardware`
-    * **Parameters:** None
-    * **Returns:** Nothing
-    * **Description:** This function should do the following:
-        1. Import the `'onoff'` library (although you could import this globally if you prefer, like you do in **`pirPlugin.js`**). 
-        2. Call the Gpio's `watch` method, with the callback function defined to accept an error and value parameter (see slides or the [Hardware Tests](https://github.com/OperationSpark/hardware-tests/blob/master/tests/pir.js) project if you need a reminder on how to do this)
-        3. Create a new Gpio connection in `'out'` mode for each LED (two total), and assign each connection to `actuator1` and `actuator2` (both variables already created globally), respectively. 
-            
-    >**Hint 1:** The `model` variable stores both LEDs, but you must use bracket notation to access them. For instance, to get the `gpio` value from the first LED, you would write `model[1].gpio`.
+just before where you tell Express to use cors, but **AFTER** you create the `app` variable.
 
-    >**Hint 2:** Creating a new Gpio connection in `'out'` mode is exactly the same as you would do for `in` mode, except you don't need to pass in a third parameter for `'out'` mode (i.e. no `'both'` like you do in your `pirPlugin.js` file)
+Finally, at the end of the file (but before the `module.exports`), add in the line
 
-* **1b)** Create the following function:
-    * **Name:** `stop`
-    * **Parameters:** None
-    * **Returns:** Nothing
-    * **Descriptions:** This function should do the following:
-        1. Turn off each LED. This can be done via `LEDGpioConnection.write(0)` for each Gpio connection.
-        2. Disconnect from the LEDs using the `unexport()` method, similar to how you do with the pirPlugin's `stop()` method. 
+```js
+app.use(converter());
+```
 
-* **1c)** Create the `switchOnOff` object
-The `switchOnOff` object is what you will use to turn your LEDs on and off. To do so, you will create a method associated with each LED's number. This will take on a structure similar to:
+The ordering is important, as by putting body-parser first, you ensure that incoming request data is easily readable during routing or converting (it's how you can get `req.accepts` in the converter file). By putting the converter at the end, it lets the routes pass data into the converter.
 
-    ```js
-    exports.switchOnOff = {
-        1: function (value) {
-            // turn LED 1 on or off based on value
-        },
-        2: function (value) {
-            // turn LED 2 on or off based on value
-        }
-    }
-    ```
+>**IMPORTANT NOTE:** Be extra certain that there are no mistakes on this TODO, as there is no way to test it yet.
 
-    To actually turn on/off the LED, you will need to use the `.write()` function (like you did in `stop()`). A `1` means to turn the LED on and a `0` means to turn it off. 
+### TODO 2: The Converter
+First, let's talk about what is actually happening when someone accesses your server. Whenever someone puts the URL of one of your devices in the browser, your server sends back information about that device to be displayed. What gets sent back is decided on by your server, but by default it is a JSON representation of your device as described in the resources.json file you have, except up to date (i.e., whether or not an LED is on or off).
 
-    >**WARNING:** The `value` you receive as an argument to your functions may be a Boolean, so you will have to use either explicit conditionals (`if`/`else`) or the ternary conditional (`<condition> ? <true response> : <false response>`) to handle this.
-
-    >**IMPORTANT NOTE:** Be extra careful during this TODO, as you will not be able to test your code until TODO 2 is completed.
-
-### TODO 2: Update Routes
-
-* **2a)** `actuators.js`
-    The only routes you will need to update are the actuator routes. First, be sure to import the plugin you just created at the top of the file using `ledsPlugin = require('./../plugins/internal/ledsPlugin');`.
-
-
-    Now, the only route you will need to update is the `'/leds/:id'` route. Because you want to be able to send signals to the LED, you will need to add PUT support. You can do this by appending `.put(function(req, res, next){})` to the current route command. In short, your route should look similar to this:
-
-    ```js
-    router.route('/leds/:id').get(...).put(...);
-    ```
-
-    The callback function for the `.put()` method should update the specified LED's value. You should know from the `.get()` method how to reach the LED's representation in the resources object. You can update it by assigning its `value` property the value passed in through the request body (i.e. `req.body.value`);
-
-    Once you've updated the LED's value, you need to set `req.result` to have the value of the specified LED.
-
-    Next, call `ledsPlugin.switchOnOff[req.params.id](req.body.value);`. This will call the correct version of the switchOnOff method you created in your ledsPlugin, while passing in the value you want to set your LEDs state to (i.e., on or off).
-
-    Finally, call `next()` to finish updating your routes.
+The first step is to create a converter that will handle sending back responses in the requested data format. This will be in your **`middleware/converter.js`** file. We're only requiring support for two formats, but you can add in more if you want. Just be aware that some formats are harder to work with than others.
 
 <hr>
 
-* **2b)** `wot-server.js`
-Once you've updated your routes, you'll need to update the wot-server to handle startup and shutdown of your new ledsPlugin. Complete the following steps to do so.
+* **2a)** Check for Results and Send Default
 
-    1. Import the plugin using `require` (the same plugin that you imported in `actuators.js` up in **2a**).
-    2. Call the `start` method for your ledsPlugin.
-    3. Call the `stop` method for your plugin.
+    The first thing that needs to be done in the converter is to check if there is even a result that needs to be sent back from the server. You can do this with the condition
 
-    <br>
+    ```js
+    if (req.result) {}
+    ```
 
-    Each of these steps should be done where the corresponding steps are for the other plugins that you are using.
-
-    At this point, you will be ready to test your server using CURL to send PUT messages to your device. If all go well, you will be able to turn on and off your LEDs at will!
+    If there is not a result to send back, then what you should do instead is call `next()`. Make sure you have this before attempting to process the result with the converter.
 
 <hr>
 
-**TEST YOUR CODE**
+* **2b)** Check if HTML is requested and send HTML
 
-To test your code, you will need to run commands in the bash terminal *after* starting up your wot-server. All of the commands will have the following format:
+    Keeping in mind that JSON is the default behavior (meaning it should only be sent back if no other data format was requested), you should now handle the case of HTML data requests. 
 
-```
-curl -X PUT -H "Content-Type:application/json" -d '{"value": <true or false>}' url.to.led
-```
-
-For your actual commands, your value must be either `true` or `false` and `url.to.led` is the actual url to your led (use `localhost:port-number/pi/...`)
-
-For example, IP address aside, this should turn on one of your leds
-
-```
-curl -X PUT -H "Content-Type:application/json" -d '{"value": true}' http://192.168.1.250:8484/pi/actuators/leds/1
-```
-
-**Run the following four tests to make certain that your code works.**
-
-1. A curl command that turns *on* LED 1
-2. A curl command that turns *on* LED 2
-3. A curl command that turns *off* LED 1
-4. A curl command that turns *off* LED 2
-
-### TODO 3: Add WebSockets Server
-So far, you've added in all the support you need to allow communication with your devices, be that sending commands are requesting information. Now, it's time to add in support for real-time updates from your server, so that clients can subscribe to your devices and monitor their conditions.
-
-In `servers/websockets.js`, you will find much of the code you need to execute the WebSocket server already provided. Your job is to construct the body of the `wss.on()` method's callback function.
-
-* **3a)** Get the specific URL the client wants to subscribe to by copying it from `req.url`.
-
-* **3b)** Find the resource that matches that URL. The provided function `selectResource(url)` returns a resource if it is given a valid URL, and `undefined` if the URL is invalid. **Store the result of `selectResource` in a variable for later.**
-
-* **3c)** If the URL was invalid, print an error warning to the console and exit from the function (use `return` and give no value to the `return`).
-
-* **3d)** Use the provided `utils.monitor()` function to watch the specified resource for the client. `utils.monitor()` takes three arguments. The first is the resource location, which you should have obtained from `selectResource()`; the second is the refreshRate (defined at the beginning of the file); the third is a callback function.
-
-    The callback function takes one parameter called `changes`. The body of the callback function should simply be
+    If you have a result to send back, then you can check if HTML is requested with an additional condition:
 
     ```js
-    ws.send(JSON.stringify(changes));
+    if (req.accepts('html')){}
     ```
 
-    which will send back to the client a list of all changes that occurred to the resource since the last time it was checked.
+    If HTML is requested, then there are two steps you must follow to send that back. 
 
-* **3e)** Update `wot-server.js` once again. This time, start by importing the websockets server (located at `"./servers/websockets"`).
+    * **2b-i)** The tranformation object
 
-    Finally, place the line
+        The first is to create a transformation object for **`json2html`** to use when converting the default JSON object into HTML. Do **NOT** use the code below directly. Instead, note that this object should take on the same form as the below object:
+
+        ```js
+        let transform = {'<>': 'div', 'html': [
+            {'<>': 'p', 'html': [
+                {'<>': 'b', 'html': 'Property1: '},
+                {'<>': 'p', 'html': '${property1}'}
+            ]},
+            {'<>': 'p', 'html': [
+                {'<>': 'b', 'html': 'Property2: '},
+                {'<>': 'p', 'html': '${property2}'}
+            ]},
+            {'<>': 'p', 'html': [
+                {'<>': 'b', 'html': 'Property3: '},
+                {'<>': 'p', 'html': '${property3}'}
+            ]}
+        ]};
+        ```
+
+        However, the three properties that you should use in your transformation object are the `name`, `description`, and `value` of whatever device's information you are sending back, which if you look at your `resources.json` file you will see are properties present in each of your connected devices.
+
+        >**CHALLENGE:** Feel free to add on additional properties, or to change up how the information is displayed (i.e. replace `'b'` with `'h1'`, or put the whole thing in a `<ul>` tag and make the information display in list format).
+
+    * **2b-ii)** The transformation
+
+        Once you have your transformation object created, you need to create some HTML from your result object. The HTML can be generated using a call to `json2html.transform()`. The first argument to `json2html.transform()` should be your result object, and the second should be your transformation object. You can then send back the HTML using `res.send()`. 
+
+        After sending the result, it is good practice to return from the function.
+
+* **2c)** Send back JSON data if HTML is not requested
+    
+    If there is a result to send back, but HTML is not requested, then the default behavior should be to send back json data. This can be done with the line 
 
     ```js
-    <websocketServer-variable-name>.listen(server);
+    res.send(req.result);
     ```
 
-    inside of the callback function for `httpServer.listen()`.
+    This will need to be the body of the `else` corresponding to your check for HTML being requested.
 
->**IMPORTANT NOTE:** This is another TODO that you will not be able to test immediately, so make sure you are mindful of your changes so that you will know where to go back and look if TODO 4's tests fail.
+>**IMPORTANT:** This TODO cannot be tested yet, so be very careful with it. After the next TODO is complete, you will be able to test this TODO.
 
-### TODO 4: Test Web Page
-Most of the test web page has been provided for you in the file **`ws_client.html`**. However, you need to construct the body of the `connect` function that will create WebSocket clients to connect to your server.
+### TODO 3: Modify Sensor Routes
+Once you have your converter set up you will need to update your routes to use the converter. First on the list are the sensor routes in **`routes/sensors.js`**.
 
-* **4a)** Inside of your `connect()` function, create a new WebSocket client with the line
+* **3a)** This step is actually fairly straightforward. Basically, for each of your routes, you should replace the `res.send()` with an assignment to `req.result` and a call to `next()`. i.e.
 
     ```js
-    var socket = new WebSocket(url);
+    res.send(resources.pi.sensors);
     ```
 
-* **4b)** Create a `socket.onopen` method as follows:
+    would become
 
     ```js
-    socket.onopen = function (event) {
-        console.log("OPENED CONNECTION");
-        $(updateElement).html("<h4>Awaiting update<h4>");
-    }
+    req.result = resources.pi.sensors;
+    next();
     ```
 
-* **4c)** Create a `socket.onmessage` method. This will be just like the `onopen` method. However, you can now use the provided `event` to obtain the data you need to display via `let result = JSON.parse(event.data);`. This method should update your HTML to display the received information, which will be stored in `result.value`.
+    **This needs to be done for all routes in your `sensors.js` file.**
 
-* **4d)** Create a `socket.onerror` method in exactly the same way as you created the `onopen` method, but update the messages displayed to show that an error has occurred (also, the incoming parameter should be called `error` for this method, not `event`).
+    >**READ:** The purpose of this step is to first store a result (that is the JSON format of your device data) in the request data. When you call `next()`, that's jumping over to the converter (remember how you put `app.use(converter())` after your routes in the `http.js` file), and req is passed along thanks to the Express server.
 
-* **4e)** Make sure that all of the URLs in your test web page are correct (lines 60-62 by default), and then test your server/client pair!
+>**TEST YOUR CODE**
+>
+>Finally, it's time to test your code. To do so, follow the steps listed at the top of these instructions in the **Important Information** section. Then, enter the following `curl` commands into your second terminal. 
+>
+>>**WARNING:** If *any* test does not produce the desired response, you *must* find and correct the problem before attempting other tests.
+>
+>1. curl -X GET -H "Accept:text/HTML" localhost:8484/pi/sensors
+>    * You should receive HTML code back as a response. If you do not, then you either did not complete this TODO, or there is an error in your TODO 2's converter code. **THIS SHOULD BE FIXED BEFORE PERFORMING ANY OTHER TESTS**
+>2. curl -X GET -H "Accept:text/HTML" localhost:8484/pi/sensors/pir
+>    * If you do not receive HTML code back as a response, then you did not update the pir route properly and should take another look.
+>3. curl -X GET -H "Accept:text/HTML" localhost:8484/pi/sensors/dht
+>    * If you do not receive HTML code back as a response, then you did not update the pir route properly and should take another look.
+>4. curl -X GET -H "Accept:text/HTML" localhost:8484/pi/sensors/dht/temperature
+>    * If you do not receive HTML code back as a response, then you did not update the pir route properly and should take another look.
+>5. curl -X GET -H "Accept:text/HTML" localhost:8484/pi/sensors/dht/humidity
+>    * If you do not receive HTML code back as a response, then you did not update the pir route properly and should take another look.
+>6. curl -X GET -H "Accept:application/json" localhost:8484/pi/sensors/
+>    * If you do not receive json data (an object) back as a response, then that means there is a problem with your converter. 
 
-**TEST YOUR CODE**
+**DO NOT PROCEED UNLESS ALL TESTS PRODUCE THE DESIRED RESULT**
 
-To test your code, make sure that you restart your wot-server, then open up `ws_client.html` using live server (or directly in the browser). If it works, then you will see the values of your sensors displaying on the web page.
+### TODO 4: Modify Actuator Routes
+Here, just do the same thing for the actuator routes that you did for the sensor routes. Once you've done that, you're ready for testing!
+
+>**TEST YOUR CODE**
+>
+>Before moving on, make certain that these tests also pass. To do so, follow the steps listed at the top of these instructions in the **Important Information** section. Then, enter the following `curl` commands into your second terminal. 
+>
+>1. curl -X GET -H "Accept:text/HTML" localhost:8484/pi/actuators
+>    * You should receive HTML code back as a response. If you do not, then the route was not properly updated.
+>2. curl -X GET -H "Accept:text/HTML" localhost:8484/pi/actuators/leds
+>    * If you do not receive HTML code back as a response, then you did not update the pir route properly and should take another look.
+>3. curl -X GET -H "Accept:text/HTML" localhost:8484/pi/actuators/leds/1
+>    * If you do not receive HTML code back as a response, then you did not update the pir route properly and should take another look.
+>4. curl -X GET -H "Accept:text/HTML" localhost:8484/pi/actuators/leds/2
+>    * If you do not receive HTML code back as a response, then you did not update the pir route properly and should take another look.
+
+**DO NOT PROCEED UNLESS ALL TESTS PRODUCE THE DESIRED RESULT**
+
+### TODO 5: Test Web Page
+To really test your changes to your server, you will need to work in the file **`data-requester.html`**. 
+
+* **5a)** Prepare the request
+
+    Inside of the `processForm()` function, you will need to create a new XMLHttpRequest client (i.e. `const xhttp = new XMLHttpRequest()`). You will also need to get the URL that you will be using. Because you are in the processForm function, it is safe to use jQuery to grab the URL from the form. You can do so using the line
+
+    ```js
+    const url = $('#host').val();
+    ```
+
+    After that use `xhttp.open()` to declare the nature of the request. You should use `"GET"` as your verb, the URL you just got as the URL, and you'll want the request to be asynchronous (it might not even let you send it if it's not).
+
+    Next, set the request header with the header of `"Accept"` and the header value of `"text/html"`. This will let the server check for what data type to send back (in this case HTML). Reminder here that the function call looks like `xhttp.setRequestHeader(header, value);`
+
+    Finally, use `xhttp.send()` to send the request.
+
+* **5b)** Handle readystate changes
+
+    You will need to tell the program how to handle changes to the XMLHttpRequest client's `readyState`. After sending the request, assign to `xhttp.onreadystatechange` a function that accepts no parameters. The body of this function will make use of the `readyState` and `status` to decide what to do.
+
+    If the `readyState` (accessable from the function via `this.readyState`) is `4`, then you should update your page using jQuery. How you should update your page depends on the value of `this.status`.
+
+    * If the status is `200`, then the data exchange was successful and you should update the page to load the received HTML (`$('#data').html(this.responseText)`). 
+    * If the status is anything other than `200`, then you should update the page to display `"ERROR"` in its data element instead.
+
+* **5c)** Test your page to make sure it and your server work
+
+    Put in various URLs that should be supported by your server. Start up your server using the command `node wot-server.js`. If you're testing directly on your Pi, keep localhost as the root of your URL. If you are testing on a different machine, you will need to put the IP address of your Pi in place of `"localhost"`. If you are getting back information other than `"ERROR"`, congratulations, you've done it! If you are getting `"ERROR"`, then check with your instructor to see if your issue is with your wires or with your software.
