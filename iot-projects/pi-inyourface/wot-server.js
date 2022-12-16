@@ -3,7 +3,7 @@ var httpServer = require("./servers/http"),
 
 var pirPlugin = require("./plugins/internal/pirPlugin"),
   dhtPlugin = require("./plugins/internal/dhtPlugin"),
-  ledsPlugin = require("./../plugins/internal/ledsPlugin");
+  ledsPlugin = require("./plugins/internal/ledsPlugin");
 
 pirPlugin.start({});
 dhtPlugin.start({ frequency: 2000 });
