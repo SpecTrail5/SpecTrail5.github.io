@@ -30,16 +30,16 @@ exports.stop = function () {
 exports.switchOnOff = {
   1: function (value) {
     if (value === true) {
-      actuator1.write(0);
-    } else if (value === false) {
       actuator1.write(1);
+    } else if (value === false) {
+      actuator1.write(0);
     }
   },
   2: function (value) {
     if (value === true) {
-      actuator2.write(0);
-    } else if (value === false) {
       actuator2.write(1);
+    } else if (value === false) {
+      actuator2.write(0);
     }
   },
 };
