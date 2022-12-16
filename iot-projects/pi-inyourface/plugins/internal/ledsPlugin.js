@@ -16,18 +16,12 @@ exports.start = function (params) {
 
 function connectHardware() {
   var Gpio = require("onoff").Gpio;
-  sensor = new Gpio(device.gpio, "in");
   actuator1 = new Gpio(model[1].gpio, "out");
   actuator2 = new Gpio(model[2].gpio, "out");
-  sensor.watch(function (err, value) {
-    if (err) {
-      exit(err);
-    }
-    device.value = !!value;
-  });
+
 }
 
-function stop() {
+exports.stop = function () {
   actuator1.write(0);
   actuator2.write(0);
   actuator1.unexport();
@@ -36,17 +30,17 @@ function stop() {
 
 exports.switchOnOff = {
   1: function (value) {
-    if (value === 0) {
-      actuator1.write(1);
-    } else if (value === 1) {
+    if (value === true) {
       actuator1.write(0);
+    } else if (value === false) {
+      actuator1.write(1);
     }
   },
   2: function (value) {
-    if (value === 0) {
-      actuator2.write(1);
-    } else if (value === 1) {
+    if (value === true) {
       actuator2.write(0);
+    } else if (value === false) {
+      actuator2.write(1);
     }
   },
 };
