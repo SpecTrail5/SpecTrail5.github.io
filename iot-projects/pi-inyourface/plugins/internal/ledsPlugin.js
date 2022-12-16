@@ -18,7 +18,6 @@ function connectHardware() {
   var Gpio = require("onoff").Gpio;
   actuator1 = new Gpio(model[1].gpio, "out");
   actuator2 = new Gpio(model[2].gpio, "out");
-
 }
 
 exports.stop = function () {
@@ -26,7 +25,7 @@ exports.stop = function () {
   actuator2.write(0);
   actuator1.unexport();
   actuator2.unexport();
-}
+};
 
 exports.switchOnOff = {
   1: function (value) {
