@@ -1,0 +1,23 @@
+{
+  "name": "calc-dist",
+  "version": "0.0.1",
+  "description": "Calculating distance",
+  "main": "index.html",
+  "authors": [
+    "jfraboni"
+  ],
+  "license": "Copywrite Operation Spark",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "EaselJS": "^1.0.2",
+    "V6": "^0.0.2"
+  }
+}
