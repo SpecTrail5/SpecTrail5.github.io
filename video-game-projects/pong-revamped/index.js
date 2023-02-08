@@ -24,12 +24,12 @@
   // Variable declarations for the paddles and the ball which are drawn using createJS (see bower_components/opspark-draw/draw.js)
   const
     paddlePlayer = createPaddle(),
-    paddleCPU = createPaddle({ x: canvas.width - 20, y: canvas.height - 100 }),
+    paddleCPU = createPaddle({ x: canvas.width - 60, y: canvas.height - 100 }),
     ball = draw.circle(20, '#CCC');
 
   // set initial properties for the paddles 
   paddlePlayer.yVelocity = 0;
-  paddleCPU.yVelocity = 6;
+  paddleCPU.yVelocity = 4.5;
 
   // set initial properties for the ball
   ball.x = canvas.width / 2;
@@ -91,18 +91,31 @@
     }
 
     // TODO 1: bounce the ball off the top
-
+    if (ball.y < 0) {
+      ball.yVelocity = ball.yVelocity * -1
+    }
 
     // TODO 2: bounce the ball off the bottom
-
+    if (ball.y > canvas.height) {
+      ball.yVelocity = ball.yVelocity * -1
+    }
 
     // TODO 3: bounce the ball off each of the paddles
+    if (ball.x < paddlePlayer.x + paddlePlayer.width*2 && ball.y + ball.height > paddlePlayer.y && ball.y < paddlePlayer.y + paddlePlayer.height) 
+    {ball.xVelocity = ball.xVelocity * -1.1}
 
+    if (ball.x > paddleCPU.x && ball.y + ball.height > paddleCPU.y && ball.y < paddleCPU.y + paddleCPU.height) 
+    {ball.xVelocity = ball.xVelocity * -1.1}
+
+    if(ball.x <= canvas.width - canvas.width)
+    {ball.x = canvas.width/2}
 
   }
 
+
+
   // helper function that wraps the draw.rect function for easy paddle making
-  function createPaddle({ width = 20, height = 100, x = 0, y = 0, color = '#CCC' } = {}) {
+  function createPaddle({ width = 20, height = 100, x = 20, y = 0, color = '#CCC' } = {}) {
     const paddle = draw.rect(width, height, color);
     paddle.x = x;
     paddle.y = y;
