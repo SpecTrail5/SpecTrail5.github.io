@@ -1,5 +1,5 @@
 // TODO 4: Add a parameter for your gaming library in the index.js module:
-(function(window, createjs, opspark) {
+(function(window, createjs, opspark, idk) {
   // OUR MODULE CODE GOES BELOW HERE //
 
   console.log('index.js initialized!');
@@ -100,4 +100,4 @@
   // OUR MODULE CODE GOES ABOVE HERE //
   
 // TODO 3: Pass your gaming library into the index.js module:
-}(window, window.createjs, window.opspark));
+}(window, window.createjs, window.opspark, window.idk));

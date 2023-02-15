@@ -64,8 +64,8 @@ function runProgram() {
     class: 0,
     posX: 1000,
     posY: 300,
-    maxSpdX: 15.5,
-    maxSpdY: 15.5,
+    maxSpdX: 12,
+    maxSpdY: 12,
     spdX: 0,
     spdY: 0,
     width: $("#BOSS").width(),
@@ -101,7 +101,7 @@ function runProgram() {
     }
     if (event.which === KEY.space) {
       playerBullet();
-      bullet.count = bullet.count + 1;
+      bullet.count++;
     }
   }
 
@@ -128,9 +128,11 @@ function runProgram() {
 
     BOSS.posX += BOSS.spdX;
     BOSS.posY += BOSS.spdY;
-
-    bullet.posX += bullet.spdX;
+    if (bullet.count > 0){
+      bullet.posX += bullet.spdX;
     bullet.posY += bullet.spdY;
+    }
+    
   }
 
   function redraw() {

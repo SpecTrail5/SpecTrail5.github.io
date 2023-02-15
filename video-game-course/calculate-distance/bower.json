@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "EaselJS": "^1.0.2",
-    "V6": "^0.0.2"
+    "V6": "^0.0.2",
+    "I-dont-Know": "https://github.com/SpecTrail5/I-dont-Know.git#^0.0.2"
   }
 }
