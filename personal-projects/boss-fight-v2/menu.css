@@ -1,0 +1,22 @@
+body{
+    background: black;
+}
+
+#content{
+    background: rgb(44, 44, 44);
+    width: 1000px;
+    height: 400px;
+    margin-left: 150px;
+    font-size: 500%;
+    color: ghostwhite;
+}
+
+#title{
+ margin-left: 200px;
+ width: 450px;
+ height: 150px;
+    
+}
+#subTitle{
+    font-size: 200%;
+}

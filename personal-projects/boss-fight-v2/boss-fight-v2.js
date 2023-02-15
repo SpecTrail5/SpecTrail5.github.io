@@ -8,7 +8,7 @@ function runProgram() {
 
   var playerItem = $("#player");
   var BOSSitem = $("#BOSS");
-  var bulletItem = $("#bullet");
+
 
   var board = {
     widthMax: $("#board").width(),
@@ -32,8 +32,10 @@ function runProgram() {
 
   // Player
   var player = {
-    maxHP: 100,
+    maxHP: 500,
     hp: 500,
+    maxShield: 250,
+    shield: 250,
     armor: 5,
     posX: 100,
     posY: 300,
@@ -43,29 +45,18 @@ function runProgram() {
     height: $("#player").height(),
   };
 
-  // bullet
-  var bullet = {
-    count: 0,
-    damage: 15,
-    posX: 100,
-    posY: 300,
-    spdX: 0,
-    spdY: 0,
-    width: $("#bullet").width(),
-    height: $("#bullet").height(),
-  };
 
   // BOSS
   var BOSS = {
     maxHP: 1000,
     hp: 10000,
     damage: 10,
-    classdur: 1500,
+    classdur: 100,
     class: 0,
     posX: 1000,
     posY: 300,
-    maxSpdX: 12,
-    maxSpdY: 12,
+    maxSpdX: 5,
+    maxSpdY: 5,
     spdX: 0,
     spdY: 0,
     width: $("#BOSS").width(),
@@ -84,6 +75,9 @@ function runProgram() {
     follow();
     colloide(BOSS, player);
     bossClass();
+    playerUnitys()
+    playerFx()
+    dieWin()
   }
   //--------------- Event Handler Functions ---------------//
   function handleKeyDown(event) {
@@ -99,10 +93,7 @@ function runProgram() {
     if (event.which === KEY.d) {
       player.spdX = 15;
     }
-    if (event.which === KEY.space) {
-      playerBullet();
-      bullet.count++;
-    }
+
   }
 
   function handleKeyUp(event) {
@@ -128,11 +119,10 @@ function runProgram() {
 
     BOSS.posX += BOSS.spdX;
     BOSS.posY += BOSS.spdY;
-    if (bullet.count > 0){
-      bullet.posX += bullet.spdX;
-    bullet.posY += bullet.spdY;
-    }
-    
+
+
+
+
   }
 
   function redraw() {
@@ -142,10 +132,10 @@ function runProgram() {
     BOSSitem.css("left", BOSS.posX);
     BOSSitem.css("top", BOSS.posY);
 
-    bulletItem.css("left", bullet.posX);
-    bulletItem.css("top", bullet.posY);
+
 
     $("#HP").css("width", player.hp);
+    $("#shield").css("width", player.shield);
   }
 
   function border() {
@@ -197,26 +187,28 @@ function runProgram() {
         BOSS.spdY = 0;
       }
     }
-    if (bullet.count > 0) {
-      if (bullet.posX > BOSS.posX + BOSS.width) {
-        bullet.spdX = -25;
+    if (BOSS.class === 1) {
+
+
+      if (BOSS.posX <= board.widthMin) {
+        BOSS.spdX = BOSS.maxSpdX
       }
-      if (bullet.posX < BOSS.posX) {
-        bullet.spdX = 25;
+      if (BOSS.posX >= board.widthMax - BOSS.width - 5) {
+        BOSS.spdX = -BOSS.maxSpdX
       }
-      if (bullet.posX === BOSS.posX - 40) {
-        bullet.spdX = 0;
+
+      if (BOSS.spdY === 0) {
+        BOSS.spdY = 10
       }
-      if (bullet.posY > BOSS.posY + BOSS.height) {
-        bullet.spdY = -25;
+      if (BOSS.posY <= board.heightMin) {
+        BOSS.spdY = BOSS.maxSpdY
       }
-      if (bullet.posY < BOSS.posY - BOSS.height) {
-        bullet.spdY = 25;
+      if (BOSS.posY >= board.heightMax - BOSS.height - 5) {
+        BOSS.spdY = -BOSS.maxSpdY
       }
-      if (bullet.posY === BOSS.posY - 40) {
-        bullet.spdY = 0;
-      }
+
     }
+
   }
 
   function colloide(obj1, obj2) {
@@ -236,6 +228,15 @@ function runProgram() {
       obj1.top < obj2.bottom &&
       obj1.bottom > obj2.top
     ) {
+      player.shield = player.shield - BOSS.damage;
+    }
+
+    if (
+      obj1.left < obj2.right &&
+      obj1.right > obj2.left &&
+      obj1.top < obj2.bottom &&
+      obj1.bottom > obj2.top && player.shield <= 0
+    ) {
       player.hp = player.hp - BOSS.damage / player.armor;
     }
   }
@@ -244,6 +245,12 @@ function runProgram() {
     BOSS.classdur = BOSS.classdur - 1;
     if (BOSS.classdur <= 0) {
       BOSS.class = Math.ceil(Math.random() * 4);
+      if (BOSS.class === 1) {
+        BOSS.classdur = 500
+      } else if (BOSS.class === 4) {
+        BOSS.classdur = 250
+      } else { BOSS.classdur = 1000 }
+
     }
 
     if (BOSS.class === 0) {
@@ -254,22 +261,110 @@ function runProgram() {
       BOSSitem.css("border-color", "darkblue");
       BOSSitem.css("width", 100);
       BOSSitem.css("height", 100);
-      BOSS.maxSpdX = 2.5;
-      BOSS.maxSpdY = 2.5;
+      BOSS.maxSpdX = 5;
+      BOSS.maxSpdY = 5;
       BOSS.damage = 10;
+    }
+
+    if (BOSS.class === 1) {
+      BOSSitem.css(
+        "box-shadow",
+        "0px 0px 20px darkred, 0px 0px 20px darkred inset"
+      );
+      BOSSitem.css("border-color", "darkred");
+      BOSSitem.css("width", 100);
+      BOSSitem.css("height", 100);
+      BOSS.maxSpdX = 20;
+      BOSS.maxSpdY = 20;
+      BOSS.damage = 100;
+    }
+
+    if (BOSS.class === 2) {
+      BOSSitem.css(
+        "box-shadow",
+        "0px 0px 20px gold, 0px 0px 20px gold inset"
+      );
+      BOSSitem.css("border-color", "gold");
+      BOSSitem.css("width", 100);
+      BOSSitem.css("height", 100);
+      BOSS.maxSpdX = 8;
+      BOSS.maxSpdY = 8;
+      BOSS.damage = 40;
+    }
+
+    if (BOSS.class === 3) {
+      BOSSitem.css(
+        "box-shadow",
+        "0px 0px 20px darkgray, 0px 0px 20px darkgray inset"
+      );
+      BOSSitem.css("border-color", "darkgray");
+      BOSSitem.css("width", 150);
+      BOSSitem.css("height", 150);
+      BOSS.maxSpdX = 3;
+      BOSS.maxSpdY = 3;
+      BOSS.damage = 20;
+    }
+
+    if (BOSS.class === 4) {
+      BOSSitem.css(
+        "box-shadow",
+        "0px 0px 20px black, 0px 0px 20px black inset"
+      );
+      BOSSitem.css("border-color", "black");
+      BOSSitem.css("width", 50);
+      BOSSitem.css("height", 50);
+      BOSS.maxSpdX = 12;
+      BOSS.maxSpdY = 12;
+      BOSS.damage = 50;
     }
   }
 
-  function playerBullet() {
-    
-    $("<div>")
-      .attr("id", "bullet")
-      .css("width", 25)
-      .css("height", 25)
-      .css("background", "red")
-      .css("position", "absolute")
-      .css("left", bullet.posX)
-      .css("top", bullet.posY)
-      .appendTo($("#board"));
+  function playerUnitys() {
+    if (player.shield <= 0) {
+      player.shield = 0
+    }
+    if (player.shield < player.maxShield) {
+      player.shield++
+    }
+
+    if (player.hp <= player.maxHP / 5) {
+      player.hp = player.hp + 1
+    }
+
   }
+
+  function playerFx() {
+    if (player.hp < player.maxHP / 6) {
+      $("#HP").css(
+        "box-shadow", "0px 0px 20px red, 0px 0px 5px red inset"
+      );
+      $("#HP").css("border-color", "red");
+    } else {
+      $("#HP").css(
+        "box-shadow", "0px 0px 20px ghostwhite, 0px 0px 5px black inset"
+      );
+      $("#HP").css("border-color", "ghostwhite");
+    }
+  }
+
+  /*function dieWin() {
+
+    if (player.hp <= 0) {
+      endGame()
+    }
+
+    if (BOSS.hp <= 0) {
+      endGame()
+    }
+  }
+
+
+
+  function endGame() {
+    // stop the interval timer
+    clearInterval(interval);
+
+    // turn off event handlers
+    $(document).off();
+  }*/
 }
