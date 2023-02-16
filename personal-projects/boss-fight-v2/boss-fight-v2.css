@@ -54,7 +54,7 @@ body{
 }
 
 #BOSS{
-    background-color: rgba(155, 155, 155, 0.45);
+    background-color: rgba(28, 30, 169, 0.45);
     border: darkblue inset;
     box-shadow: 0px 0px 20px darkblue, 0px 0px 10px darkblue inset;
     width: 100px;
@@ -62,4 +62,13 @@ body{
     position: absolute;
     left: 1000px;
     top: 300px;
+}
+#powerCD{
+    background-color: dimgray;
+    width: 135px;
+    height: 250px;
+    position: relative;
+    left: 1220px;
+    top: -610px;
+    
 }

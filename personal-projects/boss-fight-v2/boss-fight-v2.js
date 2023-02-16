@@ -93,6 +93,9 @@ function runProgram() {
     if (event.which === KEY.d) {
       player.spdX = 15;
     }
+    if(event.which === KEY.space){
+      dash()
+    }
 
   }
 
@@ -120,9 +123,6 @@ function runProgram() {
     BOSS.posX += BOSS.spdX;
     BOSS.posY += BOSS.spdY;
 
-
-
-
   }
 
   function redraw() {
@@ -131,8 +131,6 @@ function runProgram() {
 
     BOSSitem.css("left", BOSS.posX);
     BOSSitem.css("top", BOSS.posY);
-
-
 
     $("#HP").css("width", player.hp);
     $("#shield").css("width", player.shield);
@@ -189,6 +187,9 @@ function runProgram() {
     }
     if (BOSS.class === 1) {
 
+      if (BOSS.spdX === 0) {
+        BOSS.spdX = 10 || -10
+      }
 
       if (BOSS.posX <= board.widthMin) {
         BOSS.spdX = BOSS.maxSpdX
@@ -198,7 +199,7 @@ function runProgram() {
       }
 
       if (BOSS.spdY === 0) {
-        BOSS.spdY = 10
+        BOSS.spdY = 10 || -10
       }
       if (BOSS.posY <= board.heightMin) {
         BOSS.spdY = BOSS.maxSpdY
@@ -261,6 +262,8 @@ function runProgram() {
       BOSSitem.css("border-color", "darkblue");
       BOSSitem.css("width", 100);
       BOSSitem.css("height", 100);
+      BOSS.width = 100
+      BOSS.height = 100
       BOSS.maxSpdX = 5;
       BOSS.maxSpdY = 5;
       BOSS.damage = 10;
@@ -274,6 +277,8 @@ function runProgram() {
       BOSSitem.css("border-color", "darkred");
       BOSSitem.css("width", 100);
       BOSSitem.css("height", 100);
+      BOSS.width = 100
+      BOSS.height = 100
       BOSS.maxSpdX = 20;
       BOSS.maxSpdY = 20;
       BOSS.damage = 100;
@@ -287,6 +292,8 @@ function runProgram() {
       BOSSitem.css("border-color", "gold");
       BOSSitem.css("width", 100);
       BOSSitem.css("height", 100);
+      BOSS.width = 100
+      BOSS.height = 100
       BOSS.maxSpdX = 8;
       BOSS.maxSpdY = 8;
       BOSS.damage = 40;
@@ -295,11 +302,13 @@ function runProgram() {
     if (BOSS.class === 3) {
       BOSSitem.css(
         "box-shadow",
-        "0px 0px 20px darkgray, 0px 0px 20px darkgray inset"
+        "0px 0px 20px dimgray, 0px 0px 20px dimgray inset"
       );
-      BOSSitem.css("border-color", "darkgray");
-      BOSSitem.css("width", 150);
-      BOSSitem.css("height", 150);
+      BOSSitem.css("border-color", "dimgray");
+      BOSSitem.css("width", 200);
+      BOSSitem.css("height", 200);
+      BOSS.width = 200
+      BOSS.height = 200
       BOSS.maxSpdX = 3;
       BOSS.maxSpdY = 3;
       BOSS.damage = 20;
@@ -313,6 +322,8 @@ function runProgram() {
       BOSSitem.css("border-color", "black");
       BOSSitem.css("width", 50);
       BOSSitem.css("height", 50);
+      BOSS.width = 50
+      BOSS.height = 50
       BOSS.maxSpdX = 12;
       BOSS.maxSpdY = 12;
       BOSS.damage = 50;
@@ -339,12 +350,19 @@ function runProgram() {
         "box-shadow", "0px 0px 20px red, 0px 0px 5px red inset"
       );
       $("#HP").css("border-color", "red");
+      $("#HP").css("background-color", "red");
     } else {
       $("#HP").css(
         "box-shadow", "0px 0px 20px ghostwhite, 0px 0px 5px black inset"
       );
       $("#HP").css("border-color", "ghostwhite");
+      $("#HP").css("background-color", "ghostwhite");
     }
+  }
+
+  function dash(){
+    
+
   }
 
   /*function dieWin() {

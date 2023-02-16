@@ -280,19 +280,19 @@ function runProgram() {
   function border() {
 
     if (boss.posY < board.heightMin) {
-      var TY = Math.ceil( Math.random() * 5)
-      if(TY !== 3){
-      boss.spdY = boss.spdY * -1
+      var TY = Math.ceil(Math.random() * 5)
+      if (TY !== 3) {
+        boss.spdY = boss.spdY * -1
       }
-      else{
+      else {
         boss.posY = board.heightMax - boss.height
       }
     }
 
     if (boss.posY + boss.height > board.heightMax) {
-     var BY = Math.ceil( Math.random() * 5)
-      if(BY !== 3){
-      boss.spdY = boss.spdY * -1
+      var BY = Math.ceil(Math.random() * 5)
+      if (BY !== 3) {
+        boss.spdY = boss.spdY * -1
       }
       else {
         boss.posY = board.heightMin
@@ -300,9 +300,9 @@ function runProgram() {
     }
 
     if (boss.posX < board.widthMin) {
-     var LX = Math.ceil( Math.random() * 5)
-      if(LX !== 3){
-      boss.spdX = boss.spdX * -1
+      var LX = Math.ceil(Math.random() * 5)
+      if (LX !== 3) {
+        boss.spdX = boss.spdX * -1
       }
       else {
         boss.posX = board.widthMax - boss.width
@@ -310,9 +310,9 @@ function runProgram() {
     }
 
     if (boss.posX + boss.width >= board.widthMax) {
-     var RX = Math.ceil( Math.random() * 5)
-      if(RX !== 3){
-      boss.spdX = boss.spdX * -1
+      var RX = Math.ceil(Math.random() * 5)
+      if (RX !== 3) {
+        boss.spdX = boss.spdX * -1
       }
       else {
         boss.posX = board.widthMin
@@ -359,10 +359,10 @@ function runProgram() {
 
   function bosslvl() {
     boss.tpCD = boss.tpCD - 1
-    if(boss.hp < 600 && boss.tpCD <= 0){
-      boss.tpCD = 1000
+    if (boss.hp < 600 && boss.tpCD <= 0) {
+      boss.tpCD = 500
       boss.posY = Math.random() * board.heightMax
-      boss.posX =  Math.random() * board.widthMax
+      boss.posX = Math.random() * board.widthMax
     }
 
     if (boss.hp < 400) {
@@ -437,8 +437,8 @@ function runProgram() {
     if (jumper.hp > jumper.maxHp) {
       jumper.hp = jumper.maxHp
     }
-      $("#playerHp").text("HP:" + (Math.ceil(jumper.hp) - 1))
-      $("#playerHp").css('width', jumper.hp)
+    $("#playerHp").text("HP:" + (Math.ceil(jumper.hp) - 1))
+    $("#playerHp").css('width', jumper.hp)
 
   }
 

@@ -4,11 +4,11 @@ body{
 
 #content{
     background: rgb(44, 44, 44);
+    border-top: 10px ridge darkblue;
     width: 1000px;
     height: 400px;
     margin-left: 150px;
-    font-size: 500%;
-    color: ghostwhite;
+
 }
 
 #title{
@@ -17,6 +17,14 @@ body{
  height: 150px;
     
 }
-#subTitle{
-    font-size: 200%;
+
+.text{
+    background-color: rgb(70, 70, 70);
+    box-shadow: 0px 0px 10px black inset;
+    border-radius: 10%;
+    padding-left: 10px;
+    font-size: xx-large;
+    color: ghostwhite;
+    width: 200px;
+    height: fit-content;
 }
