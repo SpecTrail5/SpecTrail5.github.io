@@ -51,7 +51,7 @@ function runProgram() {
     maxHP: 1000,
     hp: 10000,
     damage: 10,
-    classdur: 100,
+    classdur: 500,
     class: 0,
     posX: 1000,
     posY: 300,
