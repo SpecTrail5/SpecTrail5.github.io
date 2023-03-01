@@ -1,9 +1,9 @@
 // TODO 4: Add a parameter for your gaming library in the index.js module:
-(function(window, createjs, opspark, idk) {
+(function (window, createjs, opspark, idk) {
   // OUR MODULE CODE GOES BELOW HERE //
-
+  console.log(idk);
   console.log('index.js initialized!');
-  
+
   /*
    * In this project, we'll use our getDistance() method to 
    * determine if the mouse is intersecting with a Shape.
@@ -21,11 +21,19 @@
     engine = opspark.V6().activateResize(),
     canvas = engine.getCanvas(),
     stage = engine.getStage(),
-    
-    
+
+
     radius = 25, // the radius of our two circles
     shapeUp = new createjs.Shape(), // the up state: the mouse is NOT intersecting
     shapeOver = new createjs.Shape(); // the over state: the mouse IS intersecting
+
+    var asdf = {
+      x: stage.mouseX,
+      y: stage.mouseY
+    };
+
+  // stage.x = stage.mouseX
+  // stage.y = stage.mouseY
 
   /*
    * Draw two circles, up for when the mouse is not touching it, over
@@ -45,52 +53,68 @@
   const
     textfield = new createjs.Text('Distance: ', "20px Arial", "#BBB"),
     textBounds = textfield.getBounds();
-    
+
   textfield.x = (canvas.width - textBounds.width) / 2;
   textfield.y = canvas.height / 2 + 50;
-  
+
   stage.addChild(shapeUp, shapeOver, textfield);
-  
+
   // The update() method is called 60 times a second //
   function update(event) {
     /*
      * TODO 5: use getDistance to calculate the distance between shapeUp and 
      * the mouse. Store the result in a variable called distance:
      */
-    
-    
-    
+    var distance = idk.phyz.getDistance(shapeUp, asdf);
+    console.log(distance);
+
+
+
+     asdf = {
+      x: stage.mouseX,
+      y: stage.mouseY
+    };
+
     /*
      * TODO 6: Check if the mouse is within the area of shapeUp, and set the 
      * alpha property of shapeUp accordingly:
      */
-    
-    
+
+
+    if (distance > 25) {
+      shapeUp.alpha = 1;
+      shapeOver.alpha = 0;
+    }
+    if (distance < 25) {
+      shapeUp.alpha = 0;
+      shapeOver.alpha = 1;
+    }
     /*
      * Update the textfield with the current distance between the mouse and 
      *the edge of the shapeUp
      */
     updateText(textfield, `Distance: ${Math.round(distance)}px`);
   }
-  
-  
+
+
   // this method updates the text on a textfield, then re-centers the textfield //
   function updateText(textfield, text) {
     textfield.text = text;
     const textBounds = textfield.getBounds();
-    
+
     // re-center the text each time it changes //
     textfield.x = (canvas.width - textBounds.width) / 2;
     textfield.y = canvas.height / 2 + 50;
   }
 
-  function getDistance(pointA, pointB) {
-    const
-      distanceX = pointB.x - pointA.x,
-      distanceY = pointB.y - pointA.y,
-      distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-    return distance;
-  }
+  // function getDistance(pointA, pointB) {
+  //   const
+  //     distanceX = pointB.x - pointA.x,
+  //     distanceY = pointB.y - pointA.y,
+  //     distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+  //   return distance;
+  // }
+
 
   // startup the engine (the tick) //
   engine
@@ -98,6 +122,6 @@
     .activateTick();
 
   // OUR MODULE CODE GOES ABOVE HERE //
-  
-// TODO 3: Pass your gaming library into the index.js module:
+
+  // TODO 3: Pass your gaming library into the index.js module:
 }(window, window.createjs, window.opspark, window.idk));
