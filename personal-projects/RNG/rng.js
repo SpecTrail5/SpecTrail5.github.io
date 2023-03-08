@@ -26,6 +26,7 @@ function runProgram(){
     between.num2 = document.getElementById("between-num2").value
 
     $("#num").text(num)
+    
 
   }
 
@@ -41,6 +42,10 @@ function runProgram(){
 
   function generateNum(){
     for(var i = 0; i < num_of_num;i++){
+
+     num = Math.ceil(Math.random() * between.num2)
+
+     
       
     }
     
