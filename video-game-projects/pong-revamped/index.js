@@ -24,7 +24,7 @@
   // Variable declarations for the paddles and the ball which are drawn using createJS (see bower_components/opspark-draw/draw.js)
   const
     paddlePlayer = createPaddle(),
-    paddleCPU = createPaddle({ x: canvas.width - 60, y: canvas.height - 100 }),
+    paddleCPU = createPaddle({ x: canvas.width - 80, y: canvas.height - 100 }),
     ball = draw.circle(20, '#CCC');
 
   // set initial properties for the paddles 
@@ -115,7 +115,7 @@
 
 
   // helper function that wraps the draw.rect function for easy paddle making
-  function createPaddle({ width = 20, height = 100, x = 20, y = 0, color = '#CCC' } = {}) {
+  function createPaddle({ width = 20, height = 100, x = 50, y = 0, color = '#CCC' } = {}) {
     const paddle = draw.rect(width, height, color);
     paddle.x = x;
     paddle.y = y;
