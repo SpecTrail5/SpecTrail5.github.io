@@ -4,6 +4,8 @@
 
 <head>
     <title> SpecTrail5's Random Website </title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
     <style>
         body {
             background: linear-gradient(rgb(78, 78, 78), rgb(0, 0, 0));
@@ -88,10 +90,51 @@
 
         }
 
+        .li {
+            margin: 0px;
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+        }
+
+        .prolinks {
+            background: rgb(100, 100, 100);
+            margin-top: 5px;
+            border: rgb(140, 140, 140);
+            border-style: inset;
+        }
+
         #nav-img {
             width: 100px;
+            border-radius: 50%;
+            animation: spin 30s infinite;
+
+        }
+
+        @keyframes spin {
+            0% {
+                rotate: 0deg;
+            }
+
+            25% {
+                rotate: 90deg;
+            }
+
+            50% {
+                rotate: 180deg;
+            }
+
+            75% {
+                rotate: 270deg;
+            }
+
+            100% {
+                rotate: 360deg;
+            }
+
         }
     </style>
+
+
 
 </head>
 
@@ -117,7 +160,7 @@
                     </li>
 
                     <li class="nav-li">
-                        <a href="photos.html">Photos</a>
+                        <a href="animation.html">animations</a>
 
                     </li>
                 </ul>
@@ -136,16 +179,32 @@
                     <h2>SpecTrail5</h2>
                     <p>Gamer</p>
 
-                    <!-- Figure out the video problem -->
+
                     <div id="interests">
+
+                        <h3>Loading Animations</h3>
                         <ul>
-
-                            <h3>Work-in-Progress</h3>
-
-
-
+                            <a class="li" href="animation-projects/loading-animations/circle-load.html">
+                                <div class="prolinks">
+                                    Cicle load
+                                </div>
+                            </a>
 
                         </ul>
+
+                        <script>
+                            $(".prolinks").hover(function () {
+                                $(this).css("border-style", "ridge");
+                            }, function () {
+                                $(this).css("border-style", "inset");
+                            })
+
+                            $(".li").hover(function () {
+                                $(this).css("color", "gold");
+                            }, function () {
+                                $(this).css("color", "white");
+                            })
+                        </script>
                     </div>
                 </div>
             </main>

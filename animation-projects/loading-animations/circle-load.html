@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Circle load</title>
+    <style>
+        body{
+            background: black;
+            
+        }
+
+        #circle{
+            margin: auto;
+            margin-top: 50px;
+            border: 5px inset ghostwhite;
+            border-radius: 50%;
+            border-top-width: 20px;
+            width: 500px;
+            height: 500px;
+            animation: load 10s infinite;
+
+        }
+
+        @keyframes load {
+            0%{rotate: -360deg;}
+            100%{rotate: 0deg;}
+            
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div id="circle"></div>
+</body>

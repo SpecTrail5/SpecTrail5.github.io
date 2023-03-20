@@ -93,13 +93,221 @@
 
         #nav-img {
             width: 100px;
-            motion-rotation: auto;
+            border-radius: 50%;
+            animation: spin 30s infinite;
+
         }
+
+        @keyframes spin {
+            0% {
+                rotate: 0deg;
+            }
+
+            25% {
+                rotate: 90deg;
+            }
+
+            50% {
+                rotate: 180deg;
+            }
+
+            75% {
+                rotate: 270deg;
+            }
+
+            100% {
+                rotate: 360deg;
+            }
+
+        }
+
 
         #secret {
             position: relative;
             left: 400;
             display: inline-block;
+
+        }
+
+        #decor-box {
+            border: 2px ridge black;
+            rotate: 45deg;
+            padding: 2px;
+            width: 60px;
+            height: 60px;
+            position: absolute;
+            left: 900px;
+            top: 200px;
+            animation: boxspin 5s infinite;
+
+        }
+
+        @keyframes boxspin {
+            0% {
+                rotate: 45deg;
+            }
+
+            50% {
+                rotate: 360deg;
+            }
+
+            100% {
+                rotate: 45deg;
+            }
+
+        }
+
+        .decor-div {
+            border: 2px ridge black;
+            width: 25px;
+            height: 25px;
+            position: absolute;
+
+
+        }
+
+        #red-decor {
+            background: red;
+            left: 0px;
+            top: 0px;
+            animation: redMove 5s infinite;
+
+        }
+
+        @keyframes redMove {
+            0% {
+                left: 0px;
+                top: 0px;
+                rotate: 360deg;
+            }
+
+            25% {
+                left: 35px;
+                top: 0px;
+            }
+
+            50% {
+                left: 35px;
+                top: 35px;
+            }
+
+            75% {
+                left: 0px;
+                top: 35px;
+            }
+
+            100% {
+                left: 0px;
+                top: 0px;
+            }
+
+        }
+
+        #purple-decor {
+            background: blueviolet;
+            left: 35px;
+            top: 0px;
+            animation: purpleMove 5s infinite;
+        }
+
+        @keyframes purpleMove {
+            0% {
+                left: 35px;
+                top: 0px;
+                rotate: 360deg;
+            }
+
+            25% {
+                left: 35px;
+                top: 35px;
+            }
+
+            50% {
+                left: 0px;
+                top: 35px;
+            }
+
+            75% {
+                left: 0px;
+                top: 0px;
+            }
+
+            100% {
+                left: 35px;
+                top: 0px;
+            }
+
+        }
+
+        #green-decor {
+            background: springgreen;
+            left: 0px;
+            top: 35px;
+            animation: greenMove 5s infinite;
+        }
+
+        @keyframes greenMove {
+            0% {
+                left: 0px;
+                top: 35px;
+                rotate: 360deg;
+            }
+
+            25% {
+                left: 0px;
+                top: 0px;
+            }
+
+            50% {
+                left: 35px;
+                top: 0px;
+            }
+
+            75% {
+                left: 35px;
+                top: 35px;
+            }
+
+            100% {
+                left: 0px;
+                top: 35px;
+            }
+
+        }
+
+        #yellow-decor {
+            background: gold;
+            left: 35px;
+            top: 35px;
+            animation: yellowMove 5s infinite;
+        }
+
+        @keyframes yellowMove {
+            0% {
+                left: 35px;
+                top: 35px;
+                rotate: 360deg;
+            }
+
+            25% {
+                left: 0px;
+                top: 35px;
+            }
+
+            50% {
+                left: 0px;
+                top: 0px;
+            }
+
+            75% {
+                left: 35px;
+                top: 0px;
+            }
+
+            100% {
+                left: 35px;
+                top: 35px;
+            }
 
         }
     </style>
@@ -128,7 +336,7 @@
                 </li>
 
                 <li class="nav-li">
-                    <a href="photos.html">Photos</a>
+                    <a href="animation.html">animations</a>
 
                 </li>
 
@@ -138,6 +346,13 @@
         </nav>
         <!--https://thumb.modcdn.io/mods/6085/929625/thumb_1020x2000/logo.1.png?/-->
         <main>
+
+            <div id="decor-box">
+                <div class="decor-div" id="red-decor"></div>
+                <div class="decor-div" id="purple-decor"></div>
+                <div class="decor-div" id="green-decor"></div>
+                <div class="decor-div" id="yellow-decor"></div>
+            </div>
 
             <!--side bar/-->
             <div class="sidebar">
@@ -176,8 +391,11 @@
                         <li>Music</li>
                         <li>Fishing</li>
                     </ul>
+
                     <h3>Quotes</h3>
-                    <li>"Don't get lost because you're afraid of getting lost" - Greg Thompson</li>
+                    <ul>
+                        <li>"Don't get lost because you're afraid of getting lost" - Greg Thompson</li>
+                    </ul>
 
                 </div>
                 <li id="secret">

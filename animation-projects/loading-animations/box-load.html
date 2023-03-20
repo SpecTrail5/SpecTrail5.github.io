@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Box load</title>
+    <style>
+        body{
+            background: black;
+            
+        }
+
+        #decor-box {
+            border: 2px ridge ghostwhite;
+            overflow: hidden;
+            rotate: 45deg;
+            padding: 2px;
+            width: 410px;
+            height: 410px;
+            position: absolute;
+            left: 500px;
+            top: 150px;
+            animation: boxspin 5s infinite;
+
+        }
+
+        @keyframes boxspin {
+            0% {
+                rotate: 45deg;
+            }
+
+            50% {
+                rotate: 360deg;
+            }
+
+            100% {
+                rotate: 45deg;
+            }
+
+        }
+
+        .decor-div {
+            border: 2px ridge ghostwhite;
+            width: 200px;
+            height: 200px;
+            position: absolute;
+
+
+        }
+
+        #red-decor {
+            background: red;
+            left: 0px;
+            top: 0px;
+            animation: redMove 5s infinite;
+
+        }
+
+        @keyframes redMove {
+            0% {
+                left: 0px;
+                top: 0px;
+                rotate: 360deg;
+                background: red;
+            }
+
+            25% {
+                left: 210px;
+                top: 0px;
+                background: darkslategray
+            }
+
+            50% {
+                left: 210px;
+                top: 210px;
+                background: springgreen;
+            }
+
+            75% {
+                left: 0px;
+                top: 210px;
+                background: mediumvioletred;
+            }
+
+            100% {
+                left: 0px;
+                top: 0px;
+                background: red;
+            }
+
+        }
+
+        #purple-decor {
+            background: darkslategray;
+            left: 210px;
+            top: 0px;
+            animation: purpleMove 5s infinite;
+        }
+
+        @keyframes purpleMove {
+            0% {
+                left: 210px;
+                top: 0px;
+                rotate: 360deg;
+                background: darkslategray
+            }
+
+            25% {
+                left: 210px;
+                top: 210px;
+                background: springgreen;
+            }
+
+            50% {
+                left: 0px;
+                top: 210px;
+                background: mediumvioletred;
+            }
+
+            75% {
+                left: 0px;
+                top: 0px;
+                background: red;
+            }
+
+            100% {
+                left: 210px;
+                top: 0px;
+                background: darkslategray
+            }
+
+        }
+
+        #green-decor {
+            background: mediumvioletred;
+            left: 0px;
+            top: 210px;
+            animation: greenMove 5s infinite;
+        }
+
+        @keyframes greenMove {
+            0% {
+                left: 0px;
+                top: 210px;
+                rotate: 360deg;
+                background: mediumvioletred;
+            }
+
+            25% {
+                left: 0px;
+                top: 0px;
+                background: red;
+            }
+
+            50% {
+                left: 210px;
+                top: 0px;
+                background: darkslategray
+            }
+
+            75% {
+                left: 210px;
+                top: 210px;
+                background: springgreen;
+            }
+
+            100% {
+                left: 0px;
+                top: 210px;
+                background: mediumvioletred;
+            }
+
+        }
+
+        #yellow-decor {
+            background: springgreen;
+            left: 210px;
+            top: 210px;
+            animation: yellowMove 5s infinite;
+        }
+
+        @keyframes yellowMove {
+            0% {
+                left: 210px;
+                top: 210px;
+                rotate: 360deg;
+                background: springgreen;
+            }
+
+            25% {
+                left: 0px;
+                top: 210px;
+                background: mediumvioletred;
+            }
+
+            50% {
+                left: 0px;
+                top: 0px;
+                background: red;
+            }
+
+            75% {
+                left: 210px;
+                top: 0px;
+                background: darkslategray
+            }
+
+            100% {
+                left: 210px;
+                top: 210px;
+                background: springgreen;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div id="decor-box">
+        <div class="decor-div" id="red-decor"></div>
+        <div class="decor-div" id="purple-decor"></div>
+        <div class="decor-div" id="green-decor"></div>
+        <div class="decor-div" id="yellow-decor"></div>
+    </div>
+</body>
