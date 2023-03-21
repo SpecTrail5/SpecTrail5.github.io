@@ -1,0 +1,16 @@
+body{
+    background: darkslategray;
+}
+
+#board{
+    background: black;
+    width: 1350px;
+    height: 650px;
+}
+
+#box{
+    background: gray;
+    border: 5px ridge gray;
+    width: 100px;
+    height: 100px;
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Box load</title>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js">
+
+        
+    </script>
+
+    <style>
+        body{
+            background: black;
+            
+        }
+
+        #decor-box {
+            border: 2px ridge ghostwhite;
+            padding: 2px;
+            width: 500px;
+            height: 500px;
+            position: absolute;
+            left: 500px;
+            top: 150px;
+            animation: boxspin 5s infinite;
+
+        }
+
+        @keyframes boxspin {
+            0% {
+                rotate: 0deg;
+            }
+
+            50% {
+                rotate: 360deg;
+            }
+
+            100% {
+                rotate: 0deg;
+            }
+
+        }
+
+        .decor-div {
+            border: 2px ridge ghostwhite;
+            width: 100px;
+            height: 100px;
+            animation: boxspin 1s infinite;
+
+        }
+
+        #box1{
+            background: red;
+        }
+
+        #box2{
+            background: ghostwhite;
+        }
+
+        #box3{
+            background: goldenrod;
+        }
+
+        #box4{
+            background: darkslategray;
+        }
+
+        #box5{
+            background: springgreen;
+        }
+
+        #box6{
+            background: indigo;
+        }
+
+        #box7{
+            background: orangered;
+        }
+
+        #box8{
+            background: steelblue;
+        }
+
+        #box9{
+            background: chartreuse;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div id="decor-box">
+        <div class="decor-div" id="box1"></div>
+        <div class="decor-div" id="box2"></div>
+        <div class="decor-div" id="box3"></div>
+        <div class="decor-div" id="box4"></div>
+        <div class="decor-div" id="box5"></div>
+        <div class="decor-div" id="box6"></div>
+        <div class="decor-div" id="box7"></div>
+        <div class="decor-div" id="box8"></div>
+        <div class="decor-div" id="box9"></div>
+    </div>
+</body>
