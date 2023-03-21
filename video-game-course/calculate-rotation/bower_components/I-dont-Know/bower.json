@@ -1,0 +1,13 @@
+{
+  "name": "I-dont-Know",
+  "description": "",
+  "main": "",
+  "authors": [
+    "SpecTrail5 <elijahiwatson2003@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/SpecTrail5/I-dont-Know",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}

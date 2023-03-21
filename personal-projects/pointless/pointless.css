@@ -4,8 +4,8 @@ body{
 
 #board{
     background: black;
-    width: 1350px;
-    height: 650px;
+    width: 1000px;
+    height: 800px;
 }
 
 #box{
@@ -13,4 +13,16 @@ body{
     border: 5px ridge gray;
     width: 100px;
     height: 100px;
+    position: relative;
+    animation: colour 5s infinite;
+    
+}
+
+@keyframes colour {
+    0%{background: crimson;}
+    25%{background: aqua;}
+    50%{background: lawngreen;}
+    75%{background: mediumblue;}
+    100%{background: crimson;}
+    
 }

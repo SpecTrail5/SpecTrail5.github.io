@@ -5,7 +5,7 @@ function runProgram() {
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
 
   //--------------- Game Variables ---------------//
-    var boxItem = $("#box")
+  var boxItem = $("#box")
 
   var board = {
     widthMax: $("#board").width(),
@@ -19,8 +19,8 @@ function runProgram() {
   var box = {
     posX: 675,
     posY: 325,
-    spdX: 0,
-    spdY: 0,
+    spdX: 10,
+    spdY: 10,
     width: $("#box").width(),
     height: $("#box").height(),
   };
@@ -41,17 +41,36 @@ function runProgram() {
   //--------------- Helper Functions ---------------//
 
   function moveGameItems() {
-    
+    box.posX += box.spdX
+    box.posY += box.spdY
+
+
   }
 
   function redraw() {
     boxItem.css('left', box.posX)
-    
+    boxItem.css('top', box.posY)
+
   }
 
   function border() {
-    
+    if(box.posX + box.width > board.widthMax){
+      box.spdX = box.spdX * -1
+    }
+
+    if(box.posX < board.widthMin){
+      box.spdX = box.spdX * -1
+    }
+
+    if(box.posY + box.height > board.widthMax){
+      box.spdY = box.spdY * -1
+    }
+
+    if(box.posY < board.widthMin){
+      box.spdY = box.spdY * -1
+    }
+
   }
 
-  
+
 }
