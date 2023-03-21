@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Sync Balls</title>
+    <style>
+        body {
+            background: black;
+            box-shadow: 0px 0px 20px ghostwhite inset;
+
+        }
+
+        #content {
+            background: black;
+            width: 1350px;
+            height: 600px;
+        }
+
+        .allBalls {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+        }
+
+        @keyframes move {
+            0% {
+                left: 675px;
+            }
+
+            25% {
+                left: 1300px;
+            }
+
+            50% {
+                left: 675px;
+            }
+
+            75% {
+                left: 50px;
+            }
+
+            100% {
+                left: 675px;
+            }
+
+        }
+
+        #ball1 {
+            background: red;
+            box-shadow: 0px 0px 20px red;
+            left: 675px;
+            top: 20px;
+            animation: move 5s infinite;
+
+        }
+
+        #ball2 {
+            background: orange;
+            box-shadow: 0px 0px 20px orange;
+            left: 675px;
+            top: 70px;
+            animation: move 6s infinite;
+
+        }
+
+        #ball3 {
+            background: yellow;
+            box-shadow: 0px 0px 20px yellow;
+            left: 675px;
+            top: 120px;
+            animation: move 7s infinite;
+
+        }
+
+        #ball4 {
+            background: green;
+            box-shadow: 0px 0px 20px green;
+            left: 675px;
+            top: 170px;
+            animation: move 8s infinite;
+
+        }
+
+        #ball5 {
+            background: blue;
+            box-shadow: 0px 0px 20px blue;
+            left: 675px;
+            top: 220px;
+            animation: move 9s infinite;
+
+        }
+
+        #ball6 {
+            background: indigo;
+            box-shadow: 0px 0px 20px indigo;
+            left: 675px;
+            top: 270px;
+            animation: move 10s infinite;
+
+        }
+
+        #ball7 {
+            background: violet;
+            box-shadow: 0px 0px 20px violet;
+            left: 675px;
+            top: 320px;
+            animation: move 11s infinite;
+
+        }
+
+        #ball8 {
+            background: white;
+            box-shadow: 0px 0px 20px white;
+            left: 675px;
+            top: 370px;
+            animation: move 12s infinite;
+
+        }
+
+        #ball9 {
+            background: black;
+            box-shadow: 0px 0px 20px dimgray;
+            left: 675px;
+            top: 420px;
+            animation: move 13s infinite;
+
+        }
+
+        #ball10 {
+            background: brown;
+            box-shadow: 0px 0px 20px brown;
+            left: 675px;
+            top: 470px;
+            animation: move 14s infinite;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="content">
+        <div class="allBalls" id="ball1"></div>
+        <div class="allBalls" id="ball2"></div>
+        <div class="allBalls" id="ball3"></div>
+        <div class="allBalls" id="ball4"></div>
+        <div class="allBalls" id="ball5"></div>
+        <div class="allBalls" id="ball6"></div>
+        <div class="allBalls" id="ball7"></div>
+        <div class="allBalls" id="ball8"></div>
+        <div class="allBalls" id="ball9"></div>
+        <div class="allBalls" id="ball10"></div>
+    </div>
+</body>
