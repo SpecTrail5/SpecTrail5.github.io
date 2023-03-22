@@ -1,5 +1,5 @@
 // TODO 4: add a param for your game lib last //
-(function(window, opspark, idk) {
+(function (window, opspark, idk) {
   console.log('index.js initialized!');
 
   const
@@ -8,24 +8,35 @@
     canvas = engine.getCanvas(),
     stage = engine.getStage(),
     textfield = assets.makeTextfield('Degrees: ');
-  
+
   stage.addChild(textfield);
 
   // try a different hex color if you want //
-  const ship = assets.makeShip('#C32626');
-  
-  
+  var red = Math.random() * 255
+  var green = Math.random() * 255
+  var blue = Math.random() * 255
+
+  var shipColor = 'rgb(' + red + ', ' + green + ', ' + blue + ')'
+
+  const ship = assets.makeShip(shipColor);
+  const ship2 = assets.makeShip(shipColor);
+
+
+
+
   // TODO 5: Center the ship on the stage //
 
-  ship.x = canvas.width/2  
-  ship.y = canvas.height/2  
+  ship.x = canvas.width / 1.9
+  ship.y = canvas.height / 2
+  ship2.x = canvas.width / 2.1
+  ship2.y = canvas.height / 2
 
   // TODO 6: Add the ship to the stage //
 
   stage.addChild(ship)
-  
+  stage.addChild(ship2)
 
-  
+
   function update(event) {
     /*
      * TODO 7: Use your game lib's getAngleDegrees to get 
@@ -45,23 +56,26 @@
     }
 
     const degrees = idk.numz.getAngleDegrees(ship, mouse)
-    
-    
+    const degrees2 = idk.numz.getAngleDegrees(ship2, mouse)
+
+
     // TODO 8: Set the ship's rotation property to the degrees //
-    
+
     ship.rotation = degrees
-    
+    ship2.rotation = degrees2
+
     /*
      * TODO 9: Uncomment the line below to update the textfield  
      * with the current angle degrees. Degrees will be a value 
      * between π and -π, or, 180 and -180.
      */
-     assets.updateText(textfield, `Degrees: ${degrees.toFixed(3)}°`, canvas);
+    assets.updateText(textfield, `Degrees: ${degrees.toFixed(3)}°`, canvas);
+
   }
 
   engine
     .addTickHandlers(update)
     .activateTick();
 
-// TODO 3: pass your game lib last with, window.my-game-lib //
+  // TODO 3: pass your game lib last with, window.my-game-lib //
 }(window, window.opspark, window.idk));
