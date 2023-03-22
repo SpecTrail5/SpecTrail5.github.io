@@ -1,8 +1,8 @@
-body{
+body {
     background: black;
 }
 
-#board{
+#board {
     background: rgb(10, 18, 18);
     border: dimgray ridge;
     box-shadow: 0px 0px 20px ghostwhite inset;
@@ -11,7 +11,7 @@ body{
     position: relative;
 }
 
-#player{
+#player {
     background-color: rgba(248, 248, 255, 0.4);
     border: ghostwhite inset;
     box-shadow: 0px 0px 10px ghostwhite, 0px 0px 5px ghostwhite inset;
@@ -21,7 +21,8 @@ body{
     left: 100px;
     top: 300px;
 }
-#hpBar{
+
+#hpBar {
     background: dimgray;
     box-shadow: 0px 0px 10px black inset;
     width: 550px;
@@ -30,7 +31,8 @@ body{
     left: 200px;
     top: 10px;
 }
-#HP{
+
+#HP {
     background: ghostwhite;
     border: ghostwhite inset;
     transform: skewX(20deg);
@@ -41,7 +43,8 @@ body{
     left: 25px;
     top: 10px;
 }
-#shield{
+
+#shield {
     background: rgba(0, 255, 251, 0.4);
     border: rgba(0, 255, 251, 0.4) inset;
     transform: skewX(20deg);
@@ -53,7 +56,7 @@ body{
     top: 10px;
 }
 
-#BOSS{
+#BOSS {
     background-color: rgba(28, 30, 169, 0.45);
     border: darkblue inset;
     box-shadow: 0px 0px 20px darkblue, 0px 0px 10px darkblue inset;
@@ -63,12 +66,13 @@ body{
     left: 1000px;
     top: 300px;
 }
-#powerCD{
+
+#powerCD {
     background-color: dimgray;
     width: 135px;
     height: 250px;
     position: relative;
     left: 1220px;
     top: -610px;
-    
+
 }

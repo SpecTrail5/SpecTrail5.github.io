@@ -80,7 +80,7 @@ function runProgram() {
     dieWin()
 
 
-    
+
   }
   //--------------- Event Handler Functions ---------------//
   function handleKeyDown(event) {
@@ -96,7 +96,7 @@ function runProgram() {
     if (event.which === KEY.d) {
       player.spdX = 15;
     }
-    if(event.which === KEY.space){
+    if (event.which === KEY.space) {
       dash()
     }
 
@@ -363,8 +363,8 @@ function runProgram() {
     }
   }
 
-  function dash(){
-    
+  function dash() {
+
 
   }
 
