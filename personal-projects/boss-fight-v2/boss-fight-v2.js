@@ -78,6 +78,9 @@ function runProgram() {
     playerUnitys()
     playerFx()
     dieWin()
+
+
+    
   }
   //--------------- Event Handler Functions ---------------//
   function handleKeyDown(event) {
@@ -364,6 +367,9 @@ function runProgram() {
     
 
   }
+
+
+
 
   /*function dieWin() {
 

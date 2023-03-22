@@ -8,6 +8,7 @@
     "node-dht-sensor": "^0.4.3",
     "node-json2html": "^2.2.2",
     "onoff": "^6.0.3",
+    "opspark": "^3.1.5",
     "websocket": "^1.0.34",
     "ws": "^8.11.0",
     "xmlhttprequest": "^1.8.0"
