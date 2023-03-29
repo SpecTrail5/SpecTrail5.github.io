@@ -1,0 +1,30 @@
+body {
+    background: dimgray;
+
+}
+
+#board {
+    background: black;
+    width: 1350px;
+    height: 650px;
+    margin: auto;
+
+}
+
+#point {
+    border: 5px outset ghostwhite;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 525px;
+    top: 175px;
+    
+}
+
+#player{
+    background: springgreen;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}
