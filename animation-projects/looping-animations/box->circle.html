@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Box load</title>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js">
+
+
+    </script>
+
+    <style>
+        body {
+            background: black;
+
+        }
+
+        #decor-box {
+            border: 2px ridge ghostwhite;
+            padding: 2px;
+            width: 500px;
+            height: 500px;
+            margin: auto;
+            margin-top: 200px;
+            animation: boxspin 5s infinite;
+
+        }
+
+        @keyframes boxspin {
+            0% {
+                rotate: 0deg;
+                 border-radius: 0%;
+            }
+
+            50% {
+                rotate: 360deg;
+                border-radius: 50%;
+            }
+
+            100% {
+                rotate: 0deg;
+                border-radius: 0%;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="decor-box">
+
+    </div>
+</body>
