@@ -7,8 +7,28 @@
     assets = opspark.assets,
     space = opspark.space;
 
-    var color = prompt('pick any color(no spaces)')
+  //--------- makes random color -------//
+
+  var coltrig = 0
+
+  var red = Math.random() * 255
+  var green = Math.random() * 255
+  var blue = Math.random() * 255
+
+  var totalColor = 'rgb(' + red + ',' + green + ',' + blue + ')'
+  // -----------------------------------//
+
+  var color = prompt("Pick any color(no spaces), If you can't choose type 'random'")
+
+  if (color === 'random') {
+    color = totalColor
+  }
+
+
   const ship = assets.makeShip(color);
+
+
+
 
   /*
    * The space module expects each body to implement an
@@ -23,6 +43,8 @@
    * acting against it on both axis, x and y.
    */
   ship.update = function () {
+
+
     /*
      * TODO 7: Use your game lib's phyz.updateVelocity() 
      * method to update the ship's velocity. The 
