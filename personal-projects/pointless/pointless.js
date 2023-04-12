@@ -15,7 +15,7 @@ function runProgram() {
   };
 
 
-  // Player
+  // box
   var box = {
     posX: 675,
     posY: 325,

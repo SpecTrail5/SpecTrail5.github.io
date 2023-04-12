@@ -7,7 +7,8 @@
     assets = opspark.assets,
     space = opspark.space;
 
-  const ship = assets.makeShip('red');
+    var color = prompt('pick any color(no spaces)')
+  const ship = assets.makeShip(color);
 
   /*
    * The space module expects each body to implement an
@@ -78,14 +79,12 @@
     // TODO 13: How do we stop the application of forces?
     if (event.key === 'w') {
       ship.propulsion = 0
-      if (ship.velocityX > 0) {
-        for (var i = 0; i < ship.velocityX; i = 0.1) {
-          ship.velocityX -= 0.1
-          console.log(ship.velocityX)
-        }
 
-        
-      }
+      ship.velocityX = 0
+      ship.velocityY = 0
+
+
+
     }
 
 
