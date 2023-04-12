@@ -1,0 +1,21 @@
+#body {
+    background-color: rgb(0, 0, 0);
+    height: 900px;
+  }
+  
+  /*linear-gradient(122deg, rgb(255, 0, 0) , rgb(166, 0, 255), rgb(0, 255, 179), rgb(255, 191, 0))*/
+  #nav {
+    background: linear-gradient(170deg, rgb(0, 0, 0), dimgray);
+    height: 50px;
+  }
+  
+  #con {
+    background: linear-gradient(rgb(255, 255, 255), rgb(120, 120, 120));
+    height: 400px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 300%;
+    align-content: center;
+  
+  }
+  
+  
