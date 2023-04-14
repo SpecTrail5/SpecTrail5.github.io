@@ -235,57 +235,13 @@ function runProgram() {
 
         //toggle angry
         if (event.which === KEY.six) {
-            if (angry === 0) {
-                angry = 1
-                $("#angry").css('background', 'lime')
-                $("#angry").text("'6' angry: yes")
-
-                $("#browL").css('rotate', '10deg')
-                $("#browR").css('rotate', '-10deg')
-                $("#pupilL").css('background', 'red')
-                $("#pupilR").css('animation-name', 'none')
-                $("#pupilR").css('background', 'red')
-                $("#pupilR").css('box-shadow', '0px 0px 20px 5px red')
-
-
-            } else if (angry === 1) {
-                angry = 0
-                $("#angry").css('background', 'red')
-                $("#angry").text("'6' angry: no")
-
-                $("#browL").css('rotate', '0deg')
-                $("#browR").css('rotate', '0deg')
-                $("#pupilL").css('background', 'black')
-                $("#pupilR").css('animation-name', 'changecolor')
-            }
+            toggleAngry()
 
         }
 
         //toggle sad
         if (event.which === KEY.seven) {
-            if (sad === 0) {
-                sad = 1
-                $("#sad").css('background', 'lime')
-                $("#sad").text("'7' sad: yes")
-
-                $("#browL").css('rotate', '-10deg')
-                $("#browR").css('rotate', '10deg')
-                $("#pupilL").css('background', 'blue')
-                $("#pupilR").css('animation-name', 'none')
-                $("#pupilR").css('background', 'blue')
-                $("#pupilR").css('box-shadow', '0px 0px 20px 5px blue')
-
-
-            } else if (sad === 1) {
-                sad = 0
-                $("#sad").css('background', 'red')
-                $("#sad").text("'7' sad: no")
-
-                $("#browL").css('rotate', '0deg')
-                $("#browR").css('rotate', '0deg')
-                $("#pupilL").css('background', 'black')
-                $("#pupilR").css('animation-name', 'changecolor')
-            }
+            toggleSad()
         }
 
     }
@@ -480,8 +436,75 @@ function runProgram() {
 
     }
 
-    function emotionHelper(){
-        
+    //=================== Toggle Emotions ===================//
+    //=================== below this line ===================//
+
+
+
+    function toggleSad() {
+
+        if (sad === 0) {
+            sad = 1
+            $("#sad").css('background', 'lime')
+            $("#sad").text("'7' sad: yes")
+
+            $("#browL").css('rotate', '-10deg')
+            $("#browR").css('rotate', '10deg')
+            $("#pupilL").css('background', 'blue')
+            $("#pupilR").css('animation-name', 'none')
+            $("#pupilR").css('background', 'blue')
+            $("#pupilR").css('box-shadow', '0px 0px 20px 5px blue')
+            $("#mouth").css('border-top-left-radius', '50%')
+            $("#mouth").css('border-top-right-radius', '50%')
+
+
+        } else if (sad === 1) {
+            sad = 0
+            $("#sad").css('background', 'red')
+            $("#sad").text("'7' sad: no")
+
+            $("#browL").css('rotate', '0deg')
+            $("#browR").css('rotate', '0deg')
+            $("#pupilL").css('background', 'black')
+            $("#pupilR").css('animation-name', 'changecolor')
+            $("#mouth").css('border-top-left-radius', '0%')
+            $("#mouth").css('border-top-right-radius', '0%')
+        }
+
+    }
+
+    function toggleAngry (){
+
+        if (angry === 0) {
+            angry = 1
+            $("#angry").css('background', 'lime')
+            $("#angry").text("'6' angry: yes")
+
+            $("#browL").css('rotate', '10deg')
+            $("#browR").css('rotate', '-10deg')
+            $("#pupilL").css('background', 'red')
+            $("#pupilR").css('animation-name', 'none')
+            $("#pupilR").css('background', 'red')
+            $("#pupilR").css('box-shadow', '0px 0px 20px 5px red')
+
+            $("#mouth").css('border-top-left-radius', '50%')
+            $("#mouth").css('border-top-right-radius', '50%')
+
+        } else if (angry === 1) {
+            angry = 0
+            $("#angry").css('background', 'red')
+            $("#angry").text("'6' angry: no")
+
+            $("#browL").css('rotate', '0deg')
+            $("#browR").css('rotate', '0deg')
+            $("#pupilL").css('background', 'black')
+            $("#pupilR").css('animation-name', 'changecolor')
+
+            $("#mouth").css('border-top-left-radius', '0%')
+            $("#mouth").css('border-top-right-radius', '0%')
+
+        }
+
     }
 
 

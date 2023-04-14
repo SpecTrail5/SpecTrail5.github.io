@@ -9,6 +9,21 @@ body {
 
 }
 
+#mouth {
+    background-color: darkred;
+    box-shadow: 0px 0px 10px 0px black inset;
+    border-top-left-radius: 0%;
+    border-bottom-left-radius: 10%;
+    border-top-right-radius: 0%;
+    border-bottom-right-radius: 10%;
+    width: 300px;
+    height: 75px;
+    position: absolute;
+    left: 125px;
+    top: 400px;
+
+}
+
 #browL {
     background: black;
     border-radius: 10%;
@@ -76,7 +91,7 @@ body {
     left: 0;
     top: 0;
     animation: changecolor 2s infinite;
-    
+
 }
 
 @keyframes changecolor {
