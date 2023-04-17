@@ -9,7 +9,7 @@
 
   //--------- makes random color -------//
 
-  var coltrig = 0
+
 
   var red = Math.random() * 255
   var green = Math.random() * 255
@@ -43,6 +43,18 @@
    * acting against it on both axis, x and y.
    */
   ship.update = function () {
+
+    if (ship.velocityX > 0) {
+      ship.velocityX = ship.velocityX - 0.1
+    } else if (ship.velocityX < 0) {
+      ship.velocityX = ship.velocityX + 0.1
+    }
+
+    if (ship.velocityY > 0) {
+      ship.velocityY = ship.velocityY - 0.1
+    } else if (ship.velocityX < 0) {
+      ship.velocityY = ship.velocityY + 0.1
+    }
 
 
     /*
@@ -81,7 +93,7 @@
      * propulsion of 0.1 is set when ArrowUp is pressed.
      */
     if (event.key === 'w') {
-      ship.propulsion = 0.1;
+      ship.propulsion = 0.2;
     }
 
     /*
@@ -101,10 +113,6 @@
     // TODO 13: How do we stop the application of forces?
     if (event.key === 'w') {
       ship.propulsion = 0
-
-      ship.velocityX = 0
-      ship.velocityY = 0
-
 
 
     }
