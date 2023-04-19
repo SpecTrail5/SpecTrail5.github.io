@@ -30,6 +30,7 @@
 
 
 
+
   /*
    * The space module expects each body to implement an
    * update() method. On each tick, the space module loops
@@ -43,6 +44,8 @@
    * acting against it on both axis, x and y.
    */
   ship.update = function () {
+
+    //Friction
 
     if (ship.velocityX > 0) {
       ship.velocityX = ship.velocityX - 0.1
@@ -105,6 +108,12 @@
       ship.rotationalVelocity = -5;
     } else if (event.key === 'd') {
       ship.rotationalVelocity = 5;
+    }
+
+    if(event.key === ' '){
+
+
+
     }
   };
 
