@@ -1,0 +1,36 @@
+
+const bullet = assets.makeBullet()
+
+bullet.update = function () { 
+    idk.phyz.updateVelocity(this, this.propulsion, this.propulsion);
+}
+
+window.opspark.assets = {
+
+    makeBullet() {
+      const
+        radius = 10,
+        bullet = draw.circle(radius, radius, 'red', null, null, -(radius + radius / 10), -(radius / 2))
+
+      bullet.radius = radius + 3;
+
+      // rasterize the vector graphic, basically creating a bitmap //
+      bullet.snapToPixel = true;
+      bullet.cache(-radius - 10, -radius - 10, radius * 2 + 15, radius * 2 + 15);
+
+      // TODO 6: Merge the ship with your game libs makeBody()
+
+      Object.assign(bullet, idk.phyz.makeBody('bullet'));
+
+      // give the ship a default propulsion //
+      bullet.propulsion = 2;
+
+      return bullet;
+    },
+    centerOnStage
+  }
+
+  assets.centerOnStage(bullet, canvas);
+  stage.addChild(bullet);
+
+space.add(bullet);

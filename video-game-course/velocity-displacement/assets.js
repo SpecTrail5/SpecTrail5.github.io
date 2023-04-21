@@ -47,16 +47,5 @@
     centerOnStage,
   };
 
-  window.opspark.assets = {
-
-    makeBullet(){
-      const
-        radius = 25,
-        bullet = draw.circle(radius, radius, 'red', null, null, -(radius + radius / 10), -(radius / 2))
-
-        
-    },
-    centerOnStage
-  }
-    // TODO 5.a: Replace *my-game-lib* with the name of your game lib
-  }(window, window.opspark.draw, window.idk));
+  // TODO 5.a: Replace *my-game-lib* with the name of your game lib
+}(window, window.opspark.draw, window.idk));

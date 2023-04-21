@@ -30,7 +30,6 @@
 
 
 
-
   /*
    * The space module expects each body to implement an
    * update() method. On each tick, the space module loops
@@ -84,7 +83,7 @@
 
   // let the space module manage our ship //
   space.add(ship);
-
+  
   engine
     .addTickHandlers(space.update)
     .activateTick();
@@ -110,8 +109,7 @@
       ship.rotationalVelocity = 5;
     }
 
-    if(event.key === ' '){
-
+    if (event.key === ' ') {
 
 
     }
