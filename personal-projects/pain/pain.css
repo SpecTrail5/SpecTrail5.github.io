@@ -1,0 +1,25 @@
+body {
+    background: darkslategray;
+}
+
+#board {
+    background: url(image/wall.png) no-repeat center,black;
+    background-size: cover;
+    width: 1000px;
+    height: 600px;
+}
+
+#ground {
+    background: gray;
+    width: 1000px;
+    height: 50px;
+    position: absolute;
+    top: 575px;
+}
+
+#player {
+    background: darkblue;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}
