@@ -83,7 +83,9 @@
 
   // let the space module manage our ship //
   space.add(ship);
+
   
+
   engine
     .addTickHandlers(space.update)
     .activateTick();
@@ -110,7 +112,7 @@
     }
 
     if (event.key === ' ') {
-
+      const bullet = assets.makeBullet('red')
 
     }
   };
@@ -120,7 +122,6 @@
     // TODO 13: How do we stop the application of forces?
     if (event.key === 'w') {
       ship.propulsion = 0
-
 
     }
 
@@ -132,6 +133,17 @@
     }
 
   };
+
+  bullet.update = function () {
+    idk.phyz.updateVelocity(this, this.propulsion, this.propulsion);
+    reboundCircularAssetInArea(this, canvas);
+  }
+
+  assets.centerOnStage(bullet, canvas);
+  stage.addChild(bullet);
+
+  space.add(bullet);
+
 
   function reboundCircularAssetInArea(body, area) {
     const
