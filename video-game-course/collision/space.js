@@ -1,12 +1,12 @@
-(function(window, opspark, racket) {
+(function (window, opspark, racket, idk) {
   /**
    * Creates and returns the space module. Listens for SPAWN 
    * events, adding any bodies in the event
    * @param {Object} messenger: The system wide event dispatcher.
    */
-  opspark.space = function(messenger) {
+  opspark.space = function (messenger) {
     // holds all bodies active in our space //
-    const 
+    const
       dampeningForce = 0.08,
       active = [];
 
@@ -14,7 +14,7 @@
     function onSpawn(event) {
       add(...event.bodies);
     }
-    
+
     function add(...bodies) {
       active.push(...bodies);
       return this;
@@ -34,7 +34,7 @@
         active.forEach(body => {
           // ask the body to update its velocity //
           body.update(event);
-          
+
           // update the body's position based on its new velocity //
           racket.physikz.updatePosition(body);
         });
@@ -47,35 +47,45 @@
           // compare all other bodies to bodyA, excluding bodyA: note j > -1 //
           hit: for (let j = i - 1; j > -1; j--) {
             const bodyB = active[j];
-            
+
             // TODO 1: Calculate hit test components
-            
-            
-              
+            const distnace = idk.phyz.getDistance(bodyA, bodyB)
+
+            const minDistnace = bodyA.radius + bodyB.radius
+
+
             // TODO 2: Do collision check: how do we know if bodies are colliding?
-            if(/* replace with collision check */ false) {
-              // console.log('hit!');
-              
+            if (distnace <= (bodyA.radius + bodyB.radius)) {
+              //console.log('hit!');
+
+              const angle = idk.numz.getAngleDegrees(bodyA, bodyB);
               // TODO 3: Calculate springToX and springToY 
-              
-              
-                
+              springToX = (Math.cos(angle) * minDistnace) + bodyA.x
+              springToY = (Math.sin(angle) * minDistnace) + bodyA.y
+
               // TODO 4: Calculate acceleration to spring-to point, factor in dampeningForce
-              
-              
-              
+              accelerateOnX = (bodyA.x - springToX) * dampeningForce
+              accelerateOnY = (bodyA.y - springToY) * dampeningForce
+
+              bodyA.velocityX = bodyA.velocityX - accelerateOnX
+              bodyA.velocityY = bodyA.velocityY - accelerateOnY
+
+              bodyB.velocityX = bodyB.velocityX + accelerateOnX
+              bodyB.velocityY = bodyB.velocityY + accelerateOnY
+
+
               // TODO 5: Apply acceleration to bodyB
-              
-              
-              
+
+
+
               // TODO 6: Apply inverse acceleration to bodyA
-              
-              
-              
+
+
+
             }
           }
         }
       }
     };
   };
-}(window, window.opspark, window.opspark.racket));
+}(window, window.opspark, window.opspark.racket, window.idk));

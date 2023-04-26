@@ -21,6 +21,7 @@
     "opspark-draw": "^1.0.0",
     "racket": "^1.1.1",
     "V6": "^0.0.2",
-    "messenjah": "^1.0.0"
+    "messenjah": "^1.0.0",
+    "I-dont-Know": "https://github.com/SpecTrail5/I-dont-Know.git#^0.0.5"
   }
 }

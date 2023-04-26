@@ -1,0 +1,31 @@
+{
+  "name": "V6",
+  "version": "0.0.2",
+  "description": "A CreateJS wrapper to handle initializing the CreateJS framework for demo purposes",
+  "main": "index.js",
+  "authors": [
+    "jfraboni"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/OperationSpark/V6",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "EaselJS": "^1.0.2"
+  },
+  "_release": "0.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.2",
+    "commit": "2abf514f842b902f39f59ab63dd8e23481aab1aa"
+  },
+  "_source": "https://github.com/OperationSpark/V6.git",
+  "_target": "^0.0.2",
+  "_originalSource": "V6"
+}
