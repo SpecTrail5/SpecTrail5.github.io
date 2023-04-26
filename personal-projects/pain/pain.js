@@ -8,6 +8,10 @@ function runProgram() {
     var playerItem = $("#player")
     var groundItem = $("#ground")
 
+    createPlatForm(440, 350, 200, 20)
+    createPlatForm(40, 350, 200, 20)
+    
+
 
     var board = {
         widthMax: $("#board").width(),
@@ -35,10 +39,11 @@ function runProgram() {
     // Player
     var player = {
         onGround: 1,
-        maxJumps: 2,
-        jumps: 2,
+        jumpCap: 1,
+        maxJumps: 5,
+        jumps: 0,
         x: 100,
-        y: 100,
+        y: 600,
         maxSpd: 10,
         spdX: 0,
         spdY: 0,
@@ -52,6 +57,14 @@ function runProgram() {
         y: 550,
         width: groundItem.width(),
         height: groundItem.height()
+    }
+
+    const platformObj = {
+        id: document.getElementById("platform"),
+        x: document.getElementById("platform").offsetLeft,
+        y: document.getElementById("platform").offsetTop,
+        width: document.getElementById("platform").offsetWidth,
+        height: document.getElementById("platform").offsetHeight
     }
 
 
@@ -73,17 +86,19 @@ function runProgram() {
         redraw();
         stayInBounds()
         touchground()
+        collidePlatform(platformObj)
 
     }
 
 
     function handleKeyDown(event) {
 
-        if (event.which === KEY.w && player.jumps > 0) {
+        if (event.which === KEY.w && player.jumps > 0 && player.jumpCap > 0) {
             player.spdY = -5
             player.jumps--
-        } else if (event.which === KEY.s) {
-            player.spdY = 50
+            player.jumpCap--
+        } else if (event.which === KEY.s && player.onGround === 0) {
+            player.spdY = 25
         }
         if (event.which === KEY.a) {
             player.spdX = -player.maxSpd
@@ -97,7 +112,9 @@ function runProgram() {
 
     function handleKeyUp(event) {
 
-
+if(event.which === KEY.w){
+    player.jumpCap = 1
+}
 
         if (event.which === KEY.a) {
             player.spdX = 0
@@ -154,7 +171,7 @@ function runProgram() {
 
 
 
-    function collide(obj1, obj2) {
+    function collide(obj1, obj2, mode) {
 
         obj1.left = obj1.x + obj1.width
         obj1.right = obj1.x
@@ -166,7 +183,13 @@ function runProgram() {
         obj2.top = obj2.y
         obj2.bottom = obj2.y + obj2.height
 
-        if (obj1.left > obj2.right && obj1.right < obj2.left && obj1.top < obj2.bottom && obj1.bottom > obj2.top) {
+        if (obj1.left > obj2.right && obj1.right < obj2.left && obj1.top < obj2.bottom && obj1.bottom > obj2.top && mode === 1) {
+
+            return true
+        } else if (obj1.left > obj2.right && obj1.right < obj2.left && obj1.top < obj2.bottom && obj1.top > obj2.top && mode === 2) {
+
+            return true
+        } else if (obj1.bottom > obj2.top && obj1.x > obj2.x && obj1.y < obj2.y && obj1.x < obj2.left && obj1.top > !obj2.top && mode === 3) {
 
             return true
         } else {
@@ -184,11 +207,11 @@ function runProgram() {
         }
 
 
-        if (collide(player, ground) === true) {
+        if (collide(player, ground, 1) === true) {
             player.onGround = 1
             player.jumps = player.maxJumps
 
-        } else if (collide(player, ground) === false) {
+        } else if (collide(player, ground, 1) === false) {
             player.onGround = 0
             gavitiy()
         }
@@ -199,10 +222,26 @@ function runProgram() {
     function gavitiy() {
 
         if (player.onGround === 0) {
-            player.spdY = player.spdY + 0.1
+            player.spdY = player.spdY + 0.2
         } else if (player.onGround === 1) {
             player.spdY = player.spdY
         }
+    }
+
+
+    function collidePlatform(platform) {
+
+        if (collide(player, platform, 2)) {
+            player.y = platform.y + platform.height + 1
+            player.spdY = 0
+        } else if (collide(player, platform, 3)) {
+            player.y = platform.y - player.height + 0.1
+            player.spdY = 0
+            player.onGround = 1
+            player.jumps = player.maxJumps
+        }
+
+
     }
 
 
