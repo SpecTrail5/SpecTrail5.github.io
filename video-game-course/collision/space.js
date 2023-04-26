@@ -8,6 +8,7 @@
     // holds all bodies active in our space //
     const
       dampeningForce = 0.08,
+      friction = 0.01,
       active = [];
 
     messenger.on('SPAWN', onSpawn);
@@ -83,6 +84,20 @@
 
 
             }
+
+            if (bodyA.velocityX < -2) {
+              bodyA.velocityX = bodyA.velocityX + friction
+            } else if (bodyA.velocityX > 2) {
+              bodyA.velocityX = bodyA.velocityX - friction
+            }
+    
+            if (bodyA.velocityY < -2) {
+              bodyA.velocityY = bodyA.velocityY + friction
+            } else if (bodyA.velocityY > 2) {
+              bodyA.velocityY = bodyA.velocityY - friction
+            }
+
+            
           }
         }
       }

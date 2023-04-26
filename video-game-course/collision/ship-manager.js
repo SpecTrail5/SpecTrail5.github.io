@@ -24,8 +24,16 @@
         
       let ship;
 
+      const red = Math.random() * 255
+      const green = Math.random() * 255
+      const blue = Math.random() * 255
+
+      const totalColor = 'rgb('+red+','+green+','+blue+')'
+
+      
+
       return {
-        spawn(color = 'red') {
+        spawn(color = totalColor) {
           if(ship) throw new Error('Ship is already spawned!');
           ship = assets.makeShip(color);
           messenger.dispatch({type: 'SPAWN', bodies: [ship]});
@@ -47,7 +55,7 @@
 
           // up arrow can be pressed in combo with other keys //
           if (controls.isActive(keyMap.W)) {
-            ship.propulsion = 0.1;
+            ship.propulsion = 0.5;
           } else {
             ship.propulsion = 0;
           }
