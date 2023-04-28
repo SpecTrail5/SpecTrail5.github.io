@@ -16,7 +16,7 @@
   
   controls.activate();
 
-  const fps = opspark.draw.fps('#000');
+  const fps = opspark.draw.fps('#fff');
   stage.addChild(fps);
 
   engine

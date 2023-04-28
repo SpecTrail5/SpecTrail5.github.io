@@ -3,24 +3,124 @@ body {
 }
 
 #board {
-    background: url(image/wall.png) no-repeat center,black;
+    background: url(image/wall.png) no-repeat center, black;
+    box-shadow: 0px 0px 10px 5px black inset;
+    overflow: hidden;
     background-size: cover;
     width: 1000px;
     height: 600px;
 }
 
 #ground {
-    background: gray;
+    background: linear-gradient(dimgray, black);
+    border-top: 5px inset steelblue;
     width: 1000px;
-    height: 50px;
+    height: 100px;
     position: absolute;
     left: inherit;
-    top: 450px;
+    top: 500px;
 }
 
-#player {
-    background: darkblue;
+#player1 {
+    background: darkcyan;
+    box-shadow: 0px 0px 10px 0px black, 0px 0px 10px 0px ghostwhite inset;
+    border: 1px outset cyan;
     width: 20px;
     height: 20px;
     position: absolute;
+}
+
+#player1-Info {
+    background: linear-gradient(dimgray, black);
+    box-shadow: 0px 0px 20px 0px black, 0px 0px 10px 0px cyan inset;
+    border: 2px outset cyan;
+    width: 300px;
+    height: 75px;
+    position: absolute;
+    left: 50px;
+    top: 535px;
+}
+
+#p1HP {
+    background: red;
+    box-shadow: 0px 0px 5px 0px black, 0px 0px 10px 0px black inset;
+    border: 2px outset ghostwhite;
+    transform: skewX(20deg);
+    width: 250px;
+    height: 20px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+#p1dmg{
+    background: yellow;
+    box-shadow: 0px 0px 5px 0px black, 0px 0px 10px 0px black inset;
+    transform: skewX(20deg);
+    border: 2px outset ghostwhite;
+    width: 100px;
+    height: 20px;
+    position: relative;
+    left: 10px;
+    top: 25px;
+}
+
+
+#player2 {
+    background: darkorange;
+    box-shadow: 0px 0px 10px 0px black, 0px 0px 10px 0px ghostwhite inset;
+    border: 1px outset orange;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}
+
+#player2-Info {
+    background: linear-gradient(dimgray, black);
+    box-shadow: 0px 0px 20px 0px black, 0px 0px 10px 0px orange inset;
+    border: 2px outset orange;
+    width: 300px;
+    height: 75px;
+    position: absolute;
+    left: 650px;
+    top: 535px;
+}
+
+#p2HP {
+    background: red;
+    box-shadow: 0px 0px 5px 0px black, 0px 0px 10px 0px black inset;
+    transform: skewX(20deg);
+    border: 2px outset ghostwhite;
+    width: 250px;
+    height: 20px;
+    position: relative;
+    left: 10px;
+    top: 10px;
+}
+#p2dmg{
+    background: yellow;
+    box-shadow: 0px 0px 5px 0px black, 0px 0px 10px 0px black inset;
+    transform: skewX(20deg);
+    border: 2px outset ghostwhite;
+    width: 100px;
+    height: 20px;
+    position: relative;
+    left: 10px;
+    top: 0px;
+}
+
+#enemy {
+    background: darkred;
+    box-shadow: 0px 0px 10px 0px black, 0px 0px 10px 0px red inset;
+    border: 5px outset red;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+}
+
+#enemyHP {
+    background: darkred;
+    border: 1px outset red;
+    width: 1000px;
+    height: 20px;
+    margin: auto;
 }

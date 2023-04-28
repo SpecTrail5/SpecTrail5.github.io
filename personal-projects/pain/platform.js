@@ -4,7 +4,9 @@ function createPlatForm(x, y, width, height) {
 
     box.setAttribute('id', 'platform');
 
-    box.style.backgroundColor = 'dimgray'
+    box.style.background = 'linear-gradient( gray,black)'
+    box.style.borderTop = ' 5px inset steelblue'
+    box.style.boxShadow = '0px 10px 10px -5px black'
     box.style.width = width + 'px';
     box.style.height = height + 'px';
     box.style.position = 'relative';
