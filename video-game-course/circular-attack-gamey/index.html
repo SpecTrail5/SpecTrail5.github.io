@@ -1,0 +1,56 @@
+<!doctype html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <title>Operation Spark || Game!</title>
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <meta name="description" content="Operation Spark | Game">
+        <meta name="author" content="operationspark.org">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href="css/style.css" rel="stylesheet">
+
+        <!-- all core CreateJS and 3rd party libraries are listed here -->
+        <script src="bower_components/lodash/dist/lodash.min.js"></script>
+        <script src="bower_components/proton/build/proton-1.0.0.min.js"></script>
+        <script src="bower_components/EaselJS/lib/easeljs.min.js"></script>
+        <script src="bower_components/TweenJS/lib/tweenjs.min.js"></script>
+        <script src="bower_components/opspark-draw/draw.js"></script>
+        <script src="bower_components/messenjah/index.js"></script>
+        <script src="bower_components/gamey/index.js"></script>
+        <script src="bower_components/racket/racket.js"></script>
+    </head>
+    <body>
+        <div>
+            <canvas id="canvas" width="500" height="500"></canvas>
+        </div>
+        
+        <!-- our game or app javascript code list here -->
+        <script src="js/util/util.js"></script>
+        <script src="js/util/control-freak.js"></script>
+        <script src="js/assets.js"></script>
+        <script src="js/factory/component.js"></script>
+        <script src="js/factory/menu.js"></script>
+        <script src="js/feature/lobby/lobby-mediator.js"></script>
+        <script src="js/feature/lobby/lobby-view.js"></script>
+        <script src="js/feature/initializing/initializing-mediator.js"></script>
+        <script src="js/feature/initializing/initializing-view.js"></script>
+        <script src="js/feature/playing/playing-mediator.js"></script>
+        <script src="js/feature/playing/playing-view.js"></script>
+        <script src="js/feature/playing/managers/projectile.js"></script>
+        <script src="js/feature/playing/managers/orb.js"></script>
+        <script src="js/feature/playing/managers/space.js"></script>
+        <script src="js/feature/playing/managers/view.js"></script>
+        <script src="js/feature/playing/managers/fx.js"></script>
+        <script src="js/feature/playing/managers/ship.js"></script>
+        <script src="js/feature/playing/hud/hud.js"></script>
+        
+        <script src="js/feature/paused/paused-mediator.js"></script>
+        <script src="js/feature/paused/paused-view.js"></script>
+        <script src="js/feature/end/end-mediator.js"></script>
+        <script src="js/feature/end/end-view.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>

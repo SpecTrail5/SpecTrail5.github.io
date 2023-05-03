@@ -1,0 +1,29 @@
+{
+  "name": "circular-attack-gamey-master",
+  "version": "1.0.1",
+  "description": "A template app for CreateJS games and apps",
+  "main": "index.html",
+  "authors": [
+    "jfraboni"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "EaselJS": "1.0.2",
+    "opspark-draw": "^1.0.0",
+    "lodash": "^4.17.5",
+    "TweenJS": "1.0.2",
+    "proton": "alpha1.0.0",
+    "racket": "1.2.0",
+    "gamey": "^2.0.0",
+    "messenjah": "^1.0.1"
+  }
+}
