@@ -1,0 +1,11 @@
+{
+    "currentLevel": 0,
+    "levels": [
+        {
+            "name": "Level 1",
+            "hitTest": "radiiHitTest",
+            "dampeningForce": 0.06,
+            "rateOfFire": 200
+        }
+    ]
+}
