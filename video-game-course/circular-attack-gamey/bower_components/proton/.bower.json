@@ -1,0 +1,13 @@
+{
+  "name": "proton",
+  "homepage": "https://github.com/a-jie/Proton",
+  "_release": "alpha1.0.0",
+  "_resolution": {
+    "type": "tag",
+    "tag": "alpha1.0.0",
+    "commit": "727bc0411eceb0f7e3bb3b75cfa71f9cad821f85"
+  },
+  "_source": "https://github.com/a-jie/Proton.git",
+  "_target": "alpha1.0.0",
+  "_originalSource": "proton"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "gamey",
+  "version": "2.0.0",
+  "main": "index.js",
+  "authors": [
+    "John Fraboni <johnfraboni@hotmail.com>"
+  ],
+  "description": "A CreateJS stateful game controller",
+  "keywords": [
+    "CreateJS"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/OperationSpark/gamey",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "EaselJS": "1.0.2",
+    "lodash": "^4.17.10"
+  },
+  "devDependencies": {
+    "opspark-draw": "^1.0.0",
+    "TweenJS": "1.0.2"
+  },
+  "_release": "2.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.0.0",
+    "commit": "a171bf8cffd634a63baf10cc1043bf54e081596e"
+  },
+  "_source": "https://github.com/OperationSpark/gamey.git",
+  "_target": "^2.0.0",
+  "_originalSource": "gamey"
+}

@@ -1,0 +1,24 @@
+{
+  "name": "I-dont-Know",
+  "description": "",
+  "main": "",
+  "authors": [
+    "SpecTrail5 <elijahiwatson2003@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/SpecTrail5/I-dont-Know",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "version": "0.0.5",
+  "_release": "0.0.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.5",
+    "commit": "88489e269cce084495760c29317bc25c7957a537"
+  },
+  "_source": "https://github.com/SpecTrail5/I-dont-Know.git",
+  "_target": "^0.0.5",
+  "_originalSource": "https://github.com/SpecTrail5/I-dont-Know.git",
+  "_direct": true
+}

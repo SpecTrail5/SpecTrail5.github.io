@@ -1,4 +1,4 @@
-(function(window, opspark, _) {
+(function (window, opspark, _) {
   const
     Proton = window.Proton,
     draw = opspark.draw,
@@ -37,7 +37,7 @@
    * game is drawn, used for incept positioning of assets.
    */
   _.set(opspark, 'playa.assets',
-    function(canvas, fx, level) {
+    function (canvas, fx, level) {
       // ASSET BEHAVIORS //
       function updateShip(event) {
         phyz.updateVelocity(this, this.propulsion, this.propulsion);
@@ -65,7 +65,7 @@
           projectile.volatility = .125;
           projectile.velocityMax = 10;
           projectile.update = updateProjectile
-          
+
           projectile.snapToPixel = true;
           projectile.cache(-projectile.radius, -projectile.radius, projectile.radius * 2, projectile.radius * 2);
 
@@ -119,7 +119,7 @@
            * render the ship's projectile.
            */
           ship.getProjectilePoint = getProjectilePoint;
-          
+
           ship.explosion = fx
             .makeEmitter(5, 8, null, new Proton.Velocity(new Proton.Span(4, 2), new Proton.Span(0, 360), 'polar'), [new Proton.RandomDrift(5, 0, .35)]);
 
@@ -133,22 +133,37 @@
           const orb = draw.randomCircleInArea(canvas, false, true, '#999', 2);
           // console.log(`rad: ${orb.radius}`);
           // console.log(`den: ${orb.radius / 20 * 0.5}`);
-          Object.assign(orb, phyz.makeBody('orb', { 
+          Object.assign(orb, phyz.makeBody('orb', {
             density: orb.radius / 20 * 0.5,
             volatility: orb.radius * 0.0001,
           }));
           phyz.addRandomVelocity(orb, canvas);
           orb.update = updateOrb;
-          
+
           // TODO: why is caching killing the cross on the orb?
           // rasterize the vector graphic, basically creating a bitmap //
           // orb.snapToPixel = true;
           // const rad = orb.radius + 2;
           // orb.cache(-rad, -rad, rad * 2, rad * 2);
-          
+
           return orb;
         },
+
+        makeShotGun() {
+          const shotgun = draw.randomCircleInArea(canvas, false, false, 'black', 2);
+
+          Object.assign(shotgun, phyz.makeBody('shotgun', {
+            density: shotgun.radius / 20 * 0.5,
+            volatility: shotgun.radius * 0.0001,
+          }));
+          phyz.addRandomVelocity(shotgun, canvas);
+          shotgun.update = updateShotgun;
+
+          return shotgun
+        },
+
         centerOnStage,
+
       };
     });
 }(window, window.opspark, window._));
