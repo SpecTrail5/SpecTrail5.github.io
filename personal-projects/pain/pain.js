@@ -3,6 +3,7 @@ $(document).ready(runProgram);
 function runProgram() {
     const FRAME_RATE = 60;
     const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
+    var fps = FRAMES_PER_SECOND_INTERVAL
     // game variables
 
     var player1Item = $("#player1")
@@ -12,6 +13,7 @@ function runProgram() {
 
     createPlatForm(300, 350, 400, 20)
 
+    const audioHit = document.getElementById('HIT')
 
 
     var board = {
@@ -47,7 +49,7 @@ function runProgram() {
         hp: 250,
         regen: 0.1,
         slam: 1,
-        maxDamage: 250,
+        maxDamage: 40,
         dmgRate: 0.5,
         damage: 0,
         onGround: 1,
@@ -98,10 +100,10 @@ function runProgram() {
         hp: 1000,
         maxDamage: 40,
         minDamage: 20,
-        x: 400,
-        y: 275,
-        spdX: -10,
-        spdY: -5,
+        x: 460,
+        y: 290,
+        spdX: 0,
+        spdY: 0,
         width: enemyItem.width(),
         height: enemyItem.height(),
     }
@@ -486,6 +488,9 @@ function runProgram() {
             player2.spdY = -10
         }
 
+        if(collide(player1, enemy, 'all')){
+            audioHit.play()
+        }
         if (collide(player1, enemy, 'left')) {
             var damage = Math.random() * enemy.maxDamage
             if (damage < enemy.minDamage) {
@@ -493,6 +498,7 @@ function runProgram() {
             }
             player1.hp = player1.hp - damage
             player1.spdX = -20
+            
         } else if (collide(player1, enemy, 'right')) {
             var damage = Math.random() * enemy.maxDamage
             if (damage < enemy.minDamage) {

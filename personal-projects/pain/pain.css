@@ -1,5 +1,5 @@
 body {
-    background: darkslategray;
+    background: rgb(28, 28, 28);
 }
 
 #board {
@@ -13,6 +13,8 @@ body {
 
 #ground {
     background: linear-gradient(dimgray, black);
+    background: url(image/wall.png) repeat-x ;
+    background-size: 300px 100px;
     border-top: 5px inset steelblue;
     width: 1000px;
     height: 100px;
@@ -23,7 +25,7 @@ body {
 
 #player1 {
     background: darkcyan;
-    box-shadow: 0px 0px 10px 0px black, 0px 0px 10px 0px ghostwhite inset;
+    box-shadow: 0px 0px 10px 0px black, 0px 0px 10px 0px cyan inset;
     border: 1px outset cyan;
     width: 20px;
     height: 20px;
@@ -42,9 +44,9 @@ body {
 }
 
 #p1HP {
-    background: red;
+    background: linear-gradient(red, rgb(255, 80, 80), red);
     box-shadow: 0px 0px 5px 0px black, 0px 0px 10px 0px black inset;
-    border: 2px outset ghostwhite;
+    border: 2px outset black;
     transform: skewX(20deg);
     width: 250px;
     height: 20px;
@@ -52,11 +54,12 @@ body {
     left: 10px;
     top: 10px;
 }
-#p1dmg{
+
+#p1dmg {
     background: yellow;
     box-shadow: 0px 0px 5px 0px black, 0px 0px 10px 0px black inset;
     transform: skewX(20deg);
-    border: 2px outset ghostwhite;
+    border: 2px outset black;
     width: 100px;
     height: 20px;
     position: relative;
@@ -66,9 +69,9 @@ body {
 
 
 #player2 {
-    background: darkorange;
-    box-shadow: 0px 0px 10px 0px black, 0px 0px 10px 0px ghostwhite inset;
-    border: 1px outset orange;
+    background: indigo;
+    box-shadow: 0px 0px 10px 0px black, 0px 0px 10px 0px purple inset;
+    border: 1px outset purple;
     width: 20px;
     height: 20px;
     position: absolute;
@@ -76,8 +79,8 @@ body {
 
 #player2-Info {
     background: linear-gradient(dimgray, black);
-    box-shadow: 0px 0px 20px 0px black, 0px 0px 10px 0px orange inset;
-    border: 2px outset orange;
+    box-shadow: 0px 0px 20px 0px black, 0px 0px 10px 0px purple inset;
+    border: 2px outset purple;
     width: 300px;
     height: 75px;
     position: absolute;
@@ -86,21 +89,22 @@ body {
 }
 
 #p2HP {
-    background: red;
+    background: linear-gradient(red, rgb(255, 80, 80), red);
     box-shadow: 0px 0px 5px 0px black, 0px 0px 10px 0px black inset;
     transform: skewX(20deg);
-    border: 2px outset ghostwhite;
+    border: 2px outset black;
     width: 250px;
     height: 20px;
     position: relative;
     left: 10px;
     top: 10px;
 }
-#p2dmg{
-    background: yellow;
+
+#p2dmg {
+    background: yellow ;
     box-shadow: 0px 0px 5px 0px black, 0px 0px 10px 0px black inset;
     transform: skewX(20deg);
-    border: 2px outset ghostwhite;
+    border: 2px outset black;
     width: 100px;
     height: 20px;
     position: relative;
@@ -118,7 +122,8 @@ body {
 }
 
 #enemyHP {
-    background: darkred;
+    background: linear-gradient(darkred, red, darkred);
+    box-shadow: 0px 0px 5px 0px black, 0px 0px 10px 0px black inset;
     border: 1px outset red;
     width: 1000px;
     height: 20px;

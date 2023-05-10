@@ -34,11 +34,11 @@
           level)
           .setKeyMap({ UP: controls.KEYS.W, LEFT: controls.KEYS.A, RIGHT: controls.KEYS.D, FIRE: controls.KEYS.SHIFT_LEFT })
           .spawn('#f44242'),
-
+    
         orb = opspark.playa.orb(assets, fx, messenger)
-          .spawn(25),
+          .spawn(0);
 
-        shotgun = opspark.playa.shotgun(assets, fx, messenger).spawn(1);
+        shotgun = opspark.playa.shotgun(assets, fx, messenger).spawn(10);
 
       game.view.addChild(view.container);
 

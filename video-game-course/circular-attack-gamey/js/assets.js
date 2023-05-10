@@ -53,6 +53,11 @@
         phyz.reboundCircularAssetInArea(this, canvas);
       }
 
+      function updateShotgun(event) {
+        phyz.updateVelocity(this, 0, 0);
+        phyz.reboundCircularAssetInArea(this, canvas);
+      }
+
       /**
        * Each method draws and assembles the asset in a 
        * default state, assigning its update method.
@@ -148,9 +153,8 @@
 
           return orb;
         },
-
         makeShotGun() {
-          const shotgun = draw.randomCircleInArea(canvas, false, false, 'black', 2);
+          const shotgun = draw.randomCircleInArea(canvas, false, false, '#FF0000', 2,true);
 
           Object.assign(shotgun, phyz.makeBody('shotgun', {
             density: shotgun.radius / 20 * 0.5,
@@ -159,11 +163,9 @@
           phyz.addRandomVelocity(shotgun, canvas);
           shotgun.update = updateShotgun;
 
-          return shotgun
+          return shotgun;
         },
-
         centerOnStage,
-
       };
     });
 }(window, window.opspark, window._));
