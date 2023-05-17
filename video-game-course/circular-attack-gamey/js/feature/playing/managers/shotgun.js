@@ -54,7 +54,7 @@
           };
         
         function makeObject() {
-          const shotgun = assets.makeOrb();
+          const shotgun = assets.makeShotgun();
           shotgun.handleCollision = handleCollision;
           return shotgun;
         }
@@ -62,6 +62,11 @@
         function handleCollision(impact, body) {
           // don't handle collisions between shotguns //
           if (body.type === this.type) return;
+
+          if(body.type === this.type){
+            console.log("ship hit");
+            
+          }
   
           /*
            * Because the explosion is async, the shotgun may exist

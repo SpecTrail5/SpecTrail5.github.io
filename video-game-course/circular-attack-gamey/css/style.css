@@ -8,3 +8,13 @@ body {
     box-shadow: 0px 0px 50px 5px black inset;
 
 }
+
+#shotgun {
+    background-color: #ff8c00;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    left: 400px;
+    top: 400px;
+}
