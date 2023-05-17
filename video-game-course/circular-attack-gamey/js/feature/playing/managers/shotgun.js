@@ -63,7 +63,7 @@
           // don't handle collisions between shotguns //
           if (body.type === this.type) return;
 
-          if(body.type === this.type){
+          if(body.type === 'ship'){
             console.log("ship hit");
             
           }

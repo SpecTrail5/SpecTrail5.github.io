@@ -156,7 +156,7 @@
        makeShotgun() {
          // const shotgun = draw.randomCircleInArea(canvas, false, false, '#FF0000', 2);
 
-          const shotgun = draw.circle(100, '#ff8c00', '#ff8c00', 20, 20)
+          const shotgun = draw.circle(20, '#ff8c00', '#ff8c00', 20, 20)
 
           Object.assign(shotgun, phyz.makeBody('shotgun', {
             density: shotgun.radius / 20 * 0.5,
