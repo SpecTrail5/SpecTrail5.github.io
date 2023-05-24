@@ -22,8 +22,11 @@
   }
 
   function getProjectilePoint() {
-    return this.localToGlobal(this.radius + 10, 0);
+    return this.localToGlobal(this.radius + 50, 0);
   }
+
+  
+  
 
   function getExhaustPoint() {
     return this.localToGlobal(-(this.radius + 10), 0);
@@ -58,13 +61,18 @@
         phyz.reboundCircularAssetInArea(this, canvas);
       }
 
+      function updatebigshot(event) {
+        phyz.updateVelocity(this, 0, 0);
+        phyz.reboundCircularAssetInArea(this, canvas);
+      }
+
       /**
        * Each method draws and assembles the asset in a 
        * default state, assigning its update method.
        */
       return {
-        makeProjectile() {
-          const projectile = _.extend(draw.circle(5, '#ff0000'), phyz.makeBody('projectile'));
+        makeProjectile(num = 5) {
+          const projectile = _.extend(draw.circle(num, '#ff0000'), phyz.makeBody('projectile'));
 
           // TODO : get from settings JSON //
           projectile.volatility = .125;
@@ -124,6 +132,10 @@
            * render the ship's projectile.
            */
           ship.getProjectilePoint = getProjectilePoint;
+         
+          ship.shotgunEnabled = false;
+
+          ship.bigshotEnabled = false;
 
           ship.explosion = fx
             .makeEmitter(5, 8, null, new Proton.Velocity(new Proton.Span(4, 2), new Proton.Span(0, 360), 'polar'), [new Proton.RandomDrift(5, 0, .35)]);
@@ -153,10 +165,14 @@
 
           return orb;
         },
-       makeShotgun() {
-         // const shotgun = draw.randomCircleInArea(canvas, false, false, '#FF0000', 2);
+        makeShotgun() {
+          // const shotgun = draw.randomCircleInArea(canvas, false, false, '#FF0000', 2);
 
-          const shotgun = draw.circle(20, '#ff8c00', '#ff8c00', 20, 20)
+          const shotgun = draw.circle(15, '#ff8c00', '#ff8c00', 0, 0)
+
+          shotgun.x = Math.random() * 1500;
+
+          shotgun.y = Math.random() * 1500;
 
           Object.assign(shotgun, phyz.makeBody('shotgun', {
             density: shotgun.radius / 20 * 0.5,
@@ -166,6 +182,24 @@
           shotgun.update = updateShotgun;
 
           return shotgun;
+        },
+        makeBigshot() {
+          // const shotgun = draw.randomCircleInArea(canvas, false, false, '#FF0000', 2);
+
+          const bigshot= draw.circle(15, '#b004d6', '#b004d6', 0, 0)
+
+          bigshot.x = Math.random() * 1500;
+
+          bigshot.y = Math.random() * 1500;
+
+          Object.assign(bigshot, phyz.makeBody('bigshot', {
+            density: bigshot.radius / 20 * 0.5,
+            volatility: bigshot.radius * 0.0001,
+          }));
+          phyz.addRandomVelocity(bigshot, canvas);
+          bigshot.update = updatebigshot;
+
+          return bigshot;
         },
         centerOnStage,
       };

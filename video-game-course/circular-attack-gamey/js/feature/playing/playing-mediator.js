@@ -36,9 +36,12 @@
           .spawn('#f44242'),
     
         orb = opspark.playa.orb(assets, fx, messenger)
-          .spawn(10);
+          .spawn(25);
 
         shotgun = opspark.playa.shotgun(assets, fx, messenger)
+          .spawn(1);
+
+        bigshot = opspark.playa.bigshot(assets, fx, messenger)
           .spawn(1);
 
       game.view.addChild(view.container);
@@ -68,6 +71,10 @@
           window.removeEventListener('keydown', onKeyDown);
           game.pause();
         }
+      }
+
+      function detectShotgun(event, ship){
+        
       }
 
       /*
@@ -125,7 +132,7 @@
           // playerManager.off('EXPLOSION', onPlayerExplosion);
 
           game.view.removeChild(view.container);
-        }
+        },
       };
     });
 }(window.opspark, window._));
