@@ -22,7 +22,12 @@
   }
 
   function getProjectilePoint() {
-    return this.localToGlobal(this.radius + 50, 0);
+    var pPoint = 10
+
+    if (this.bigshotEnabled)(
+      pPoint = 55
+    )
+    return this.localToGlobal(this.radius + pPoint, 0);
   }
 
   
@@ -71,7 +76,7 @@
        * default state, assigning its update method.
        */
       return {
-        makeProjectile(num = 5) {
+        makeProjectile(num) {
           const projectile = _.extend(draw.circle(num, '#ff0000'), phyz.makeBody('projectile'));
 
           // TODO : get from settings JSON //

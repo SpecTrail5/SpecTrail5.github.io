@@ -32,7 +32,7 @@
     
   game.lobby();
 
-  const fps = opspark.draw.fps('#000');
+  const fps = opspark.draw.fps('#fff');
   game.hud.addChild(fps);
   game.addUpdateable(fps);
 
