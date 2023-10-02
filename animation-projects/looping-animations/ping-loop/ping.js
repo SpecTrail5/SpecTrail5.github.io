@@ -6,9 +6,11 @@ function runProgram() {
 
     //--------------- Game Variables ---------------//
     const audioHit = document.getElementById('HIT')
+    const audioHit2 = document.getElementById('HIT2')
 
     var boxItem = $("#box")
     var ball0Item = $("#ball0")
+    var ball1Item = $("#ball1")
 
 
     // box
@@ -22,8 +24,8 @@ function runProgram() {
     };
 
     var center = {
-        posX: 0,
-        posY: 0,
+        posX: 180,
+        posY: 180,
         spdX: 0,
         spdY: 0,
         width: $("#center").width(),
@@ -32,11 +34,20 @@ function runProgram() {
 
     var ball0 = {
         posX: 0,
-        posY: $("#box").height() / 2.8,
-        spdX: 5,
+        posY: 180,
+        spdX: 2,
         spdY: 0,
         width: $("#ball0").width(),
         height: $("#ball0").height(),
+    };
+
+    var ball1 = {
+        posX: 210,
+        posY: 180,
+        spdX: 0,
+        spdY: 2,
+        width: $("#ball1").width(),
+        height: $("#ball1").height(),
     };
 
 
@@ -45,11 +56,12 @@ function runProgram() {
     let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);
 
     function newFrame() {
+
         moveGameItems();
         redraw();
         border();
         audio();
- 
+
     }
 
 
@@ -59,12 +71,18 @@ function runProgram() {
         ball0.posX += ball0.spdX
         ball0.posY += ball0.spdY
 
+        ball1.posX += ball1.spdX
+        ball1.posY += ball1.spdY
+
 
     }
 
     function redraw() {
         ball0Item.css('left', ball0.posX)
         ball0Item.css('top', ball0.posY)
+
+        ball1Item.css('left', ball1.posX)
+        ball1Item.css('top', ball1.posY)
 
     }
 
@@ -77,12 +95,12 @@ function runProgram() {
             ball0.spdX = ball0.spdX * -1
         }
 
-        if (ball0.posY + ball0.height > box.widthMax) {
-            ball0.spdY = ball0.spdY * -1
+        if (ball1.posY + ball1.height > box.posY + box.height) {
+            ball1.spdY = ball1.spdY * -1
         }
 
-        if (ball0.posY < box.widthMin) {
-            ball0.spdY = ball0.spdY * -1
+        if (ball1.posY < box.posY) {
+            ball1.spdY = ball1.spdY * -1
         }
 
     }
@@ -110,13 +128,19 @@ function runProgram() {
     }
 
     function audio() {
-       
-       let hit = collide(ball0, center)
-        if (hit === true) {
-            audioHit.play()
 
+        if (collide(ball0, center)) {
+
+            audioHit.play()
+    
         }
-        
+
+        if (collide(ball1, center)) {
+
+            audioHit2.play()
+    
+        }
+
     }
 
 
