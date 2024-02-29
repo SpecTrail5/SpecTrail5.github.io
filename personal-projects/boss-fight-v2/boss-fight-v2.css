@@ -22,14 +22,12 @@ body {
     top: 300px;
 }
 
-#hpBar {
+#HUD-Bar {
     background: dimgray;
     box-shadow: 0px 0px 10px black inset;
     width: 550px;
     height: 75px;
-    position: absolute;
-    left: 200px;
-    top: 10px;
+
 }
 
 #HP {
@@ -39,7 +37,7 @@ body {
     box-shadow: 0px 0px 10px ghostwhite, 0px 0px 10px black inset;
     width: 500px;
     height: 50px;
-    position: absolute;
+    position: relative;
     left: 25px;
     top: 10px;
 }
@@ -47,13 +45,13 @@ body {
 #shield {
     background: rgba(0, 255, 251, 0.4);
     border: rgba(0, 255, 251, 0.4) inset;
-    transform: skewX(20deg);
+    /*transform: skewX(20deg);*/
     box-shadow: 0px 0px 10px rgba(0, 255, 251, 0.362), 0px 0px 10px ghostwhite inset;
     width: 250px;
     height: 50px;
-    position: absolute;
-    left: 25px;
-    top: 10px;
+    position: relative;
+    left: -2px;
+    top: -3px;
 }
 
 #BOSS {
@@ -65,6 +63,25 @@ body {
     position: absolute;
     left: 1000px;
     top: 300px;
+}
+
+#bossHP-bar {
+    background: dimgray;
+    box-shadow: 0px 0px 10px black inset;
+    width: 1050px;
+    height: 75px;
+}
+
+#bossHP {
+    background: crimson;
+    border: crimson inset;
+    transform: skewX(20deg);
+    box-shadow: 0px 0px 10px crimson, 0px 0px 10px black inset;
+    width: 1000px;
+    height: 50px;
+    position: relative;
+    left: 25px;
+    top: 10px;
 }
 
 #powerCD {

@@ -1,0 +1,120 @@
+body {
+    background: linear-gradient(rgb(78, 78, 78), rgb(0, 0, 0));
+    color: rgb(45, 45, 45);
+    padding: 10px;
+    font-family: Arial;
+}
+
+
+/* navigation menu */
+nav {
+    background: linear-gradient(122.2deg, rgb(0, 0, 0) 50%, rgb(0, 61, 193) 60%, rgb(9, 139, 245) 80%, rgb(0, 234, 255) 100%);
+    margin: 0 auto;
+    margin-bottom: 20px;
+    display: flex;
+    padding: 10px;
+    border: inset;
+    width: 98%;
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    flex: 1;
+    margin: 0;
+}
+
+#nav-ul {
+    list-style-image: none;
+}
+
+.nav-li {
+    display: inline-block;
+    padding: 0%;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* main container area beneath menu */
+main {
+    background: linear-gradient(rgb(190, 190, 190), rgb(148, 148, 148));
+    width: 99%;
+    display: flex;
+    border: inset;
+}
+
+.sidebar {
+    background: linear-gradient(rgba(0, 61, 193), rgb(9, 139, 245), rgb(0, 234, 255));
+    width: 210px;
+    height: 800px;
+    margin-right: 20px;
+    padding: 10px;
+    border: 4px rgb(133, 133, 133) ridge;
+}
+
+.sidebar-img {
+    width: 200px;
+    border: 4px rgb(0, 255, 188) ridge;
+}
+
+.content {
+    flex: 1;
+    padding: 15px;
+}
+
+#interests {
+    border: 4px silver ridge;
+    padding: 8px;
+}
+
+.h2 {
+    margin: 0px;
+    color: rgb(255, 255, 255);
+}
+
+
+.h3 {
+    margin: 0px;
+    color: rgb(255, 255, 255);
+    background: rgb(160, 159, 159);
+    background: rgb(138, 138, 138);
+    margin-top: 5px;
+    border: rgb(190, 190, 190);
+    border-style: inset;
+
+}
+
+
+#nav-img {
+    width: 100px;
+    border-radius: 50%;
+    animation: spin 30s infinite;
+
+}
+
+@keyframes spin {
+    0% {
+        rotate: 0deg;
+    }
+
+    25% {
+        rotate: 90deg;
+    }
+
+    50% {
+        rotate: 180deg;
+    }
+
+    75% {
+        rotate: 270deg;
+    }
+
+    100% {
+        rotate: 360deg;
+    }
+
+}

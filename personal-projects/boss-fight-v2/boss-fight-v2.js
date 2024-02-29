@@ -36,7 +36,7 @@ function runProgram() {
     hp: 500,
     maxShield: 250,
     shield: 250,
-    armor: 5,
+    armor: 3,
     posX: 100,
     posY: 300,
     spdX: 0,
@@ -49,7 +49,7 @@ function runProgram() {
   // BOSS
   var BOSS = {
     maxHP: 1000,
-    hp: 10000,
+    hp: 1000,
     damage: 10,
     classdur: 500,
     class: 0,
@@ -77,7 +77,6 @@ function runProgram() {
     bossClass();
     playerUnitys()
     playerFx()
-    dieWin()
 
 
 
@@ -132,11 +131,13 @@ function runProgram() {
     playerItem.css("left", player.posX);
     playerItem.css("top", player.posY);
 
+    $("#HP").css("width", player.hp);
+    $("#shield").css("width", player.shield);
+
     BOSSitem.css("left", BOSS.posX);
     BOSSitem.css("top", BOSS.posY);
 
-    $("#HP").css("width", player.hp);
-    $("#shield").css("width", player.shield);
+    $("#bossHP").css("width", BOSS.hp);
   }
 
   function border() {
@@ -165,6 +166,16 @@ function runProgram() {
     if (BOSS.posY >= board.heightMax - BOSS.height - 5) {
       BOSS.posY = board.heightMax - BOSS.height - 5;
     }
+  }
+
+  function getDistance(pointA, pointB) {
+    const
+      distanceX = pointB.posX - pointA.posX,
+      distanceY = pointB.posY - pointA.posY,
+      taldistanceX = Math.sqrt(distanceX * distanceX);
+    taldistanceY = Math.sqrt(distanceY * distanceY);
+    distance = [taldistanceX, taldistanceY]
+    return distance;
   }
 
   function follow() {
@@ -348,7 +359,7 @@ function runProgram() {
   }
 
   function playerFx() {
-    if (player.hp < player.maxHP / 6) {
+    if (player.hp < player.maxHP / 5) {
       $("#HP").css(
         "box-shadow", "0px 0px 20px red, 0px 0px 5px red inset"
       );
